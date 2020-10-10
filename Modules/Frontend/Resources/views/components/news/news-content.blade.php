@@ -7,6 +7,7 @@
                 {!! $news->title !!}
             @endisset
         </a>
+
     </h5>
 @endisset
 

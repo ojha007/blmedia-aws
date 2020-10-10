@@ -9,7 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
-        "alexusmai/laravel-file-manager": "^2.5",
         "anlutro/l4-settings": "^1.0",
         "barryvdh/laravel-elfinder": "^0.4.6",
         "cloudinary/cloudinary_php": "^1.18",
