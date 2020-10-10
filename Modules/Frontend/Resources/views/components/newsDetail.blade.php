@@ -46,12 +46,12 @@
                                 </div>
                                 <div class="col-sm-6 col-md-8 col-lg-6">
                                     <div class="sharethis-inline-share-buttons"></div>
-{{--                                    <div class="addthis_inline_share_toolbox"--}}
-{{--                                         data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
-{{--                                         data-title="{{$news->title}}"--}}
-{{--                                         data-description="{{$news->title}}"--}}
-{{--                                         data-media="{{$news->image}}"--}}
-{{--                                    ></div>--}}
+                                    {{--                                    <div class="addthis_inline_share_toolbox"--}}
+                                    {{--                                         data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
+                                    {{--                                         data-title="{{$news->title}}"--}}
+                                    {{--                                         data-description="{{$news->title}}"--}}
+                                    {{--                                         data-media="{{$news->image}}"--}}
+                                    {{--                                    ></div>--}}
 
                                 </div>
                             </div>
@@ -80,12 +80,12 @@
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="adsssss amadam">
                                         <div class="sharethis-inline-share-buttons"></div>
-{{--                                        <div class="addthis_inline_share_toolbox"--}}
-{{--                                             data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
-{{--                                             data-title="{{$news->title}}"--}}
-{{--                                             data-description="{{$news->title}}"--}}
-{{--                                             data-media="{{$news->image}}"--}}
-{{--                                        ></div>--}}
+                                        {{--                                        <div class="addthis_inline_share_toolbox"--}}
+                                        {{--                                             data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
+                                        {{--                                             data-title="{{$news->title}}"--}}
+                                        {{--                                             data-description="{{$news->title}}"--}}
+                                        {{--                                             data-media="{{$news->image}}"--}}
+                                        {{--                                        ></div>--}}
                                     </div>
                                 </div>
 
@@ -194,11 +194,17 @@
 {{--     data-media="{{$news->image}}"--}}
 {{--></div>--}}
 @push('meta')
-{{--    <meta property="fb:app_id" content="1234567890"/>--}}
+    {{--    <meta name="{{$news->title}}"--}}
+    {{--          content="{{$news->short_description}}"--}}
+    {{--          category--}}
+    {{--    />--}}
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
     <meta property="og:title" content="{{$news->title}}"/>
-    <meta property="og:image"
-          content="{{$news->image}}"/>
+    <meta property="og:image" content="{{$news->image}}"/>
     <meta property="og:description" content="{{$news->short_description}}"/>
+    <meta name="twitter:card" content="article">
+    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
+    <meta name="twitter:title" content="{{$news->title}}"/>
+    <meta property="twitter:image" content="{{$news->image}}"/>
 @endpush
