@@ -5,7 +5,21 @@
             <div class="row d-block">
                 @foreach($thirteenPositionNews as $key=>$news)
                     @if($key == 0)
-                        <div class="news-item highlight-news overlay-parent">
+                        <div class="card text-white overlay-main ">
+                            @include('frontend::components.news.news-image',['imgClass'=>'card-img'])
+                            <div class="card-img-overlay d-flex flex-column " >
+                                <p class="mt-auto ">
+                                    <a href="{{route($routePrefix.'news.show',$news->news_slug)}}" class="text-white">
+                                        @isset($limit)
+                                            {{\Illuminate\Support\Str::limit($news->title, $limit)}}
+                                        @else
+                                            {!! $news->title !!}
+                                        @endisset
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        {{--<div class="news-item highlight-news overlay-parent">
                             @include('frontend::components.news.news-image',['figureClass'=>'ghumphir-am-bl news-image'])
                             <div class="news-content-overlay">
                                 <div class="news-content am-content-blam">
@@ -20,7 +34,7 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     @else
                         <div class="news-item">
                             <div class="fixed-height-img">
