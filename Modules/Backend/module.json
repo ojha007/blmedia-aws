@@ -1,0 +1,17 @@
+{
+    "name": "Backend",
+    "alias": "backend",
+    "description": "",
+    "keywords": [],
+    "order": 1,
+    "providers": [
+        "Modules\\Backend\\Providers\\BackendServiceProvider",
+        "Modules\\Backend\\Providers\\ViewComposerServiceProvider",
+        "Modules\\Backend\\Providers\\ResourceBreadCrumbsServiceProvider",
+        "Modules\\Backend\\Providers\\ObserverServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+    ],
+    "requires": []
+}
