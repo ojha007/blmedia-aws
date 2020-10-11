@@ -92,11 +92,11 @@
                         <a href="https://www.youtube.com/channel/UC88oI8rfTs8LwgQrH3JU7Tw" target="_blank">
                             <i class="fab fa-youtube-square"></i></a>
                     </li>
-                    @if(isset($edition) && $edition =='nepali')
+                    @if(request()->segment(1) == 'nepali')
                         <li class="unicode-am">
                             |
                             <a href="{{route($routePrefix.'preeti-to-unicode')}}" target="_blank">
-                                <i class="fa fa-keyboard"></i> युनिकोड</a>
+                                <i class="fa fa-keyboard"></i>युनिकोड</a>
                         </li>
                     @endif
                 </ul>
