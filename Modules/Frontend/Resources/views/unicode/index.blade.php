@@ -26,7 +26,7 @@
 </head>
 <body>
 @include('frontend::unicode.partials.header')
-<div class="uk-container-center py-5 my-5">
+<div class="uk-container-center">
     @yield('content')
 </div>
 
