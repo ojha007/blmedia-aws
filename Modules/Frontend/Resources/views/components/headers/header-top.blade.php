@@ -2,55 +2,78 @@
     @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above','sub_for'=>'top_menu'])
 </div>
 <section class="header-top">
-    <div class="container-fluid ">
-        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 float-left scroll-news">
-            <div class="scroll-header">
-                <h4>{{trans('messages.editions')}}</h4>
-            </div>
-            <div class="scroll-news-content">
-                <div class="tickercontainer">
-                    <div class="mask">
-                        <ul id="scrollNewsList" class="newsTickerLisst newsticker"
-                            style="width: 3454px; left: -2434.21px;">
-                            <li>
-                                <a href="{{url('/nepali')}}" class="am-bl-topscroll active"
-                                   target="_blank">नेपाली</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/en')}}" class="am-bl-topscroll active"
-                                   target="_blank">English</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/hindi')}}" class="am-bl-topscroll active"
-                                   target="_blank">Hindi</a>
-                            </li>
-                            <li>
-                                <a href="#" class="am-bl-topscroll active"
-                                >Español</a>
-                            </li>
-                            <li>
-                                <a href="#" class="am-bl-topscroll active"
-                                >عربي</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar w/ text</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 float-right ">
-            <span class="overflow-hidden  float-right">
-                <button class="btn btn-outline-light border-0 rounded-0 search-button" type="button"
-                        data-toggle="collapse"
-                        data-target="#searchDropdown" aria-expanded="false" aria-controls="searchDropdown">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
-        </div>
-        <div class="clearfix"></div>
-    </div>
+    </nav>
+    {{-- <div class="container-fluid ">
+         <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 float-left scroll-news">
+             <div class="scroll-header">
+                 <h4>{{trans('messages.editions')}}</h4>
+             </div>
+             <div class="scroll-news-content">
+                 <div class="tickercontainer">
+                     <div class="mask">
+                         <ul id="scrollNewsList" class="newsTickerLisst newsticker"
+                             style="width: 3454px; left: -2434.21px;">
+                             <li>
+                                 <a href="{{url('/nepali')}}" class="am-bl-topscroll active"
+                                    target="_blank">नेपाली</a>
+                             </li>
+                             <li>
+                                 <a href="{{url('/en')}}" class="am-bl-topscroll active"
+                                    target="_blank">English</a>
+                             </li>
+                             <li>
+                                 <a href="{{url('/hindi')}}" class="am-bl-topscroll active"
+                                    target="_blank">Hindi</a>
+                             </li>
+                             <li>
+                                 <a href="#" class="am-bl-topscroll active"
+                                 >Español</a>
+                             </li>
+                             <li>
+                                 <a href="#" class="am-bl-topscroll active"
+                                 >عربي</a>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 float-right ">
+             <span class="overflow-hidden  float-right">
+                 <button class="btn btn-outline-light border-0 rounded-0 search-button" type="button"
+                         data-toggle="collapse"
+                         data-target="#searchDropdown" aria-expanded="false" aria-controls="searchDropdown">
+                     <i class="fa fa-search"></i>
+                 </button>
+             </span>
+         </div>
+         <div class="clearfix"></div>
+     </div>--}}
 </section>
 
-<div class="collapse container-fluid" id="searchDropdown">
+{{--<div class="collapse container-fluid" id="searchDropdown">
     <div class="card card-body border-0 rounded-0 searchBody ">
         <form>
             <div class="form-row">
@@ -77,7 +100,7 @@
             </div>
         </form>
     </div>
-</div>
+</div>--}}
 @push('scripts')
     <script>
         $(document).ready(function () {

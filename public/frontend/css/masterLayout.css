@@ -861,7 +861,7 @@ ol, ul, dl {
 }
 
 .gn-heading, .cmn-fw, .hr-list.wide, .vr-list, .base-dropMenu .menu-content, .base-dropMenu .menu-content .menuHeader, .base-dropMenu .menu-content .menuHeader .help-block, .base-dropMenu .menu-content .menuBody, .base-dropMenu .menu-content .menuBody .dropdown-menu-list, .base-dropMenu .menu-content .menuBody .dropdown-menu-list li,
-.base-dropMenu .menu-content .menuBody .dropdown-menu-list .dropdown-item, .base-dropMenu .menu-content .menuFooter, .base-dropMenu .menu-content .menuFooter .help-block, .base-form, .page-header, .page-header .header-top, .page-header .header-mid, footer.page-footer, footer.page-footer .footer-brand, .newsBlock, .newsBlock .block-header, .newsBlock .block-body, .newsBlock .block-body .news-item, .newsBlock.type-2 .news-item, .newsBlock.type-2 .news-item.highlight-news .news-image, .newsBlock.type-2 .news-item.highlight-news .news-content, .newsBlock.type-3 .news-item.highlight-news .news-image, .newsBlock.type-3 .news-item.highlight-news .news-content, .newsBlock.type-4 .news-item, .newsBlock.type-4 .news-item.highlight-news .news-image, .newsBlock.type-4 .news-item.highlight-news .news-content, .newsBlock.type-9 .news-item, .newsBlock.type-9 .news-item.highlight-news .news-image, .newsBlock.type-9 .news-item.highlight-news .news-content, .news-catHighlight, .news-catHighlight .block-header, .news-catHighlight .block-body, .news-catHighlight .block-body .news-item, .news-list-view, .news-list-view .news-item, .news-details, .news-details .details-header, .news-details .news-banner, .news-details .news-story, .commentPost, .commentPost .loged-userInfo, .commentPost .comment-postInput, .commnet-listing, .commnet-listing .listing-header, .commnet-listing .listing-body, .tabNews-listing, .tabNews-listing .block-header, .tabNews-listing .block-body, .scroll-news .scroll-news-content .newsTickerList, .cmn-section, .section-row, .section-row .inner-row, .page-body, .breadcrumb-wrapper, .pagination-wrapper, .commentReview, .commentReview .block-header, .commentReview .block-body, .commentReview .block-body .commentLogin {
+.base-dropMenu .menu-content .menuBody .dropdown-menu-list .dropdown-item, .base-dropMenu .menu-content .menuFooter, .base-dropMenu .menu-content .menuFooter .help-block, .base-form, .page-header, .page-header .header-top, .page-header .header-mid, .newsBlock, .newsBlock .block-header, .newsBlock .block-body, .newsBlock .block-body .news-item, .newsBlock.type-2 .news-item, .newsBlock.type-2 .news-item.highlight-news .news-image, .newsBlock.type-2 .news-item.highlight-news .news-content, .newsBlock.type-3 .news-item.highlight-news .news-image, .newsBlock.type-3 .news-item.highlight-news .news-content, .newsBlock.type-4 .news-item, .newsBlock.type-4 .news-item.highlight-news .news-image, .newsBlock.type-4 .news-item.highlight-news .news-content, .newsBlock.type-9 .news-item, .newsBlock.type-9 .news-item.highlight-news .news-image, .newsBlock.type-9 .news-item.highlight-news .news-content, .news-catHighlight, .news-catHighlight .block-header, .news-catHighlight .block-body, .news-catHighlight .block-body .news-item, .news-list-view, .news-list-view .news-item, .news-details, .news-details .details-header, .news-details .news-banner, .news-details .news-story, .commentPost, .commentPost .loged-userInfo, .commentPost .comment-postInput, .commnet-listing, .commnet-listing .listing-header, .commnet-listing .listing-body, .tabNews-listing, .tabNews-listing .block-header, .tabNews-listing .block-body, .scroll-news .scroll-news-content .newsTickerList, .cmn-section, .section-row, .section-row .inner-row, .page-body, .breadcrumb-wrapper, .pagination-wrapper, .commentReview, .commentReview .block-header, .commentReview .block-body, .commentReview .block-body .commentLogin {
     width: 100%;
     float: left;
     position: relative;
@@ -1120,7 +1120,38 @@ a:hover, a:focus {
     z-index: 999;
     /* border-bottom: 1px solid #D9D9F4; */
 }
+#language_section .navbar-toggler {
+    padding: 1px 5px;
+}
 
+.navbar-toggler::focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#language_section .navbar-toggler img {
+    width: 30px;
+    height: 30px;
+}
+
+.navbar-toggler .cancle_btn {
+    z-index: 99999;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+}
+
+#language_section .navbar-toggler span {
+    font-size: 14px;
+}
+
+#language_section .navbar-collapse .navbar-nav .cancle_btn {
+    position: absolute;
+    right: 30px;
+    font-size: 12px;
+    color: #ff5e14;
+    z-index: 9999999;
+}
 .primary-nav .navbar-collapse .navbar-nav {
     width: 100%;
 }
@@ -1203,13 +1234,6 @@ section.amnavnd {
 }
 
 
-.primary-nav .navbar-collapse .navbar-nav .nav-item .nav-link:hover, .primary-nav .navbar-collapse .navbar-nav .nav-item .nav-link:focus {
-    background-color: #e0e0f7;
-}
-
-.primary-nav .navbar-collapse .navbar-nav .nav-item.active .nav-link {
-    color: #FF5E14 !important;
-}
 
 .base-pagination {
     display: block;
@@ -1473,41 +1497,42 @@ section.amnavnd {
 }
 
 footer.page-footer {
-    background-color: #111111;
-    color: #FFFFFF;
-    padding: 1.875em 0em;
+    /*background-color: #111111;*/
+    /*color: #FFFFFF;*/
+    /*padding: 1.875em 0em;*/
 }
 
 footer.page-footer .footer-brand .brand-logo {
-    display: inline-block;
-    float: left;
-    position: relative;
-    width: 5.125em;
-    margin: 0em;
+    /*display: inline-block;*/
+    /*float: left;*/
+    /*position: relative;*/
+    /*width: 5.125em;*/
+    /*margin: 0em;*/
 }
 
 footer.page-footer .footer-brand .brand-logo a img,
 footer.page-footer .footer-brand .brand-logo img {
-    display: block;
-    width: 5.125em;
+    /*display: block;*/
+    /*width: 5.125em;*/
 }
 
 footer.page-footer .footer-brand .brand-info {
-    float: left;
-    display: inline-block;
-    position: relative;
-    width: calc(100% - 5.125em);
-    padding-left: 0.9375em;
-    color: #FFFFFF;
+    /*float: left;*/
+    /*display: inline-block;*/
+    /*position: relative;*/
+    /*width: calc(100% - 5.125em);*/
+    /*padding-left: 0.9375em;*/
+    /*color: #FFFFFF;*/
 }
 
 footer.page-footer .footer-brand .brand-info .brand-name {
-    font-size: 1.375rem;
-    color: #FFFFFF;
-    font-weight: bold;
-    padding-bottom: 0.3125em;
+    /*font-size: 1.375rem;*/
+    /*color: #FFFFFF;*/
+    /*font-weight: bold;*/
+    /*padding-bottom: 0.3125em;*/
 }
 
+/*
 footer.page-footer .footer-brand .brand-info p {
     font-size: 1rem;
     color: #FFFFFF;
@@ -1538,6 +1563,7 @@ footer.page-footer .base-form .btn {
     text-transform: uppercase;
     padding: 0.375em 1.25em;
 }
+*/
 
 table.layout-1 {
     width: 100%;
@@ -4581,7 +4607,7 @@ body {
 }
 
 .page-body {
-    padding: 1.875em 0em;
+    /*padding: 1.875em 0em;*/
 }
 
 .breadcrumb-wrapper nav .breadcrumb {
@@ -4709,6 +4735,13 @@ BREAKPOINTS
 
     padding: 0.7rem 1rem !important;
 }
+.primary-nav .navbar-collapse .navbar-nav .nav-item .nav-link:hover, .primary-nav .navbar-collapse .navbar-nav .nav-item .nav-link:focus {
+    background-color: #e0e0f7;
+}
+
+.primary-nav .navbar-collapse .navbar-nav .nav-item.active .nav-link {
+    color: #FF5E14 !important;
+}
 
 .primary-nav .navbar-collapse .navbar-nav .nav-item .nav-link {
     display: block;
@@ -4831,13 +4864,7 @@ BREAKPOINTS
     width: 8%;
 }
 
-.navbar-brand-img-logo {
 
-}
-
-.primary-nav .navbar-collapse .navbar-nav .nav-item .nav-link img {
-    width: 150%;
-}
 
 .home-site-logo {
     display: none !important;
@@ -4916,7 +4943,13 @@ button.btn.btn-link {
 .follow-social-media li:hover a i {
     color: #8c7f7f;
 }
+.navbar-brand-img-logo {
 
+}
+
+.primary-nav .navbar-collapse .navbar-nav .nav-item .nav-link img {
+    width: 150%;
+}
 .hiderfixed_navbar12 {
     display: none;
 }
@@ -5815,38 +5848,7 @@ figure img {
     display: none;
 }
 
-#language_section .navbar-toggler {
-    padding: 1px 5px;
-}
 
-.navbar-toggler::focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-#language_section .navbar-toggler img {
-    width: 30px;
-    height: 30px;
-}
-
-.navbar-toggler .cancle_btn {
-    z-index: 99999;
-    position: absolute;
-    right: 15px;
-    top: 20px;
-}
-
-#language_section .navbar-toggler span {
-    font-size: 14px;
-}
-
-#language_section .navbar-collapse .navbar-nav .cancle_btn {
-    position: absolute;
-    right: 30px;
-    font-size: 12px;
-    color: #ff5e14;
-    z-index: 9999999;
-}
 
 
 /* CORONA */

@@ -17,8 +17,8 @@
                                            placeholder="Search...">
                                     <div class="input-group-append">
                                         <button type="submit" name="search" class="btn btn-trans"><i
-                                                class="fa fa-search"
-                                                style="font-size: 10px; margin-top: 13px; padding-left: 20px;"></i>
+                                                    class="fa fa-search"
+                                                    style="font-size: 10px; margin-top: 13px; padding-left: 20px;"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                                              )
                                                      ? 'active':''}}">
                                 <a href="{{route($routePrefix.'index')}}" class="nav-link"><i
-                                        class="fa fa-home"></i> <span class="sr-only">Home</span>
+                                            class="fa fa-home"></i> <span class="sr-only">Home</span>
                                 </a>
                             </li>
                             <li class="nav-item  home-site-logo">

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('frontend/css/masterLayout.css') }}">
+{{--<link rel="stylesheet" href="{{ asset('frontend/css/masterLayout.css') }}">--}}
 <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
 <link rel="stylesheet"

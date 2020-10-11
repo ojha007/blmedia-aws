@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,12 +20,11 @@
 <body>
 <div id="fb-root"></div>
 
-<script async defer crossorigin="anonymous"
+{{--<script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=3228453080521488&autoLogAppEvents=1"
-        nonce="zR3d9Tsr"></script>
+        nonce="zR3d9Tsr"></script>--}}
 
-<button onclick="topFunction()" id="scrollTop" class="btn btn-sm " title="Scroll top"><i class="fas fa-arrow-up"></i>
-</button>
+<button onclick="topFunction()" id="scrollTop" class="btn btn-sm " title="Scroll top"><i class="fas fa-arrow-up"></i></button>
 
 <!-- Main Header -->
 @include('frontend::partials.header')
