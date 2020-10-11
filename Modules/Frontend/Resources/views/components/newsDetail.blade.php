@@ -74,6 +74,15 @@
                         <div class="news-story">
                             <div class="col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1">
                                 {!! $news->description !!}
+                                @if($news->external_url)
+                                    <div class="col-md-12 text-center align-center">
+                                        <a href="{{$news->external_url}}"
+                                           target="_blank"
+                                           class=" btn btn-viewAll text-center align-center"
+                                           role="button">{{trans('messages.read_all')}}
+                                        </a>
+                                    </div>
+                                @endif
                                 <div class="col-sm-6 col-xs-12">
                                     <strong> {{trans('messages.publish_on')}}
                                         : {{\Carbon\Carbon::parse($news->publish_date)->toDateTimeString()}}</strong>
