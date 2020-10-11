@@ -158,12 +158,18 @@ html {
     width: 100%;
 }
 
-.featured-img-fixed-height figure img {
-    /*background-color: red !important;*/
+/*.featured-img-fixed-height{
+    height: 300px !important;
+    border: 1px solid white;
+    overflow: hidden;
+}*/
+
+/*.featured-img-fixed-height figure img {
+    !*background-color: red !important;*!
     height: 300px !important;
     object-fit: fill;
     width: 100%;
-}
+}*/
 
 /* [1] The container */
 .img-hover-zoom {
@@ -216,6 +222,16 @@ html {
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.14);
 }
 
+.recommendation-card figure {
+    height: 200px !important;
+    /*background-color: black;*/
+    /*padding: 10px;*/
+    overflow: hidden;
+}
+.recommendation-card img{
+    height:100%;
+}
+
 .custom-tag {
     border-radius: 35px;
     line-height: 30px;
@@ -230,19 +246,44 @@ html {
     background-color: black;
 }
 
-.search-button i{
-    font-size: 18px!important;
+.search-button i {
+    font-size: 18px !important;
     overflow-x: hidden;
 }
-.searchBody{
+
+.searchBody {
     padding: 6px 13px;
     margin: 0 13px;
     background-color: #DDDDDD;
 }
-.searchBody input, .searchBody button{
+
+.searchBody input, .searchBody button {
     border-radius: 50px;
     height: 45px;
 }
-.searchBody button:hover{
-    background-color: #FF5E14!important;
+
+.searchBody button:hover {
+    background-color: #FF5E14 !important;
+}
+
+.custom-card-title {
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.overlay-main {
+    padding: 0 15px;
+}
+
+.overlay-main .card-img-overlay {
+    padding: 0 15px;
+}
+
+.overlay-main .card-img-overlay p {
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 4em;
+    font-weight: 600;
 }

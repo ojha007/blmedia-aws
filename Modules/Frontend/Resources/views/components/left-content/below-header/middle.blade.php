@@ -6,7 +6,7 @@
                 @if($key == 0)
                     <div class="news-item highlight-news">
                         <div class="featured-img-fixed-height">
-                            @include('frontend::components.news.news-image')
+                            @include('frontend::components.news.news-image',['imgClass'=>'card-img-top'])
                         </div>
                         <div class="news-content">
                             @include('frontend::components.news.news-content')

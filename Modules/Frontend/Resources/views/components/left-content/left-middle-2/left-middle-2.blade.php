@@ -20,7 +20,23 @@
                 <div class="row d-block">
                     @foreach($sixthPositionNews as $key=>$news)
                         @if($key == 0)
-                            <div class="news-item highlight-news">
+                            <div class="card" >
+                                <div class="row no-gutters " style="padding: 0 15px;" >
+                                    <div class="col-md-4">
+                                        @include('frontend::components.news.news-image',['imgClass' =>'card-img'] )
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body pt-0 pr-0">
+                                            <a href="{{route($routePrefix.'news.show',$news->news_slug)}}"> <h5 class="card-title custom-card-title">
+                                                    {{$news->title}}
+                                                </h5></a>
+                                            @include('frontend::components.news.news-author')
+                                            <p class="card-text">{!! $news->short_description !!}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--<div class="news-item highlight-news">
                                 <div class="featured-img-fixed-height">
                                     @include('frontend::components.news.news-image')
                                 </div>
@@ -35,7 +51,7 @@
                                         {!! $news->short_description !!}
                                     </p>
                                 </div>
-                            </div>
+                            </div>--}}
                         @elseif($key <=3)
                             <div class="news-item ">
                                 <div class="fixed-height-img">

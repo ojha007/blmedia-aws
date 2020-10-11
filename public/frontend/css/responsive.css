@@ -97,6 +97,9 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .front_body_position_12 .block-body .card{
+        padding: 0 15px!important;
+    }
     .overlay-parent {
         position: relative !important;
     }
@@ -148,7 +151,9 @@
     .newsBlock.front_body_position_6, .newsBlock.front_body_position_8, .newsBlock.front_body_position_10 {
         padding: 0 !important;
     }
-
+    .front_body_position_6 .card .card-body{
+        padding: 0 !important;
+    }
     .videoCard {
         padding: 0 15px !important;
     }

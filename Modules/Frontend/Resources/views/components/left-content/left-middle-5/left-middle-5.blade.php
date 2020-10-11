@@ -5,15 +5,24 @@
             <div class="row">
                 @foreach($twelvePositionNews as $key=>$news)
                     @if($key ==0 )
-                        <div class="col eq-highlight">
-                            <div class="news-item">
-                                @include('frontend::components.news.news-image',['figureClass'=>''])
-                                <div class="news-content">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="card ">
+                                @include('frontend::components.news.news-image',['figureClass'=>'', 'imgClass'=>'card-img-top'])
+                                <div class="card-body px-0">
                                     @include('frontend::components.news.news-content')
-                                    <p class="short-news"> {!! $news->short_description !!}</p>
+                                    <p class="card-text">{!! $news->short_description !!}</p>
                                 </div>
                             </div>
                         </div>
+                        {{-- <div class="col eq-highlight">
+                             <div class="news-item">
+                                 @include('frontend::components.news.news-image',['figureClass'=>''])
+                                 <div class="news-content">
+                                     @include('frontend::components.news.news-content')
+                                     <p class="short-news"> {!! $news->short_description !!}</p>
+                                 </div>
+                             </div>
+                         </div>--}}
                     @endif
                 @endforeach
                 <div class="col eq-listing">
