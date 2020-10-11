@@ -27,7 +27,8 @@
                                                 @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)
                                                 <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}"
                                                    class="highlight">
-                                                <span class="usr">
+                                                <span class="usr" style="font-size: 16px;
+                                                                      padding-bottom: 5px">
                                                     {{ $news->reporter ? $news->reporter->name
                                                      :( $news->guest ? $news->guest->name:'')  }}
                                                     </span>
