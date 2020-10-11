@@ -12,10 +12,10 @@
                     <div class="mask">
                         <ul id="scrollNewsList" class="newsTickerLisst newsticker"
                             style="width: 3454px; left: -2434.21px;">
-                            <li>
-                                <a href="{{url('/nepali')}}" class="am-bl-topscroll active"
-                                   target="_blank">नेपाली</a>
-                            </li>
+                                <li>
+                                    <a href="{{url('/nepali')}}" class="am-bl-topscroll active"
+                                       target="_blank">नेपाली</a>
+                                </li>
                             <li>
                                 <a href="{{url('/en')}}" class="am-bl-topscroll active"
                                    target="_blank">English</a>
