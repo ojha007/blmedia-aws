@@ -99,8 +99,9 @@
                                class="form-control" name="publish_date">
                     @else
                         <input type="datetime-local" value="{{isset($news) ?
-                                \Illuminate\Support\Carbon::parse($news->publish_date)->format('Y-m-d\TH:i')
+                                         \Illuminate\Support\Carbon::parse($news->publish_date)->format('Y-m-d\TH:i')
                                         : now()->timezone(config('app.timezone'))->format('Y-m-d\TH:i')}}"
+
                                class="form-control" name="publish_date">
                     @endif
 
