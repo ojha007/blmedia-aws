@@ -27,7 +27,8 @@
                                                 @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)
                                                 <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}"
                                                    class="highlight">
-                                                <span class="usr">
+                                                <span class="usr" style="font-size: 16px;
+                                                                      padding-bottom: 5px">
                                                     {{ $news->reporter ? $news->reporter->name
                                                      :( $news->guest ? $news->guest->name:'')  }}
                                                     </span>
@@ -38,7 +39,7 @@
                                         <ul class="post-info-details">
                                             <li>
                                                 <p>
-                                                    <i class="fa fa-clock"></i> {{ Carbon\Carbon::parse($news->publish_date)->format('Y-m-d') }}
+                                                    <i class="fa fa-map-marker"></i> {{$news->date_line}}
                                                 </p>
                                             </li>
                                         </ul>
@@ -73,6 +74,15 @@
                         <div class="news-story">
                             <div class="col-sm-12 col-md-12 col-lg-10 col-xl-10 offset-lg-1">
                                 {!! $news->description !!}
+                                @if($news->external_url)
+                                    <div class="col-md-12 text-center align-center">
+                                        <a href="{{$news->external_url}}"
+                                           target="_blank"
+                                           class=" btn btn-viewAll text-center align-center"
+                                           role="button">{{trans('messages.read_all')}}
+                                        </a>
+                                    </div>
+                                @endif
                                 <div class="col-sm-6 col-xs-12">
                                     <strong> {{trans('messages.publish_on')}}
                                         : {{\Carbon\Carbon::parse($news->publish_date)->toDateTimeString()}}</strong>

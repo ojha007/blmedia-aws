@@ -92,9 +92,8 @@ class FrontendController extends Controller
     public function getCountyByIp()
     {
 //        $ip = "43.245.87.255";
-        $ip =request()->ip();
+        $ip = request()->ip();
         $data = \Location::get($ip);
-        print_r($data);
         if ($data) {
             if ($data->countryName == 'Nepal') {
                 return 'Nepal';

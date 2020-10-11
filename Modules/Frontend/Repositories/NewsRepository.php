@@ -192,40 +192,128 @@ class NewsRepository extends Repository
 
     public function getCacheNews(int $position, $placement, $limit, $cacheName)
     {
-        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
-            return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
-        });
+//        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
+        return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
+//        });
 
     }
 
     public function getNewsByPositionAndPlacement(int $position, $placement, int $limit)
     {
         $category = DB::table('categories')
-            ->select('categories.id')
+            ->select('categories.id', 'categories.slug')
             ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
             ->where('category_positions.' . $placement, '=', $position)
             ->first();
-        if ($category)
+        if ($category) {
+            if ($position == 5) {
+                return $this->blBreakNews($category, $limit);
+            }
+            if ($position == 8) {
+                return $this->getSamacharNews($category, $limit);
+
+            }
+            return $this->newsByPosition($category, $limit);
+        }
+
+        return [];
+    }
+
+
+    protected function blBreakNews($category, $limit)
+    {
+        if ($category->slug == 'break-16') {
+            $break = trans('messages.break');
+            $breakSlug = 'break-16';
             return DB::table('news')
                 ->select('news.title', 'news.sub_title', 'news.short_description', 'reporters.name as reporter_name',
-                    'guests.name as guest_name', 'categories.name as categories', 'news.id as news_slug',
+                    'guests.name as guest_name', 'news.id as news_slug',
                     'reporters.image as reporter_image', 'guests.image as guest_image',
-                    'news.publish_date', 'categories.is_video', 'news.date_line',
-                    'categories.slug as category_slug', 'news.image', 'news.image_description', 'news.image_alt')
+                    'news.publish_date', 'news.date_line',
+                    'news.image', 'news.image_description', 'news.image_alt')
                 ->selectRaw('IFNULL(guests.name,reporters.name) as author_name')
                 ->selectRaw('IF(news.guest_id IS NOT NULL,"guests","reporters") as author_type')
                 ->selectRaw('IFNULL(guests.slug,reporters.slug) as author_slug')
-                ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
-                ->join('categories', 'categories.id', '=', 'news_categories.category_id')
+                ->selectRaw('"' . $break . '" as  categories ,"' . $breakSlug . '" as category_slug,0 as is_video')
                 ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
                 ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
                 ->where('news.is_active', true)
                 ->whereNull('news.deleted_at')
-                ->where('categories.id', '=', $category->id)
-                ->orderByDesc('news.id')
+                ->orderByDesc('publish_date')
                 ->distinct(true)
                 ->limit($limit)
                 ->get();
-        return [];
+        } else {
+            return $this->newsByPosition($category, $limit);
+        }
+    }
+
+    protected function newsByPosition($category, $limit)
+    {
+        return DB::table('news')
+            ->select('news.title', 'news.sub_title', 'news.short_description', 'reporters.name as reporter_name',
+                'guests.name as guest_name', 'categories.name as categories', 'news.id as news_slug',
+                'reporters.image as reporter_image', 'guests.image as guest_image',
+                'news.publish_date', 'categories.is_video', 'news.date_line',
+                'categories.slug as category_slug', 'news.image', 'news.image_description', 'news.image_alt')
+            ->selectRaw('IFNULL(guests.name,reporters.name) as author_name')
+            ->selectRaw('IF(news.guest_id IS NOT NULL,"guests","reporters") as author_type')
+            ->selectRaw('IFNULL(guests.slug,reporters.slug) as author_slug')
+            ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
+            ->join('categories', 'categories.id', '=', 'news_categories.category_id')
+            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->where('news.is_active', true)
+            ->whereNull('news.deleted_at')
+            ->where('categories.id', '=', $category->id)
+            ->orderByDesc('publish_date')
+            ->distinct(true)
+            ->limit($limit)
+            ->get();
+    }
+
+
+    protected function getSamacharNews($category, $limit)
+    {
+
+        $category_name = trans('messages.news');
+        $category_slug = 'news-19';
+        $mixCategorySlug = [
+            2,
+            35,
+            60,
+        ];
+        if ($category->slug == 'news-19') {
+            return DB::table('news')
+                ->select('news.title', 'news.sub_title', 'news.short_description', 'reporters.name as reporter_name',
+                    'guests.name as guest_name', 'news.id as news_slug',
+                    'reporters.image as reporter_image', 'guests.image as guest_image',
+                    'news.publish_date', 'news.date_line',
+                    'news.image', 'news.image_description', 'news.image_alt')
+                ->selectRaw('IFNULL(guests.name,reporters.name) as author_name')
+                ->selectRaw('IF(news.guest_id IS NOT NULL,"guests","reporters") as author_type')
+                ->selectRaw('IFNULL(guests.slug,reporters.slug) as author_slug')
+                ->selectRaw('"' . $category_name . '" as  categories ,"' . $category_slug . '" as category_slug,0 as is_video')
+                ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+                ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+                ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
+                ->join('categories', 'categories.id', '=', 'news_categories.category_id')
+                ->whereIn('categories.id', $mixCategorySlug)
+                ->where('news.is_active', true)
+                ->whereNull('news.deleted_at')
+                ->orderByDesc('publish_date')
+                ->distinct(true)
+                ->limit($limit)
+                ->get();
+
+        } else {
+            return $this->newsByPosition($category, $limit);
+        }
+    }
+
+    protected function childNewsToParent()
+    {
+
     }
 }
+

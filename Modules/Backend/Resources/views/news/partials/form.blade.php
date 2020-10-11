@@ -99,8 +99,9 @@
                                class="form-control" name="publish_date">
                     @else
                         <input type="datetime-local" value="{{isset($news) ?
-                                \Illuminate\Support\Carbon::parse($news->publish_date)->format('Y-m-d\TH:i')
-                                        : now()->format('Y-m-d\TH:i')}}"
+                                         \Illuminate\Support\Carbon::parse($news->publish_date)->format('Y-m-d\TH:i')
+                                        : now()->timezone(config('app.timezone'))->format('Y-m-d\TH:i')}}"
+
                                class="form-control" name="publish_date">
                     @endif
 
@@ -116,7 +117,7 @@
                 </label>
                 {{Form::select('category_id',$selectNewsCategories,isset($news) ?
                            $news->categories->pluck('id')->toArray() : null,
-                    ['class'=>'form-control select2',
+                          ['class'=>'form-control select2',
                         'style'=>'width:100%'])}}
             </div>
             <div class=" form-group {{$errors->has('tags') ?'has-error':''}}">

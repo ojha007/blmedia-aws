@@ -15,4 +15,6 @@ return [
     'bl_special' => 'Bl Special',
     'trending' => 'Trending',
     'search' => 'Search...',
+    'news' => 'News',
+
 ];
