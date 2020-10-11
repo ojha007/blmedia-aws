@@ -38,7 +38,7 @@
                                         <ul class="post-info-details">
                                             <li>
                                                 <p>
-                                                    <i class="fa fa-clock"></i> {{ Carbon\Carbon::parse($news->publish_date)->format('Y-m-d') }}
+                                                    <i class="fa fa-map-marker"></i> {{$news->date_line}}
                                                 </p>
                                             </li>
                                         </ul>
