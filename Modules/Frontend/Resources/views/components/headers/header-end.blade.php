@@ -96,7 +96,7 @@
                         <li class="unicode-am">
                             |
                             <a href="{{route($routePrefix.'preeti-to-unicode')}}" target="_blank">
-                                <i class="fa fa-keyboard"></i>युनिकोड</a>
+                                <i class="fa fa-keyboard"></i>&nbsp;युनिकोड</a>
                         </li>
                     @endif
                 </ul>
