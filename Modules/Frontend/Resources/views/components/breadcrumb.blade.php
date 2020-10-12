@@ -7,7 +7,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="{{route($routePrefix.'index')}}">
-                                    गृहपृष्ठ
+                                    {{trans('messages.home')}}
                                 </a>
                             </li>
                             @foreach($breadcrumbs as $breadcrumb)

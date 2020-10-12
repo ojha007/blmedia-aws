@@ -19,5 +19,6 @@ return [
     'news' => 'News',
     'read_all' => 'Read All',
     'break' => 'Break',
+    'home' => 'Home',
 
 ];
