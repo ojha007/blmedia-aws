@@ -49,6 +49,12 @@ class BackendController extends Controller
                 'bg' => 'aqua',
                 'count' => $this->adsCounts()
             ],
+            [
+                'title' => 'Total News Today',
+                'fa' => 'trending',
+                'bg' => 'aqua',
+                'count' => $this->todayNews()
+            ],
         ];
 
         return view('backend::index', compact('attributes'));
@@ -77,6 +83,14 @@ class BackendController extends Controller
     protected function adsCounts()
     {
         return Advertisement::where('is_active', 1)->count();
+    }
+
+    protected function todayNews()
+    {
+//        dd(now()->addHours(23)->timezone(config('app.timeZone')));
+        return News::where('publish_date', '>=', now()->addHours(23)->timezone(config('app.timeZone')))
+            ->where('publish_date', '<', now()->timezone(config('app.timeZone')))
+            ->count();
     }
 
 }
