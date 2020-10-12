@@ -18,5 +18,6 @@ return [
     'search' => 'Search...',
     'news' => 'News',
     'read_all' => 'Read All',
+    'break' => 'Break',
 
 ];
