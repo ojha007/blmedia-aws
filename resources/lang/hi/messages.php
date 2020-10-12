@@ -10,6 +10,7 @@ return [
     'write_your_comment' => 'अपना काँमेंट लिखें',
     'anchor' => 'एंकर',
     'bl_special' => 'बिएल स्पेशल',
+    'bl-special' => 'बिएल स्पेशल',
     'other_news' => 'अन्य खबरें',
     'publish_on' => 'प्रकाशित तारीख',
     'search' => 'यहाँ टाइप करें....',

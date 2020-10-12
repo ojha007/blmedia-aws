@@ -73,7 +73,7 @@ class CategoryController extends Controller
                 return $cat->id;
             })->toArray();
 
-        $isExtraCategory = $slug == 'anchor' || $slug == 'bl_special';
+        $isExtraCategory = $slug == 'anchor' || $slug == 'bl-special';
         return DB::table('news')
             ->select('news.sub_title', 'news.id as news_slug', 'news.title', 'news.short_description',
                 'news.description', 'news.publish_date', 'news.image', 'news.image_alt', 'news.image_description',
@@ -85,7 +85,7 @@ class CategoryController extends Controller
             ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
             ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
             ->when($isExtraCategory, function ($a) use ($slug) {
-                $category_slug = $slug == 'anchor' ? 'anchor' : 'bl_special';
+                $category_slug = $slug == 'anchor' ? 'anchor' : 'bl-special';
                 $category = trans('messages.' . $category_slug);
                 $column = $slug == 'anchor' ? 'is_anchor' : 'is_special';
                 $a->selectRaw("'$category' as categories")
