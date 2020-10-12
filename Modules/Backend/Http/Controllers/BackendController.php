@@ -34,13 +34,13 @@ class BackendController extends Controller
             [
                 'title' => 'Active Reporters',
                 'fa' => 'users',
-                'bg' => 'yellow',
+                'bg' => 'orange',
                 'count' => $this->reportersCounts()
             ],
             [
                 'title' => 'Total Category',
                 'fa' => 'list-alt',
-                'bg' => 'aqua',
+                'bg' => 'info',
                 'count' => $this->categoryCount()
             ],
             [
@@ -51,8 +51,8 @@ class BackendController extends Controller
             ],
             [
                 'title' => 'Total News Today',
-                'fa' => 'trending',
-                'bg' => 'aqua',
+                'fa' => 'line-chart',
+                'bg' => 'secondary',
                 'count' => $this->todayNews()
             ],
         ];
