@@ -11,7 +11,7 @@
                         <div class="news-content">
                             @include('frontend::components.news.news-content')
                             @include('frontend::components.news.news-author')
-                            <p> {{$news->short_description}}</p>
+                            <p> {{\Illuminate\Support\Str::limit($news->short_description,200)}}</p>
                         </div>
                     </div>
                 @else
@@ -22,7 +22,7 @@
                         <div class="news-content">
                             @include('frontend::components.news.news-content')
                             @include('frontend::components.news.news-author')
-                            <p>{{$news->short_description}}</p>
+                            <p> {{\Illuminate\Support\Str::limit($news->short_description,200)}}</p>
                         </div>
                     </div>
                 @endif

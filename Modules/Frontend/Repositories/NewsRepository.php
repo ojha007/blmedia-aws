@@ -192,16 +192,16 @@ class NewsRepository extends Repository
 
     public function getCacheNews(int $position, $placement, $limit, $cacheName)
     {
-//        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
-        return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
-//        });
+        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
+            return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
+        });
 
     }
 
     public function getNewsByPositionAndPlacement(int $position, $placement, int $limit)
     {
         $category = DB::table('categories')
-            ->select('categories.id', 'categories.slug')
+            ->select('categories.id', 'categories.slug', 'categories.name')
             ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
             ->where('category_positions.' . $placement, '=', $position)
             ->first();
@@ -250,12 +250,22 @@ class NewsRepository extends Repository
 
     protected function newsByPosition($category, $limit)
     {
+        $category_name = $category->name;
+        $category_slug = $category->slug;
+        $childCategories = DB::table('categories')
+            ->select('id')
+            ->where('parent_id', '=', $category->id)
+            ->get()->map(function ($cat) {
+                return $cat->id;
+            })->toArray();
         return DB::table('news')
-            ->select('news.title', 'news.sub_title', 'news.short_description', 'reporters.name as reporter_name',
-                'guests.name as guest_name', 'categories.name as categories', 'news.id as news_slug',
+            ->select('news.title', 'news.sub_title', 'news.short_description',
+                'reporters.name as reporter_name',
+                'guests.name as guest_name', 'news.id as news_slug',
                 'reporters.image as reporter_image', 'guests.image as guest_image',
-                'news.publish_date', 'categories.is_video', 'news.date_line',
-                'categories.slug as category_slug', 'news.image', 'news.image_description', 'news.image_alt')
+                'news.publish_date', 'news.date_line',
+                'news.image',
+                'news.image_description', 'news.image_alt')
             ->selectRaw('IFNULL(guests.name,reporters.name) as author_name')
             ->selectRaw('IF(news.guest_id IS NOT NULL,"guests","reporters") as author_type')
             ->selectRaw('IFNULL(guests.slug,reporters.slug) as author_slug')
@@ -263,9 +273,11 @@ class NewsRepository extends Repository
             ->join('categories', 'categories.id', '=', 'news_categories.category_id')
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->selectRaw('"' . $category_name . '" as  categories ,"' . $category_slug . '" as category_slug,0 as is_video')
             ->where('news.is_active', true)
             ->whereNull('news.deleted_at')
             ->where('categories.id', '=', $category->id)
+            ->orWhereIn('categories.id', $childCategories)
             ->orderByDesc('publish_date')
             ->distinct(true)
             ->limit($limit)

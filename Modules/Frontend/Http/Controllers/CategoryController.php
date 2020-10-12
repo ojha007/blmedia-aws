@@ -120,6 +120,9 @@ class CategoryController extends Controller
             ->selectRaw('IFNULL(reporters.slug,guests.slug) as author_slug')
             ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
             ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
+            ->where('news.is_active', true)
+            ->whereNull('news.deleted_at')
+            ->orderByDesc('news.publish_date')
             ->get()
             ->groupBy('c2_id')
             ->map(function ($news) use ($limit) {
