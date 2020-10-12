@@ -52,17 +52,20 @@ class SwitchDatabaseConnectionServiceProvider extends ServiceProvider
     protected function getTimeZoneByIp()
     {
         $ip = request()->ip();
-        $data = \Location::get($ip);
-        if ($data) {
-            if ($data->countryName == 'Nepal') {
-                return 'Asia/Kathmandu';
+        if ($ip) {
+            $data = \Location::get($ip);
+            if ($data) {
+                if ($data->countryName == 'Nepal') {
+                    return 'Asia/Kathmandu';
+                }
+                if ($data->countryName == 'India') {
+                    return 'Asia/Kolkata';
+                }
+                return 'America/Los_Angeles';
             }
-            if ($data->countryName == 'India') {
-                return 'Asia/Kolkata';
-            }
-            return 'America/Los_Angeles';
+            return 'Asia/Kathmandu';
         }
-        return 'Asia/Kathmandu';
+
     }
 
     /**
