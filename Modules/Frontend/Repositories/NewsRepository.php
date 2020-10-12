@@ -42,7 +42,7 @@ class NewsRepository extends Repository
                 ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
                 ->where('news_category_id', '=', $category_id)
                 ->where('news.is_active', true)
-                ->orderByDesc('news.id')
+                ->orderByDesc('news.publish_date')
                 ->whereNull('news.deleted_at')
                 ->limit($limit);
         } catch (\Exception $exception) {
@@ -73,7 +73,7 @@ class NewsRepository extends Repository
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->where('category_positions.front_body_position', $position)
-            ->orderByDesc('news.id')
+            ->orderByDesc('news.publish_date')
             ->where('news.is_active', true)
             ->whereNull('news.deleted_at')
             ->limit($limit)
@@ -100,7 +100,7 @@ class NewsRepository extends Repository
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->where('category_positions.detail_body_position', $position)
-            ->orderByDesc('news.id')
+            ->orderByDesc('news.publish_date')
             ->where('news.is_active', true)
             ->whereNull('news.deleted_at')
             ->distinct(true)
@@ -143,7 +143,7 @@ class NewsRepository extends Repository
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->where('category_positions.front_body_position', $position)
             ->where('news.' . $extra_column, '=', 1)
-            ->orderByDesc('news.id')
+            ->orderByDesc('news.publish_date')
             ->where('news.is_active', true)
             ->whereNull('news.deleted_at')
             ->limit($limit)
@@ -289,7 +289,7 @@ class NewsRepository extends Repository
     {
 
         $category_name = trans('messages.news');
-        $category_slug = 'news-19';
+        $category_slug = 'news';
         $mixCategorySlug = [
             2,
             35,
