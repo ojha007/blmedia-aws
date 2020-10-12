@@ -59,7 +59,7 @@ class NewsController extends Controller
             ->where('is_active', true)
             ->pluck('name', 'id');
         $news = News::with(['categories', 'reporter', 'guest', 'createdBy', 'updatedBy', 'tags'])
-            ->orderBy('news.id', 'DESC')
+            ->orderByDesc('news.publish_date')
             ->when($is_special, function ($a) use ($is_special) {
                 $a->where('is_special', $is_special);
             })
