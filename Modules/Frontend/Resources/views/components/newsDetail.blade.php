@@ -215,5 +215,6 @@
     <meta name="twitter:card" content="article">
     <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
     <meta name="twitter:title" content="{{$news->title}}"/>
-    <meta property="twitter:image" content="{{$news->image}}"/>
+    <meta name="twitter:image" content="{{$news->image}}"/>
+    <meta name="twitter:description" content="{{$news->short_description}}"/>
 @endpush
