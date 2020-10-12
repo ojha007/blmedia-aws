@@ -222,9 +222,9 @@ class NewsRepository extends Repository
 
     protected function blBreakNews($category, $limit)
     {
-        if ($category->slug == 'break-16') {
+        if ($category->slug == 'break') {
             $break = trans('messages.break');
-            $breakSlug = 'break-16';
+            $breakSlug = 'break';
             return DB::table('news')
                 ->select('news.title', 'news.sub_title', 'news.short_description', 'reporters.name as reporter_name',
                     'guests.name as guest_name', 'news.id as news_slug',
