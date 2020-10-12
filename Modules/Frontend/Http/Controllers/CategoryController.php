@@ -103,6 +103,7 @@ class CategoryController extends Controller
             ->where('news.is_active', '=', 1)
             ->whereNull('news.deleted_at')
             ->orderByDesc('news.publish_date')
+            ->distinct(true)
             ->paginate($perPage);
 
     }
