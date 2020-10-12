@@ -29,13 +29,7 @@ class SwitchDatabaseConnectionServiceProvider extends ServiceProvider
         DB::disconnect();
         $diskName = $edition == 'en' ? 'english' : $edition;
         Config::set('elfinder.disks', $diskName);
-        $timeZone = 'America/Los_Angeles';
-        if ($edition == 'nepali') {
-            $timeZone = 'Asia/Kathmandu';
-        }
-        if ($edition == 'hindi') {
-            $timeZone = 'Asia/Kolkata';
-        }
+        $timeZone = $this->getTimeZoneByIp();
         Config::set('app.timezone', $timeZone);
         Config::set('CACHE_PREFIX', $edition);
         Config::set('elfinder.route.prefix', $edition . '/bl-secure/elfinder');
@@ -53,6 +47,22 @@ class SwitchDatabaseConnectionServiceProvider extends ServiceProvider
             $edition = 'en';
         }
         return $edition;
+    }
+
+    protected function getTimeZoneByIp()
+    {
+        $ip = request()->ip();
+        $data = \Location::get($ip);
+        if ($data) {
+            if ($data->countryName == 'Nepal') {
+                return 'Asia/Kathmandu';
+            }
+            if ($data->countryName == 'India') {
+                return 'Asia/Kolkata';
+            }
+            return 'America/Los_Angeles';
+        }
+        return 'Asia/Kathmandu';
     }
 
     /**
@@ -78,5 +88,4 @@ class SwitchDatabaseConnectionServiceProvider extends ServiceProvider
         }
         App::setLocale($language[$edition]);
     }
-
 }
