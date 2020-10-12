@@ -16,5 +16,6 @@ return [
     'trending' => 'Trending',
     'search' => 'Search...',
     'news' => 'News',
+    'read_all' => 'Read All',
 
 ];

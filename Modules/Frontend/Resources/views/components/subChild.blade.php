@@ -30,7 +30,7 @@
                                         @include('frontend::components.news.news-content')
                                         @include('frontend::components.news.news-author')
                                         <p>
-                                            {{$news->short_description}}
+                                            {{\Illuminate\Support\Str::limit($news->short_description,200)}}
                                         </p>
                                     </div>
                                 </div>

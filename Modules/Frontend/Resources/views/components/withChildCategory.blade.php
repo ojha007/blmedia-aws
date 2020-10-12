@@ -8,15 +8,14 @@
                     @include('frontend::components.news.news-author',['news'=>$newsByCategory->first()])
                 </div>
                 <p>
-{{--                    @dd($newsByCategory->first())--}}
-                    {!! $newsByCategory->first()->short_description !!}
+                    {!! \Illuminate\Support\Str::limit($newsByCategory->first()->short_description,200) !!}
                 </p>
             @endif
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="row">
-            @foreach($newsByCategory->take(4) as $key=>$news)
+            @foreach($newsByCategory->take(5) as $key=>$news)
                 @if($key > 0)
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="small_bx">

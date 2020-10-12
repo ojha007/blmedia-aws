@@ -263,7 +263,7 @@ class NewsRepository extends Repository
                 'reporters.name as reporter_name',
                 'guests.name as guest_name', 'news.id as news_slug',
                 'reporters.image as reporter_image', 'guests.image as guest_image',
-                'news.publish_date', 'news.date_line',
+                'news.publish_date', 'news.date_line', 'categories.is_video',
                 'news.image',
                 'news.image_description', 'news.image_alt')
             ->selectRaw('IFNULL(guests.name,reporters.name) as author_name')
@@ -273,7 +273,7 @@ class NewsRepository extends Repository
             ->join('categories', 'categories.id', '=', 'news_categories.category_id')
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
-            ->selectRaw('"' . $category_name . '" as  categories ,"' . $category_slug . '" as category_slug,0 as is_video')
+            ->selectRaw('"' . $category_name . '" as  categories ,"' . $category_slug . '" as category_slug')
             ->where('news.is_active', true)
             ->whereNull('news.deleted_at')
             ->where('categories.id', '=', $category->id)

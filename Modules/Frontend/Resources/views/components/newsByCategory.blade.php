@@ -27,7 +27,7 @@
                         @include('frontend::components.news.news-template',
                             [
                                 'allNews'=>$blSpecialNews,
-                                'class'=>' blspecial-body bisheshNew'
+                                'bodyClass'=>'blspecial-body bisheshNew'
 
                                 ])
                         @include('frontend::components.news.news-template',['allNews'=>$detailPageSecondPositionNews])
