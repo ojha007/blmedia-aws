@@ -125,7 +125,7 @@ class NewsRepository extends Repository
 
     public function getNewsByExtraColumn(int $position, int $limit, $extra_column)
     {
-        $category = $extra_column == 'is_anchor' ? 'anchor' : 'blspecial-37-25-38';
+        $category = $extra_column == 'is_anchor' ? 'anchor' : 'bl_special';
         return DB::table('news')
             ->select('news.title', 'news.sub_title', 'news.short_description',
                 'categories.name as categories', 'news.slug as news_slug', 'news.publish_date',
