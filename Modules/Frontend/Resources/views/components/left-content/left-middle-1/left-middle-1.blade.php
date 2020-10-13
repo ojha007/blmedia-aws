@@ -20,7 +20,7 @@
                 @endforeach
             </div>
         </div>--}}
-        <div class="section-row pt-0 front_body_position_4">
+        <div class="row pt-0 {{ $positionClass ?? '' }} is_video">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left ">
                 <div class="row">
                     <div class="col-md-12">

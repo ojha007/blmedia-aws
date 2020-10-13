@@ -1,11 +1,11 @@
 <figure class=" {{ isset($figureClass) ? $figureClass : 'news-image'}}">
+{{--    @dd($news)--}}
     <a href="{{route($routePrefix.'news.show',$news->news_slug ?? $news->slug)}}">
         @if(isset($image))
             <img src="{{
                 is_null($image) ?
-
                asset('frontend/img/logo.png')
-               :  $news->$image
+               :  $news->reporter_image
                }}"
                  alt="{{$news->image_alt}}"
                  title="{{$news->image_description}}"

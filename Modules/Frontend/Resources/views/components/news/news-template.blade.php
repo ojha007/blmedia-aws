@@ -1,12 +1,12 @@
 @if(count($allNews))
     <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
-       @include('frontend::components.card-header',['header'=>$allNews])
+        @include('frontend::components.card-header',['header'=>$allNews])
         <div class="card-body text-primary">
             @foreach($allNews as $news)
                 <div class="card mb-3">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            {{--                        @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img'])--}}
+                            @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             @endforeach
-                @include('frontend::components.buttons.view-all-category-button', ['position' => $allNews])
+            @include('frontend::components.buttons.view-all-category-button', ['position' => $allNews])
         </div>
     </div>
     {{--<div class="newsBlock type-8 ">

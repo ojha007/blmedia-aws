@@ -6,7 +6,7 @@
                 @if($key == 0)
                     <div class="card text-white overlay-main ">
                         @include('frontend::components.news.news-image',['imgClass'=>'card-img'])
-                        <div class="card-img-overlay d-flex flex-column " >
+                        <div class="card-img-overlay d-flex flex-column ">
                             <p class="mt-auto ">
                                 <a href="{{route($routePrefix.'news.show',$news->news_slug)}}" class="text-white">
                                     @isset($limit)
@@ -22,15 +22,15 @@
             @endforeach
             <div class="row">
                 @foreach($thirteenPositionNews as $key=>$news)
-                <div class="col-sm-12 col-md-4">
-                    <div class="card mb-3">
-                        {{--                                                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])--}}
-                        <div class="card-body">
-                            @include('frontend::components.news.news-title')
-                            @include('frontend::components.news.news-author')
+                    <div class="col-sm-12 col-md-4">
+                        <div class="card mb-3">
+                            @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])
+                            <div class="card-body">
+                                @include('frontend::components.news.news-title')
+                                @include('frontend::components.news.news-author')
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
             @include('frontend::components.buttons.view-all-category-button', ['position' => $thirteenPositionNews])

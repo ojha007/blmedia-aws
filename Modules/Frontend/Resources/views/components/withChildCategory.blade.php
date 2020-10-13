@@ -1,4 +1,44 @@
-<div class="row">
+<div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
+    @include('frontend::components.card-header',['header'=>$newsByCategory])
+    <div class="card-body ">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                @foreach($newsByCategory as $key=>$news)
+                    @if($key == 0)
+                        <div class="card mb-3">
+                            @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])
+                            <div class="card-body">
+                                @include('frontend::components.news.news-title')
+                                @include('frontend::components.news.news-author')
+                                @include('frontend::components.news.news-short-description')
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="row">
+                    @foreach($newsByCategory->take(5) as $key=>$news)
+                        @if($key >0)
+                            <div class="col-sm-12 col-md-6">
+                                <div class="card mb-3">
+                                    @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])
+                                    <div class="card-body">
+                                        @include('frontend::components.news.news-title')
+                                        @include('frontend::components.news.news-author')
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        @include('frontend::components.buttons.view-all-category-button', ['position' => $newsByCategory])
+    </div>
+</div>
+
+{{--<div class="row">
     <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="big_bx">
             @if(count($newsByCategory))
@@ -8,7 +48,6 @@
                     @include('frontend::components.news.news-author',['news'=>$newsByCategory->first()])
                 </div>
                 <p>
-{{--                    @dd($newsByCategory->first())--}}
                     {!! $newsByCategory->first()->short_description !!}
                 </p>
             @endif
@@ -34,5 +73,5 @@
             @include('frontend::components.buttons.view-all-category-button', ['position' => $newsByCategory])
         </div>
     @endif
-</div>
+</div>--}}
 @include('frontend::components.subChild')

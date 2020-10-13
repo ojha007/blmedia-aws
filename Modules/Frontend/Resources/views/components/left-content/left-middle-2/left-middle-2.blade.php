@@ -1,6 +1,6 @@
 @if(count($sixthPositionNews))
     @if($sixthPositionNews->first()->is_video)
-        <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
+        <div class="card border-primary mb-3 {{ $positionClass ?? '' }} is_video">
             @include('frontend::components.card-header',['header'=>$sixthPositionNews])
             <div class="card-body ">
               <div class="row">
@@ -23,7 +23,46 @@
             </div>
         </div>--}}
     @else
-        <div class="newsBlock front_body_position_6 type-5" >
+        <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
+            @include('frontend::components.card-header',['header'=>$sixthPositionNews])
+            <div class="card-body ">
+                @foreach($sixthPositionNews as $key=>$news)
+                    @if($key == 0)
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                                            @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        @include('frontend::components.news.news-title')
+                                        @include('frontend::components.news.news-author')
+                                        @include('frontend::components.news.news-short-description')
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                @endforeach
+                    <div class="row">
+                        @foreach($sixthPositionNews as $key=>$news)
+                            @if($key !=0)
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="card mb-3">
+                                                                                        @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
+                                        <div class="card-body">
+                                            @include('frontend::components.news.news-title')
+                                            @include('frontend::components.news.news-author')
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @include('frontend::components.buttons.view-all-category-button', ['position' => $sixthPositionNews])
+            </div>
+        </div>
+       {{-- <div class="newsBlock front_body_position_6 type-5" >
             @include('frontend::components.news.category-heading',['allNews'=>$sixthPositionNews])
             <div class="block-body">
                 <div class="row d-block">
@@ -45,7 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--<div class="news-item highlight-news">
+                            --}}{{--<div class="news-item highlight-news">
                                 <div class="featured-img-fixed-height">
                                     @include('frontend::components.news.news-image')
                                 </div>
@@ -60,7 +99,7 @@
                                         {!! $news->short_description !!}
                                     </p>
                                 </div>
-                            </div>--}}
+                            </div>--}}{{--
                         @elseif($key <=3)
                             <div class="news-item ">
                                 <div class="fixed-height-img">
@@ -75,7 +114,7 @@
                 </div>
             </div>
             @include('frontend::components.buttons.view-all-category-button', ['position' => $sixthPositionNews])
-        </div>
+        </div>--}}
     @endif
 @endif
 

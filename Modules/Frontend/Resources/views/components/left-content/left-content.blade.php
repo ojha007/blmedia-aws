@@ -5,14 +5,10 @@
     @include('frontend::components.ads.ads-1')
 </section>
 <section class="left-middle-1-section">
-    <div class="col-sm-12 col-md-12">
-        @include('frontend::components.left-content.left-middle-1.left-middle-1', [ 'positionClass'=>'front_body_position_12'])
-    </div>
+    @include('frontend::components.left-content.left-middle-1.left-middle-1', [ 'positionClass'=>'front_body_position_4 '])
 </section>
 <section class="left-middle-2-section">
-    <div class="col-sm-12 col-md-12">
-        @include('frontend::components.left-content.left-middle-2.left-middle-2', [ 'positionClass'=>'front_body_position_6'])
-    </div>
+    @include('frontend::components.left-content.left-middle-2.left-middle-2', [ 'positionClass'=>'front_body_position_6'])
 </section>
 <section class="left-middle-3-section">
     @include('frontend::components.left-content.left-middle-3.left-middle-3',['baseAllNews'=>$eighthPositionNews, 'positionClass'=>'front_body_position_8'])

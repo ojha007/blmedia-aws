@@ -7,7 +7,7 @@
                @foreach($baseAllNews as $key=>$news)
                    @if($key == 0)
                <div class="card mb-3">
-                   {{--                                                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])--}}
+                                                                   @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                    <div class="card-body">
                        @include('frontend::components.news.news-title')
                        @include('frontend::components.news.news-author')
@@ -20,19 +20,36 @@
            <div class="col-md-6">
               <div class="row">
                   @foreach($baseAllNews as $key=>$news)
+                      @if($key >0 && $key <=8)
                   <div class="col-md-6">
                       <div class="card mb-3">
-                          {{--                                                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])--}}
+                                                                          @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                           <div class="card-body">
                               @include('frontend::components.news.news-title')
                               @include('frontend::components.news.news-author')
                           </div>
                       </div>
                   </div>
+                      @endif
                   @endforeach
               </div>
            </div>
        </div>
+        <div class="row">
+            @foreach($baseAllNews as $key=>$news)
+                @if($key >=9)
+                <div class="col-md-3">
+                    <div class="card mb-3">
+                                                                        @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
+                        <div class="card-body">
+                            @include('frontend::components.news.news-title')
+                            @include('frontend::components.news.news-author')
+                        </div>
+                    </div>
+                </div>
+                @endif
+            @endforeach
+        </div>
         @include('frontend::components.buttons.view-all-category-button', ['position' => $baseAllNews])
     </div>
 </div>

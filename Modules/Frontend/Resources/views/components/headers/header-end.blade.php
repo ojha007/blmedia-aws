@@ -1,8 +1,8 @@
 <section class=" header-end-section ">
-    <div class="offset-lg-1 col-lg-10">
+    <div class="offset-lg-1 col-lg-10 px-0">
         <div class="row">
             <div class="col-lg-10">
-                <nav class="navbar navbar-expand-lg navbar-light ">
+                <nav class="navbar navbar-expand-lg navbar-light px-0" >
                     {{--        <a class="navbar-brand" href="#">Navbar</a>--}}
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent"

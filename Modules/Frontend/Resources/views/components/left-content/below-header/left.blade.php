@@ -6,7 +6,7 @@
                 <div class="card mb-3">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                                                    @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img'])
+                            @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img'])
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             @endforeach
-                @include('frontend::components.buttons.view-all-category-button', ['position' => $firstPositionNews])
+            @include('frontend::components.buttons.view-all-category-button', ['position' => $firstPositionNews])
         </div>
     </div>
     {{--<div class="newsBlock front_body_position_1 type-1">

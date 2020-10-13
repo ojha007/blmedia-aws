@@ -7,7 +7,7 @@
                     @foreach($twelvePositionNews as $key=>$news)
                         @if($key == 0)
                             <div class="card mb-3">
-                                {{--                                                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])--}}
+                                                                                @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                                 <div class="card-body">
                                     @include('frontend::components.news.news-title')
                                     @include('frontend::components.news.news-author')
@@ -23,7 +23,7 @@
                            @if($key >0)
                                <div class="col-sm-12 col-md-6">
                                    <div class="card mb-3">
-                                       {{--                                                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])--}}
+                                                                                       @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                                        <div class="card-body">
                                            @include('frontend::components.news.news-title')
                                            @include('frontend::components.news.news-author')

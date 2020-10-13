@@ -1,4 +1,22 @@
-<div class="news-list-view">
+@foreach($newsByCategory as $news)
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img'])
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    @include('frontend::components.news.news-title')
+                    @include('frontend::components.news.news-author')
+                    @include('frontend::components.news.news-short-description')
+                    @include('frontend::components.buttons.read-more-button', ['news' => $news])
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+{{--<div class="news-list-view">
     @foreach($newsByCategory as $news)
         <div class="news-item">
             <div class="fixed-height-img">
@@ -29,7 +47,7 @@
             </div>
         </div>
     @endforeach
-</div>
+</div>--}}
 <div class="pagination-wrapper">
     {{ $newsByCategory->links('vendor.pagination.custom') }}
 </div>

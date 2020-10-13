@@ -1,5 +1,5 @@
 <section class="header-mid-section">
-    <div class="offset-lg-1 col-lg-10">
+    <div class="offset-lg-1 col-lg-10 pt-3">
         <div class="row">
             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 float-left">
                 <figure class="brand-logo">
