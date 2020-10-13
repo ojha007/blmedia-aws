@@ -228,8 +228,9 @@ html {
     /*padding: 10px;*/
     overflow: hidden;
 }
-.recommendation-card img{
-    height:100%;
+
+.recommendation-card img {
+    height: 100%;
 }
 
 .custom-tag {
@@ -287,8 +288,13 @@ html {
     font-size: 4em;
     font-weight: 600;
 }
-.custom-news-title a{
+
+.custom-news-title a {
     color: black;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
+}
+
+.custom-news-title a:hover {
+    color: #FF5E14;
 }
