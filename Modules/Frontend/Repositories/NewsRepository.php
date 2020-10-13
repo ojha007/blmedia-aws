@@ -294,6 +294,11 @@ class NewsRepository extends Repository
             2,
             35,
             60,
+            23,
+            62,
+            38,
+            33,
+            13,
 
 
         ];
