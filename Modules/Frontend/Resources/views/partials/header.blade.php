@@ -1,8 +1,10 @@
 <header class="page-header ">
-    @include('frontend::components.headers.mobile-header-top')
-    @include('frontend::components.headers.header-top')
-    @include('frontend::components.headers.header-mid')
-    @include('frontend::components.headers.header-end')
+    <div class="container-fluid px-0">
+        @include('frontend::components.headers.mobile-header-top')
+        @include('frontend::components.headers.header-top')
+        @include('frontend::components.headers.header-mid')
+        @include('frontend::components.headers.header-end')
+    </div>
 </header>
 @push('scripts')
     <script>

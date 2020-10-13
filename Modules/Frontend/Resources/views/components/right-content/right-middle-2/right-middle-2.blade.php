@@ -1,3 +1,3 @@
 @include('frontend::components.news.news-template',['allNews'=>$seventhPositionNews,
-'class' => 'front_body_position_7'
+'positionClass'=>'front_body_position_7'
 ])

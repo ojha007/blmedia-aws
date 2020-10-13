@@ -1,5 +1,44 @@
-<div class="newsBlock type-6 position-12 front_body_position_12">
-    @if(count($twelvePositionNews))
+@if(count($twelvePositionNews))
+    <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
+        @include('frontend::components.card-header',['header'=>$twelvePositionNews])
+        <div class="card-body text-primary">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    @foreach($twelvePositionNews as $key=>$news)
+                        @if($key == 0)
+                            <div class="card mb-3">
+                                {{--                                                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])--}}
+                                <div class="card-body">
+                                    @include('frontend::components.news.news-title')
+                                    @include('frontend::components.news.news-author')
+                                    @include('frontend::components.news.news-short-description')
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                <div class="col-sm-12 col-md-6">
+                   <div class="row">
+                       @foreach($twelvePositionNews as $key=>$news)
+                           @if($key >0)
+                               <div class="col-sm-12 col-md-6">
+                                   <div class="card mb-3">
+                                       {{--                                                @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])--}}
+                                       <div class="card-body">
+                                           @include('frontend::components.news.news-title')
+                                           @include('frontend::components.news.news-author')
+                                       </div>
+                                   </div>
+                               </div>
+                           @endif
+                       @endforeach
+                   </div>
+                </div>
+            </div>
+            @include('frontend::components.buttons.view-all-category-button', ['position' => $twelvePositionNews])
+        </div>
+    </div>
+{{--<div class="newsBlock type-6 position-12 front_body_position_12">
         @include('frontend::components.news.category-heading',['allNews'=>$twelvePositionNews])
         <div class="block-body">
             <div class="row">
@@ -14,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col eq-highlight">
+                        --}}{{-- <div class="col eq-highlight">
                              <div class="news-item">
                                  @include('frontend::components.news.news-image',['figureClass'=>''])
                                  <div class="news-content">
@@ -22,7 +61,7 @@
                                      <p class="short-news"> {!! $news->short_description !!}</p>
                                  </div>
                              </div>
-                         </div>--}}
+                         </div>--}}{{--
                     @endif
                 @endforeach
                 <div class="col eq-listing">
@@ -44,6 +83,7 @@
                 </div>
             </div>
             @include('frontend::components.buttons.view-all-category-button', ['position' => $twelvePositionNews])
-            @endif
+
         </div>
-</div>
+</div>--}}
+@endif

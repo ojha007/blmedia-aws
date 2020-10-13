@@ -1,10 +1,10 @@
-<section class="header-mid">
-    <div class="container-fluid">
+<section class="header-mid-section">
+    <div class="offset-lg-1 col-lg-10">
         <div class="row">
             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 float-left">
                 <figure class="brand-logo">
                     <a href="{{route($routePrefix.'index')}}">
-                        <img class="responsive-img" id="logo_image_nav"
+                        <img class="responsive-img"
                              src="{{asset('frontend/img/logo.png')}}"
                              alt="BL Media">
                     </a>

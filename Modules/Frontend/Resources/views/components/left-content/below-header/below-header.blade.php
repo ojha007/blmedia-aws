@@ -1,4 +1,4 @@
-<div class="section-row pt-0">
+<div class="row">
     @php
         $subFor =[];
         if(isset($firstPositionNews) && count($firstPositionNews) ){
@@ -13,10 +13,10 @@
                             'sub_for'=>$subFor])
     </div>
     <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 float-left">
-        @include('frontend::components.left-content.below-header.left')
+        @include('frontend::components.left-content.below-header.left',[ 'positionClass'=>'front_body_position_1'])
     </div>
     <div class="col-sm-12 col-md-7 col-lg-8 col-xl-8 float-right">
-        @include('frontend::components.left-content.below-header.middle')
+        @include('frontend::components.left-content.below-header.middle',[ 'positionClass'=>'front_body_position_2'])
     </div>
     <div class="container-fluid text-center">
         @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',

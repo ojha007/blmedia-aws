@@ -1,6 +1,15 @@
 @if(count($sixthPositionNews))
     @if($sixthPositionNews->first()->is_video)
-        <div class="section-row pt-0 front_body_position_4">
+        <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
+            @include('frontend::components.card-header',['header'=>$sixthPositionNews])
+            <div class="card-body ">
+              <div class="row">
+                  @include('frontend::components.videos.card2',['allNews'=>$sixthPositionNews])
+              </div>
+                @include('frontend::components.buttons.view-all-category-button', ['position' => $sixthPositionNews])
+            </div>
+        </div>
+        {{--<div class="section-row pt-0 front_body_position_4">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left ">
                 <div class="row">
                     <div class="col-md-12">
@@ -12,9 +21,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
     @else
-        <div class="newsBlock front_body_position_6 type-5" style="padding: 0 15px;">
+        <div class="newsBlock front_body_position_6 type-5" >
             @include('frontend::components.news.category-heading',['allNews'=>$sixthPositionNews])
             <div class="block-body">
                 <div class="row d-block">

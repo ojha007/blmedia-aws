@@ -1,30 +1,37 @@
 <div class="container-fluid text-center px-0 header-top-ads">
     @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above','sub_for'=>'top_menu'])
 </div>
-<section class="header-top">
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar w/ text</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-            </ul>
-            <span class="navbar-text">
-      Navbar text with an inline element
-    </span>
+<section class="header-top-section">
+    <div class="col-sm-12 header-top">
+        <div class="offset-lg-1 col-lg-10">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <a class="navbar-brand" href="#">{{trans('messages.editions')}}</a>
+                <ul class="navbar-nav mr-auto ">
+                    <li class="nav-item ">
+                        <a href="{{url('/nepali')}}" class="nav-link "
+                           target="_blank">नेपाली</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{url('/en')}}" class="nav-link"
+                           target="_blank">English</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{url('/hindi')}}" class="nav-link"
+                           target="_blank">Hindi</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link"
+                        >Español</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link"
+                        >عربي</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </div>
+
     {{-- <div class="container-fluid ">
          <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 float-left scroll-news">
              <div class="scroll-header">
@@ -71,7 +78,7 @@
          </div>
          <div class="clearfix"></div>
      </div>--}}
-    <div class="container-fluid ">
+  {{--  <div class="container-fluid ">
         <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 float-left scroll-news">
             <div class="scroll-header">
                 <h4>{{trans('messages.editions')}}</h4>
@@ -116,10 +123,10 @@
             </span>
         </div>
         <div class="clearfix"></div>
-    </div>
+    </div>--}}
 </section>
 
-<div class="collapse container-fluid" id="searchDropdown">
+{{--<div class="collapse container-fluid" id="searchDropdown">
     <div class="card card-body border-0 rounded-0 searchBody ">
         <form>
             <div class="form-row">
@@ -146,7 +153,7 @@
             </div>
         </form>
     </div>
-</div>
+</div>--}}
 @push('scripts')
     <script>
         $(document).ready(function () {
