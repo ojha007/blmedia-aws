@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title m-0 p-0"><a href="{{route($routePrefix.'news.show',$news->news_slug)}}">
+                    <h5 class="custom-news-title m-0 p-0"><a href="{{route($routePrefix.'news.show',$news->news_slug)}}">
                             {{\Illuminate\Support\Str::limit($news->title, 70)}}
                         </a></h5>
                     <p class="card-text">{{$news->image_description}}</p>

@@ -81,17 +81,17 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            $('.search-button').on("click", function () {
+           /* $('.search-button').on("click", function () {
                 $('i', this).toggleClass("fa fa-search fas fa-times");
-            });
-            $('.datepicker').datepicker({
+            });*/
+           /* $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 inline: true,
                 sideBySide: true,
                 todayHighlight: true,
                 orientation: "bottom auto",
                 autoclose: true
-            });
+            });*/
 
 
         });

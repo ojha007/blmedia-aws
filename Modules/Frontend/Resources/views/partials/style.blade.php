@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="{{ asset('frontend/css/masterLayout.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
-<link rel="stylesheet"
+{{--<link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.css"
-      crossorigin="anonymous"/>
+      crossorigin="anonymous"/>--}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 
