@@ -34,13 +34,13 @@ class BackendController extends Controller
             [
                 'title' => 'Active Reporters',
                 'fa' => 'users',
-                'bg' => 'yellow',
+                'bg' => 'orange',
                 'count' => $this->reportersCounts()
             ],
             [
                 'title' => 'Total Category',
                 'fa' => 'list-alt',
-                'bg' => 'aqua',
+                'bg' => 'info',
                 'count' => $this->categoryCount()
             ],
             [
@@ -48,6 +48,12 @@ class BackendController extends Controller
                 'fa' => 'ad',
                 'bg' => 'aqua',
                 'count' => $this->adsCounts()
+            ],
+            [
+                'title' => 'Total News Today',
+                'fa' => 'line-chart',
+                'bg' => 'secondary',
+                'count' => $this->todayNews()
             ],
         ];
 
@@ -77,6 +83,14 @@ class BackendController extends Controller
     protected function adsCounts()
     {
         return Advertisement::where('is_active', 1)->count();
+    }
+
+    protected function todayNews()
+    {
+//        dd(now()->addHours(23)->timezone(config('app.timeZone')));
+        return News::where('publish_date', '>=', now()->addHours(23)->timezone(config('app.timeZone')))
+            ->where('publish_date', '<', now()->timezone(config('app.timeZone')))
+            ->count();
     }
 
 }

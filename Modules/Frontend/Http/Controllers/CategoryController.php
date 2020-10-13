@@ -61,7 +61,19 @@ class CategoryController extends Controller
 
     public function getNewsByCategorySlug($slug, $perPage = 15)
     {
-        $isExtraCategory = $slug == 'anchor' || $slug == 'bl_special';
+        $category = DB::table('categories')
+            ->select('id', 'name')
+            ->where('slug', $slug)
+            ->first();
+        if (!$category) return redirect('/');
+        $childCategories = DB::table('categories')
+            ->select('id')
+            ->where('parent_id', '=', $category->id)
+            ->get()->map(function ($cat) {
+                return $cat->id;
+            })->toArray();
+
+        $isExtraCategory = $slug == 'anchor' || $slug == 'bl-special';
         return DB::table('news')
             ->select('news.sub_title', 'news.id as news_slug', 'news.title', 'news.short_description',
                 'news.description', 'news.publish_date', 'news.image', 'news.image_alt', 'news.image_description',
@@ -73,22 +85,25 @@ class CategoryController extends Controller
             ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
             ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
             ->when($isExtraCategory, function ($a) use ($slug) {
-                $category_slug = $slug == 'anchor' ? 'anchor' : 'bl_special';
-                $category = $slug == 'anchor' ? trans('messages.' . $category_slug) : trans('messages.' . $category_slug);
+                $category_slug = $slug == 'anchor' ? 'anchor' : 'bl-special';
+                $category = trans('messages.' . $category_slug);
                 $column = $slug == 'anchor' ? 'is_anchor' : 'is_special';
                 $a->selectRaw("'$category' as categories")
                     ->selectRaw("'$category_slug' as category_slug")
                     ->where('news.' . $column, '=', true);
-            })->when($isExtraCategory == false, function ($a) use ($slug) {
-                $a->addSelect('categories.slug as category_slug', 'categories.name as categories')
+            })->when($isExtraCategory == false, function ($a) use ($slug, $childCategories, $category) {
+                $a->selectRaw("'$slug'as category_slug")
+                    ->selectRaw("'$category->name'as categories")
                     ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
                     ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-                    ->where('categories.slug', '=', $slug);
+                    ->where('categories.slug', '=', $slug)
+                    ->orWhereIn('categories.id', $childCategories);
 
             })
             ->where('news.is_active', '=', 1)
             ->whereNull('news.deleted_at')
-            ->orderByDesc('news.id')
+            ->orderByDesc('news.publish_date')
+            ->distinct(true)
             ->paginate($perPage);
 
     }
@@ -120,6 +135,9 @@ class CategoryController extends Controller
             ->selectRaw('IFNULL(reporters.slug,guests.slug) as author_slug')
             ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
             ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
+            ->where('news.is_active', true)
+            ->whereNull('news.deleted_at')
+            ->orderByDesc('news.publish_date')
             ->get()
             ->groupBy('c2_id')
             ->map(function ($news) use ($limit) {

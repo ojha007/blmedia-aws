@@ -55,7 +55,7 @@
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="row">
-            @foreach($newsByCategory->take(4) as $key=>$news)
+            @foreach($newsByCategory->take(5) as $key=>$news)
                 @if($key > 0)
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="small_bx">

@@ -59,7 +59,7 @@ class CategoryRepository extends Repository
     public function getChildCategory($slug, int $limit)
     {
         return DB::table('categories as c1')
-            ->select('c2.name', 'c2.slug')
+            ->select('c2.name', 'c2.slug','c2.id')
             ->join('categories as c2', 'c1.id', '=', 'c2.parent_id')
             ->whereNotNull('c2.parent_id')
             ->where('c2.is_active', true)

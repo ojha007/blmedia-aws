@@ -13,7 +13,6 @@
         @else
             <img src="{{
                 is_null($news->image) ?
-
                asset('frontend/img/logo.png')
                :  $news->image
                }}"

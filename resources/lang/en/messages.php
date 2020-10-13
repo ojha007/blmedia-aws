@@ -13,8 +13,12 @@ return [
     'email' => 'Email',
     'anchor' => 'Anchor',
     'bl_special' => 'Bl Special',
+    'bl-special' => 'Bl Special',
     'trending' => 'Trending',
     'search' => 'Search...',
     'news' => 'News',
+    'read_all' => 'Read All',
+    'break' => 'Break',
+    'home' => 'Home',
 
 ];

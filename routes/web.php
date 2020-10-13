@@ -12,13 +12,15 @@ foreach (config('editions') as $edition) {
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
-Route::get('hindi/c-w-l', function () {
+Route::get('nepali/c-w-l', function () {
 
     try {
         $start = microtime(TRUE);
 
-        $news = \Modules\Backend\Entities\Guest::
-        all();
+        $news = \Modules\Backend\Entities\News::
+        where('image', 'like', '% www.breaknlinks.com/nepali')
+            ->get();
+//        dd($news);
         foreach ($news as $n) {
             $url = $n->image;
             if ($url) {

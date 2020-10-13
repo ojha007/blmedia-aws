@@ -20,7 +20,7 @@
                             {{\Illuminate\Support\Str::limit($news->title, 70)}}
                         </a></h5>
                     <p class="card-text">{{$news->image_description}}</p>
-                    <div style="margin-top: -15px;">@include('frontend::components.news.news-author')</div>--}}
+                    <div style="margin-top: -15px;">@include('frontend::components.news.news-author')</div>
                 </div>
             </div>
         </div>
