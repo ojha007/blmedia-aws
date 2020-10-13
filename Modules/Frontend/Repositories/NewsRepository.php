@@ -294,8 +294,10 @@ class NewsRepository extends Repository
             2,
             35,
             60,
+
+
         ];
-        if ($category->slug == 'news-19') {
+        if ($category->slug == 'news') {
             return DB::table('news')
                 ->select('news.title', 'news.sub_title', 'news.short_description', 'reporters.name as reporter_name',
                     'guests.name as guest_name', 'news.id as news_slug',
@@ -310,7 +312,8 @@ class NewsRepository extends Repository
                 ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
                 ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
                 ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                ->whereIn('categories.id', $mixCategorySlug)
+                ->orWhereIn('categories.id', $mixCategorySlug)
+//                ->where('categories.slug', $category_slug)
                 ->where('news.is_active', true)
                 ->whereNull('news.deleted_at')
                 ->orderByDesc('publish_date')
