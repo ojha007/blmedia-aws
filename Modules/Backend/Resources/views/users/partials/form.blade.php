@@ -24,10 +24,19 @@
                 <div class="form-group {{$errors->has('role_id') ?'has-error' :''}}">
                     {{ Form::label('role', 'Role:', ['class'=>'col-sm-2 control-label required'])}}
                     <div class="col-sm-10">
-                        {!! Form::select('role', $roles, isset($user) ? $user->roles()->first()->name :null,
+                        {!! Form::select('role', $roles, isset($user) ?
+                                $user->roles()->first() ? $user->roles()->first()->name
+                                :null:null,
                         array('placeholder' => 'Select Role','class' => 'form-control select2','style'=>'width:100%;')) !!}
                     </div>
                 </div>
+                @if(auth()->user()->is_super)
+                    <div class="form-group {{$errors->has('is_super') ?'has-error' :''}}">
+                        {{ Form::label('status', 'Super User:', ['class'=>'col-sm-2 control-label'])}}
+                        @include('backend::partials.toggle-button',['value'=>'super','checked'=>$user->is_super ?? 1])
+
+                    </div>
+                @endif
                 <div class="form-group {{$errors->has('status') ?'has-error' :''}}">
                     {{ Form::label('status', 'Status:', ['class'=>'col-sm-2 control-label'])}}
                     @include('backend::partials.toggle-button',['value'=>'status','checked'=>$user->status ?? 1])
