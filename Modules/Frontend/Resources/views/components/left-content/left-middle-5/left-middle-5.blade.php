@@ -46,6 +46,7 @@
                 </div>
             </div>
             @include('frontend::components.buttons.view-all-category-button', ['position' => $twelvePositionNews])
+
             @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
                        'sub_for'=>$twelvePositionNews->first()->category_slug])
             @endif

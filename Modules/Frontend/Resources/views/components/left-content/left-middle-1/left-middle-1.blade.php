@@ -8,9 +8,7 @@
                     <div class="col-md-12">
                         @include('frontend::components.news.category-heading',['allNews'=>$fourthPositionNews])
                     </div>
-
                     @include('frontend::components.videos.card2')
-
                     <div class="col-md-12">
                         @include('frontend::components.buttons.view-all-category-button', ['position' => $fourthPositionNews])
                     </div>
