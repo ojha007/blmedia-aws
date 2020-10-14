@@ -192,9 +192,9 @@ class NewsRepository extends Repository
 
     public function getCacheNews(int $position, $placement, $limit, $cacheName)
     {
-        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
-            return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
-        });
+//        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
+        return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
+//        });
 
     }
 
