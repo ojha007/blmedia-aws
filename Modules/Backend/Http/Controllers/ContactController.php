@@ -45,7 +45,7 @@ class ContactController extends Controller
 
         $viewPath = $this->viewPath . '.index';
         $contacts = $this->repository->getAll()
-        ->sortByDesc('id');
+            ->sortByDesc('id');
         return new Response($viewPath, [
             'contacts' => $contacts,
             'type' => $this->model->getType()
@@ -80,6 +80,13 @@ class ContactController extends Controller
 
         try {
             DB::beginTransaction();
+            $baseUrl = 'https://breaknlinks.s3.amazonaws.com/';
+            if (!Str::contains($attributes['image'], $baseUrl)) {
+                if (!Str::contains($attributes['image'], 'http')
+                    || !Str::contains($attributes['image'], 'https')) {
+                    $attributes['image'] = $baseUrl . $attributes['image'];
+                }
+            }
             $this->repository->create($attributes);
             DB::commit();
             $baseRoute = getBaseRouteByUrl($request);
@@ -102,7 +109,13 @@ class ContactController extends Controller
         $attributes = $request->validated();
         try {
             DB::beginTransaction();
-//            $attributes['image'] = $this->storeImage($request);
+            $baseUrl = 'https://breaknlinks.s3.amazonaws.com/';
+            if (!Str::contains($attributes['image'], $baseUrl)) {
+                if (!Str::contains($attributes['image'], 'http')
+                    || !Str::contains($attributes['image'], 'https')) {
+                    $attributes['image'] = $baseUrl . $attributes['image'];
+                }
+            }
             $this->repository->update($id, $attributes);
             DB::commit();
             $baseRoute = getBaseRouteByUrl($request);
@@ -116,15 +129,6 @@ class ContactController extends Controller
                 ->with('failed', 'Failed to update ' . $this->model->getType());
         }
 
-    }
-
-    protected function storeImage($request)
-    {
-        if ($request->has('image')) {
-            $folder = $request->route()->getAction('edition') . '/' . Str::lower($this->type);
-            return $request->file('image')->store($folder);
-        }
-        return null;
     }
 
     public function destroy(Request $request, $id)
@@ -143,5 +147,14 @@ class ContactController extends Controller
                 ->with('failed', 'Failed to delete contact .');
 
         }
+    }
+
+    protected function storeImage($request)
+    {
+        if ($request->has('image')) {
+            $folder = $request->route()->getAction('edition') . '/' . Str::lower($this->type);
+            return $request->file('image')->store($folder);
+        }
+        return null;
     }
 }
