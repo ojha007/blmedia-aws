@@ -14,8 +14,10 @@ class  ContactRequest extends FormRequest
     public function rules()
     {
 
+        $table = $this->request->get('t') == 'Reporters' ? 'reporters' : 'guests';
+        $id = $this->id;
         return [
-            'name' => 'required',
+            'name' => 'required|unique:' . $table . ',name,' . $id,
             'slug' => 'required|string|max:255',
             'designation' => 'nullable',
             'organization' => 'nullable',

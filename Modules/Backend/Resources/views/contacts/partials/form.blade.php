@@ -160,7 +160,7 @@
                             'placeholder'=>'Enter Description ',
                             ])}}
             </div>
-
+            <input type="hidden" name="t" value="{{$type}}">
         </div>
         <div class="box-footer">
             <a href="{{route($routePrefix.strtolower($type).'.index')}}" type="button"
