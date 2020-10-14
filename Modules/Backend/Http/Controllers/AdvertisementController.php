@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Modules\Backend\Entities\Advertisement;
 use Modules\Backend\Entities\News;
 use Modules\Backend\Http\Requests\AdvertisementRequest;
@@ -66,6 +67,13 @@ class AdvertisementController extends Controller
         $baseRoute = getBaseRouteByUrl($request);
         try {
             DB::beginTransaction();
+            $baseUrl = 'https://breaknlinks.s3.amazonaws.com/';
+            if (!Str::contains($attributes['image'], $baseUrl)) {
+                if (!Str::contains($attributes['image'], 'http')
+                    || !Str::contains($attributes['image'], 'https')) {
+                    $attributes['image'] = $baseUrl . $attributes['image'];
+                }
+            }
             $this->repository->update($id, $attributes);
             DB::commit();
             return redirect()->route($baseRoute . '.index')
@@ -84,6 +92,13 @@ class AdvertisementController extends Controller
         try {
             $baseRoute = getBaseRouteByUrl($request);
             DB::beginTransaction();
+            $baseUrl = 'https://breaknlinks.s3.amazonaws.com/';
+            if (!Str::contains($attributes['image'], $baseUrl)) {
+                if (!Str::contains($attributes['image'], 'http')
+                    || !Str::contains($attributes['image'], 'https')) {
+                    $attributes['image'] = $baseUrl . $attributes['image'];
+                }
+            }
             $this->repository->create($attributes);
             DB::commit();
             return redirect()->route($baseRoute . '.index')
