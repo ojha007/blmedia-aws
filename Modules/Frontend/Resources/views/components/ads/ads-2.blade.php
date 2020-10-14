@@ -10,6 +10,7 @@
                         ->where('sub_for','=',$sub_for)
                         ->take(2);
             }
+
         @endphp
         @foreach($ads as $ad)
             <div class="cmn-fw">

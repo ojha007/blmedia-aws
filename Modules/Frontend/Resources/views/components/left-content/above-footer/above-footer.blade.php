@@ -1,4 +1,7 @@
 @if(count($thirteenPositionNews))
+    @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above',
+                      'sub_for'=>$thirteenPositionNews->first()->category_slug])
+
     <div class="newsBlock front_body_position_13 above-footer type-5 position-13" style="padding: 0 15px;">
         @include('frontend::components.news.category-heading',['allNews'=>$thirteenPositionNews])
         <div class="block-body">
@@ -7,7 +10,7 @@
                     @if($key == 0)
                         <div class="card text-white overlay-main ">
                             @include('frontend::components.news.news-image',['imgClass'=>'card-img'])
-                            <div class="card-img-overlay d-flex flex-column " >
+                            <div class="card-img-overlay d-flex flex-column ">
                                 <p class="mt-auto ">
                                     <a href="{{route($routePrefix.'news.show',$news->news_slug)}}" class="text-white">
                                         @isset($limit)
@@ -51,4 +54,6 @@
             @include('frontend::components.buttons.view-all-category-button', ['position' => $thirteenPositionNews])
         </div>
     </div>
+    @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
+                      'sub_for'=>$thirteenPositionNews->first()->category_slug])
 @endif

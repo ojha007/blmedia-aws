@@ -70,7 +70,6 @@
             </div>
             @include('frontend::components.buttons.view-all-category-button', ['position' => $sixthPositionNews])
         </div>
-
     @endif
     @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
                        'sub_for'=>$sixthPositionNews->first()->category_slug])
