@@ -15,34 +15,35 @@
                                 <div class="col-sm-6 col-md-4 col-lg-6">
                                     <div class="post-info">
                                             <span>
-{{--                                                 <img--}}
-                                                {{--                                                     src="{{$news->reporter->image ?? asset('/frontend/images/logo.png')}}"--}}
-                                                {{--                                                     alt="{{$news->image_alt}}"--}}
-                                                {{--                                                     title="{{$news->sub_description}}"--}}
-                                                {{--                                                     class="responsive-img">--}}
+                                                 <img
+                                                     src="{{$news->reporter_image ?? asset('/frontend/images/logo.png')}}"
+                                                     alt="{{$news->image_alt}}"
+                                                     title="{{$news->sub_description}}"
+                                                     class="responsive-img">
+                                                 @include('frontend::components.news.news-author')
                                             </span>
-                                        <p>
-                                            {{--                                            @if($news->reporter || $news->guest)--}}
-                                            {{--                                                @php($author_type = $news->reporter ? 'reporters' : 'guests')--}}
-                                            {{--                                                @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)--}}
-                                            {{--                                                <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}"--}}
-                                            {{--                                                   class="highlight">--}}
-                                            {{--                                                <span class="usr" style="font-size: 16px;--}}
-                                            {{--                                                                      padding-bottom: 5px">--}}
-                                            {{--                                                    {{ $news->reporter ? $news->reporter->name--}}
-                                            {{--                                                     :( $news->guest ? $news->guest->name:'')  }}--}}
-                                            {{--                                                    </span>--}}
-                                            {{--                                                </a>--}}
-                                            {{--                                            @endif--}}
 
-                                        </p>
-                                        <ul class="post-info-details">
-                                            <li>
-                                                <p>
-                                                    <i class="fa fa-map-marker blus"></i> {{$news->date_line}}
-                                                </p>
-                                            </li>
-                                        </ul>
+                                        {{--                                            @if($news->reporter || $news->guest)--}}
+                                        {{--                                                @php($author_type = $news->reporter ? 'reporters' : 'guests')--}}
+                                        {{--                                                @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)--}}
+                                        {{--                                                <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}"--}}
+                                        {{--                                                   class="highlight">--}}
+                                        {{--                                                <span class="usr" style="font-size: 16px;--}}
+                                        {{--                                                                      padding-bottom: 5px">--}}
+                                        {{--                                                    {{ $news->reporter ? $news->reporter->name--}}
+                                        {{--                                                     :( $news->guest ? $news->guest->name:'')  }}--}}
+                                        {{--                                                    </span>--}}
+                                        {{--                                                </a>--}}
+                                        {{--                                            @endif--}}
+
+
+                                        {{--                                        <ul class="post-info-details">--}}
+                                        {{--                                            <li>--}}
+                                        {{--                                                <p>--}}
+                                        {{--                                                    <i class="fa fa-map-marker blus"></i> {{$news->date_line}}--}}
+                                        {{--                                                </p>--}}
+                                        {{--                                            </li>--}}
+                                        {{--                                        </ul>--}}
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-8 col-lg-6">

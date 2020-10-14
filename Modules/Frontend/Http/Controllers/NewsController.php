@@ -137,9 +137,6 @@ class NewsController extends Controller
                 ->where('news.is_active', '=', 1)
                 ->whereNull('news.deleted_at')
                 ->orderByDesc('news.publish_date')
-//                ->toSql();
-//            dd($newsByAuthor);
-//                ->distinct(true)
                 ->paginate(30);
             $advertisements = $this->adsRepository->getAllAdvertisements('category_page');;
             return view($this->viewPath . '.newsByAuthor',
@@ -147,7 +144,6 @@ class NewsController extends Controller
                 ->with($this->newsRepository->getDetailPageCommonData())
                 ->with($advertisements);
         } catch (\Exception $exception) {
-            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->back();
         }
