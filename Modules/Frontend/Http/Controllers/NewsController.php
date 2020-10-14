@@ -36,6 +36,9 @@ class NewsController extends Controller
 
         try {
             $news = $this->getNews($slug);
+            if (!$news->is_active) {
+                return redirect()->back();
+            }
             $category_slug = $news->category_name;
             $advertisements = $this->adsRepository->getAllAdvertisements('detail_page');
             if (count($category_slug) == 0) {
