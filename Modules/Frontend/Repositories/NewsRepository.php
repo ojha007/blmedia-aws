@@ -154,8 +154,8 @@ class NewsRepository extends Repository
     {
         $headerCategories = $this->categoryRepo->getDetailPageHeaderCategoriesByPosition();
         $blSpecialNews = $this->getCacheNewsByExtraColumn('is_special', 5);
-        $detailPageSecondPositionNews = $this->getCacheNews(2, CategoryPositions::DETAIL_BODY_POSITION, 5, 'detailPageSecondPositionNews');
-        $detailPageThirdPositionNews = $this->getCacheNews(3, CategoryPositions::DETAIL_BODY_POSITION, 5, 'detailPageThirdPositionNews');
+        $detailPageSecondPositionNews = $this->getCacheNews(2, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageSecondPositionNews');
+        $detailPageThirdPositionNews = $this->getCacheNews(3, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageThirdPositionNews');
         return [
             'headerCategories' => $headerCategories,
             'blSpecialNews' => $blSpecialNews,
