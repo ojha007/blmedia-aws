@@ -1,5 +1,7 @@
 <div class="newsBlock type-6 position-12 front_body_position_12">
     @if(count($twelvePositionNews))
+        @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above',
+                        'sub_for'=>$twelvePositionNews->first()->category_slug])
         @include('frontend::components.news.category-heading',['allNews'=>$twelvePositionNews])
         <div class="block-body">
             <div class="row">
@@ -44,6 +46,8 @@
                 </div>
             </div>
             @include('frontend::components.buttons.view-all-category-button', ['position' => $twelvePositionNews])
+            @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
+                       'sub_for'=>$twelvePositionNews->first()->category_slug])
             @endif
         </div>
 </div>

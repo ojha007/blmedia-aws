@@ -1,5 +1,7 @@
 <div class="newsBlock type-3 front_body_position_8" style="padding: 0 15px;">
     @if(count($baseAllNews))
+        @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above',
+                               'sub_for'=>$baseAllNews->first()->category_slug])
         @include('frontend::components.news.category-heading',['allNews'=>$baseAllNews])
         <div class="block-body">
             <div class="row d-block">
@@ -30,5 +32,7 @@
                 @include('frontend::components.buttons.view-all-category-button', ['position' => $baseAllNews])
             </div>
         </div>
+        @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
+                          'sub_for'=>$baseAllNews->first()->category_slug])
     @endif
 </div>
