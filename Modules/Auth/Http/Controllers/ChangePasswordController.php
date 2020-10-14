@@ -17,8 +17,11 @@ class ChangePasswordController extends Controller
         $user = Auth::user();
         $user->password = Hash::make($request->get('new-password'));
         $user->save();
-        return redirect()->back()
-            ->with('success', 'Password changed successfully');
+        session()->flash('success', 'Enter Your New password');
+        Auth::logout();
+        return redirect('/');
+//        return redirect()->back()
+//            ->with('success', 'Password changed successfully');
 
     }
 }

@@ -59,7 +59,7 @@ class CategoryRepository extends Repository
     public function getChildCategory($slug, int $limit)
     {
         return DB::table('categories as c1')
-            ->select('c2.name', 'c2.slug','c2.id')
+            ->select('c2.name', 'c2.slug', 'c2.id')
             ->join('categories as c2', 'c1.id', '=', 'c2.parent_id')
             ->whereNotNull('c2.parent_id')
             ->where('c2.is_active', true)
@@ -75,17 +75,24 @@ class CategoryRepository extends Repository
         $slug = is_array($slug) ? $slug : [$slug];
         return DB::table('news')
             ->selectRaw('SELECT distinct news.id')
-            ->select('news.title', 'news.description',
-                'news.id as news_slug', 'news.publish_date', 'news.image',
+            ->select('news.title',
+                'news.description',
+                'news.id as news_slug',
+                'news.publish_date',
+                'news.image',
                 'news.date_line',
-                'news.image_description', 'news.image_alt')
+                'news.image_description',
+                'reporters.name as reporter_name',
+                'guests.name as guest_name',
+                'reporters.image as reporter_image',
+                'guests.slug as guest_slug',
+                'guests.image as guest_image',
+                'reporters.slug as reporter_slug',
+                'news.image_alt')
             ->join('news_categories', 'news_categories.news_id', 'news.id')
             ->join('categories', 'categories.id', '=', 'news_categories.category_id')
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
-            ->selectRaw('IFNULL(reporters.name,guests.name) as author_name')
-            ->selectRaw('IF(reporters.name IS NOT  NULL,"reporters","guests") as author_type')
-            ->selectRaw('IFNULL(reporters.slug,guests.slug) as author_slug')
             ->whereIn('categories.slug', $slug)
             ->orderBy('news.created_at', 'DESC')
             ->where('news.is_active', '=', 1)

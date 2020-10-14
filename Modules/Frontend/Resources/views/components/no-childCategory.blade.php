@@ -8,19 +8,10 @@
                 @include('frontend::components.news.news-content')
                 <ul class="hr-list wide stamp">
                     <li>
-                        <i class="fa fa-clock-o"></i>
+                        <i class="fa fa-clock blus "></i>
                         {{\Carbon\Carbon::parse($news->publish_date)->format('Y-m-d')}}
                     </li>
-                    @if($news->author_type && $news->author_slug)
-                        <li>
-
-                            <a href="{{route($routePrefix.'news.by.author',[$news->author_type,$news->author_slug])}}">
-                                <i class="fa fa-user"></i>
-                                {{$news->author_name}}
-                            </a>
-
-                        </li>
-                    @endif
+                    @include('frontend::components.news.news-author')
                 </ul>
                 <p>{!! $news->short_description !!}</p>
                 <p>

@@ -15,31 +15,31 @@
                                 <div class="col-sm-6 col-md-4 col-lg-6">
                                     <div class="post-info">
                                             <span>
-                                                 <img
-                                                     src="{{$news->reporter->image ?? asset('/frontend/images/logo.png')}}"
-                                                     alt="{{$news->image_alt}}"
-                                                     title="{{$news->sub_description}}"
-                                                     class="responsive-img">
+{{--                                                 <img--}}
+                                                {{--                                                     src="{{$news->reporter->image ?? asset('/frontend/images/logo.png')}}"--}}
+                                                {{--                                                     alt="{{$news->image_alt}}"--}}
+                                                {{--                                                     title="{{$news->sub_description}}"--}}
+                                                {{--                                                     class="responsive-img">--}}
                                             </span>
                                         <p>
-                                            @if($news->reporter || $news->guest)
-                                                @php($author_type = $news->reporter ? 'reporters' : 'guests')
-                                                @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)
-                                                <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}"
-                                                   class="highlight">
-                                                <span class="usr" style="font-size: 16px;
-                                                                      padding-bottom: 5px">
-                                                    {{ $news->reporter ? $news->reporter->name
-                                                     :( $news->guest ? $news->guest->name:'')  }}
-                                                    </span>
-                                                </a>
-                                            @endif
+                                            {{--                                            @if($news->reporter || $news->guest)--}}
+                                            {{--                                                @php($author_type = $news->reporter ? 'reporters' : 'guests')--}}
+                                            {{--                                                @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)--}}
+                                            {{--                                                <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}"--}}
+                                            {{--                                                   class="highlight">--}}
+                                            {{--                                                <span class="usr" style="font-size: 16px;--}}
+                                            {{--                                                                      padding-bottom: 5px">--}}
+                                            {{--                                                    {{ $news->reporter ? $news->reporter->name--}}
+                                            {{--                                                     :( $news->guest ? $news->guest->name:'')  }}--}}
+                                            {{--                                                    </span>--}}
+                                            {{--                                                </a>--}}
+                                            {{--                                            @endif--}}
 
                                         </p>
                                         <ul class="post-info-details">
                                             <li>
                                                 <p>
-                                                    <i class="fa fa-map-marker"></i> {{$news->date_line}}
+                                                    <i class="fa fa-map-marker blus"></i> {{$news->date_line}}
                                                 </p>
                                             </li>
                                         </ul>
@@ -109,7 +109,7 @@
                     <div class="section-row">
                         <div class="col-sm-12  py-3 offset-lg-1">
 
-                            @foreach($news->tags as $tags)
+                            @foreach($news_tags as $tags)
                                 <span class=" custom-tag">{{$tags->name}}</span>
                             @endforeach
                         </div>
@@ -158,7 +158,8 @@
                             <!--if user is not logged then this block shold be display-->
                                 <div class="commentLogin">
                                     <div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid_desktop"
-                                         data-href="{{route($routePrefix.'news.show',$news->id)}}" data-width="100%"
+                                         data-href="{{route($routePrefix.'news.show',$news->news_slug)}}"
+                                         data-width="100%"
                                          data-numposts="5" fb-xfbml-state="rendered"
                                          fb-iframe-plugin-query="app_id=264188744527053&amp;container_width=912&amp;height=100&amp;href=https%3A%2F%2Fwww.breaknlinks.com%2Fhindi%2Fnews%2F1939&amp;locale=en_US&amp;numposts=5&amp;sdk=joey&amp;version=v4.0&amp;width="
                                          style="width: 100%;"><span
@@ -208,13 +209,13 @@
     {{--          category--}}
     {{--    />--}}
     <meta property="og:type" content="article"/>
-    <meta property="og:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
+    <meta property="og:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
     <meta property="og:title" content="{{$news->title}}"/>
     <meta property="og:image" content="{{$news->image}}"/>
     <meta property="og:description" content="{{$news->short_description}}"/>
     {{--    <meta name="twitter:card" content="summary_large_image"/>--}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
+    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
     <meta name="twitter:title" content="{{$news->title}}"/>
     <meta name="twitter:image:src" content="{{$news->image}}"/>
     <meta name="twitter:description" content="{{$news->short_description}}"/>

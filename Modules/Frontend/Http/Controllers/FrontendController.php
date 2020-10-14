@@ -121,14 +121,12 @@ class FrontendController extends Controller
         return redirect('/');
     }
 
-    public
-    function getAllEditions()
+    public function getAllEditions()
     {
         return config('editions');
     }
 
-    public
-    function videos()
+    public function videos()
     {
         $headerCategories = $this->categoryRepository->getFrontPageHeaderCategoriesByPosition();
         $advertisements = $this->adsRepository->getAllAdvertisements('main_page');
@@ -136,20 +134,17 @@ class FrontendController extends Controller
         return view('frontend::components.videos.videos', compact('headerCategories', 'fourthPositionNews'))->with($advertisements);
     }
 
-    public
-    function preetiToUniCode()
+    public function preetiToUniCode()
     {
         return view('frontend::unicode.preeti-to-unicode');
     }
 
-    public
-    function unicodeToPreeti()
+    public function unicodeToPreeti()
     {
         return view('frontend::unicode.unicode-to-preeti');
     }
 
-    public
-    function romanToUnicode()
+    public function romanToUnicode()
     {
         return view('frontend::unicode.roman-to-nepali');
     }
