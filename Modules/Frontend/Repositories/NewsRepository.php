@@ -290,19 +290,14 @@ class NewsRepository extends Repository
 
         $category_name = trans('messages.news');
         $category_slug = 'news';
-        $mixCategorySlug = [
-            2,
-            35,
-            60,
-            23,
-            62,
-            38,
-            33,
-            13,
-            65,
-
-
-        ];
+        $segment = request()->segment(1);
+        $mixCategorySlug = [33, 3, 6, 13, 23, 36, 37, 38];
+        if ($segment == 'nepali') {
+            $mixCategorySlug = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
+        }
+        if ($segment == 'hindi') {
+            $mixCategorySlug = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
+        }
         if ($category->slug == 'news') {
             return DB::table('news')
                 ->select('news.title', 'news.sub_title', 'news.short_description', 'reporters.name as reporter_name',
@@ -318,7 +313,7 @@ class NewsRepository extends Repository
                 ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
                 ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
                 ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                ->orWhereIn('categories.id', $mixCategorySlug)
+                ->whereIn('categories.id', $mixCategorySlug)
 //                ->where('categories.slug', $category_slug)
                 ->where('news.is_active', true)
                 ->whereNull('news.deleted_at')
