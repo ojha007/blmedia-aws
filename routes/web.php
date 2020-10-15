@@ -15,26 +15,25 @@ Route::get('nepali/c-w-l', function () {
 
 
     $start = microtime(TRUE);
-    $news = \Illuminate\Support\Facades\DB::table('news')
+    $news = \Illuminate\Support\Facades\DB::table('guests')
         ->select('id', 'image')
-        ->where('image', 'like', '%https://www.breaknlinks.com/nepali/uploads/Magh%')
-        ->orderByDesc('id')
         ->get();
     foreach ($news as $n) {
         $url = $n->image;
         if ($url) {
-            if (\Illuminate\Support\Str::contains($url, 'https://www.breaknlinks.com/nepali/uploads/Magh')) {
-                $a = str_replace('https://www.breaknlinks.com', 'https://breaknlinks.s3.amazonaws.com', $url);
-                \Illuminate\Support\Facades\DB::table('news')
-                    ->where('id', $n->id)
-                    ->update([
-                        'image' => $a
-                    ]);
-                echo $n->id . '<br>' . $a . '<br>';
+            $a = 'https://breaknlinks.s3.amazonaws.com/nepali/guest/' . $url;
+//            if (\Illuminate\Support\Str::contains($url, 'https://www.breaknlinks.com/nepali/uploads/Magh')) {
+//                $a = str_replace('https://www.breaknlinks.com', 'https://breaknlinks.s3.amazonaws.com', $url);
+            \Illuminate\Support\Facades\DB::table('guests')
+                ->where('id', $n->id)
+                ->update([
+                    'image' => $a
+                ]);
+            echo $n->id . '<br>' . $a . '<br>';
 
-            }
         }
     }
+//}
     $end = microtime(TRUE);
     echo "The code took " . ($end - $start) . " seconds to complete.";
 
