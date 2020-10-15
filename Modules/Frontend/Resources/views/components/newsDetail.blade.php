@@ -13,7 +13,7 @@
                             </p>
                             <div class="row ">
                                 @if($news->reporter_name)
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="col-6 col-md-6 col-lg-6 ">
                                         <div class="circular--portrait">
                                             <img
                                                 src="{{ ($news->reporter_image ? $news->reporter_image: asset('/frontend/img/logo.png'))}}"
@@ -32,7 +32,7 @@
                                     </div>
                                 @endif
                                 @if($news->guest_name)
-                                    <div class="col-sm-6 col-md-6 col-lg-6 ">
+                                    <div class="col-6 col-md-6 col-lg-6 ">
                                         <div class="circular--portrait">
                                             <img
                                                 src="{{$news->guest_image ?$news->guest_image:
