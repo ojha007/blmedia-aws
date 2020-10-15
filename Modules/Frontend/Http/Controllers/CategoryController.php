@@ -65,6 +65,9 @@ class CategoryController extends Controller
             ->select('id', 'name')
             ->where('slug', $slug)
             ->first();
+        if ($slug == 'trending') {
+            return (new NewsRepository())->getTrendingNews()->paginate(30);
+        }
         if (!$category) return redirect('/');
         $childCategories = DB::table('categories')
             ->select('id')
@@ -151,9 +154,6 @@ class CategoryController extends Controller
                 'cat.slug as category_slug',
                 'cat.name as categories', 'cat.c2_id'
             )
-//            ->selectRaw('IFNULL(reporters.name,guests.name) as author_name')
-//            ->selectRaw('IF(reporters.name IS NOT  NULL,"reporters","guests") as author_type')
-//            ->selectRaw('IFNULL(reporters.slug,guests.slug) as author_slug')
             ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
             ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
             ->where('news.is_active', true)

@@ -58,7 +58,6 @@ class NewsController extends Controller
                 ->with($advertisements);
 
         } catch (\Exception $exception) {
-            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->back();
         }
@@ -68,6 +67,8 @@ class NewsController extends Controller
     protected function getNews($id)
     {
 
+        DB::table('news')
+            ->increment('view_count', 100);
         return News::with('tags')
             ->without('categories')
             ->select(

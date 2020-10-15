@@ -177,11 +177,13 @@ class NewsRepository extends Repository
     {
         $headerCategories = $this->categoryRepo->getDetailPageHeaderCategoriesByPosition();
         $blSpecialNews = $this->getCacheNewsByExtraColumn('is_special', 5);
+        $trendingNews = (new NewsRepository())->getTrendingNews()->limit(5)->get();
         $detailPageSecondPositionNews = $this->getCacheNews(2, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageSecondPositionNews');
         $detailPageThirdPositionNews = $this->getCacheNews(3, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageThirdPositionNews');
         return [
             'headerCategories' => $headerCategories,
             'blSpecialNews' => $blSpecialNews,
+            'trendingNews' => $trendingNews,
             'detailPageSecondPositionNews' => $detailPageSecondPositionNews,
             'detailPageThirdPositionNews' => $detailPageThirdPositionNews
         ];
@@ -221,6 +223,45 @@ class NewsRepository extends Repository
 //        });
     }
 
+    public function getTrendingNews()
+    {
+        $trending = trans('messages.trending');
+        $slug = 'trending';
+        return DB::table('news')
+            ->select(
+                'news.title',
+                'news.sub_title',
+                'news.short_description',
+                'news.description',
+                'reporters.name as reporter_name',
+                'guests.name as guest_name',
+                'reporters.image as reporter_image',
+                'guests.slug as guest_slug',
+                'guests.image as guest_image',
+                'reporters.slug as reporter_slug',
+                'news.image_description',
+                'news.external_url',
+                'news.video_url',
+                'news.date_line',
+                'news.is_active',
+                'news.publish_date',
+                'news.id as news_slug',
+                'news.image',
+                'news.view_count',
+                'news.image_description',
+                'news.image_alt'
+            )
+            ->selectRaw("'$trending' as categories")
+            ->selectRaw("'$slug' as category_slug")
+            ->selectRaw('0 as is_video')
+            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->where('news.is_active', true)
+            ->whereNull('news.deleted_at')
+            ->orderByDesc('news.publish_date')
+            ->orderByDesc('view_count');
+    }
+
     public function getCacheNews(int $position, $placement, $limit, $cacheName)
     {
 //        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
@@ -252,7 +293,6 @@ class NewsRepository extends Repository
 
         return [];
     }
-
 
     protected function blBreakNews($category, $limit)
     {
@@ -335,7 +375,6 @@ class NewsRepository extends Repository
             ->get();
     }
 
-
     protected function getSamacharNews($category, $limit)
     {
 
@@ -384,7 +423,6 @@ class NewsRepository extends Repository
             return $this->newsByPosition($category, $limit);
         }
     }
-
 
     protected function childNewsToParent()
     {

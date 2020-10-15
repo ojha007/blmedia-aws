@@ -14,7 +14,7 @@
                             <div class="row ">
                                 @if($news->reporter_name)
                                     <div class="col-6 col-md-6 col-lg-6 ">
-                                        <div class="circular--portrait">
+                                        <div class="circular--portrait float-left">
                                             <img
                                                 src="{{ ($news->reporter_image ? $news->reporter_image: asset('/frontend/img/logo.png'))}}"
                                                 alt="{{$news->image_alt}}"
@@ -23,17 +23,19 @@
 
                                         </div>
                                         @if($news->reporter_slug)
-                                            <a href="{{route($routePrefix.'news.by.author',
+                                            <a  class="py-2 px-2" href="{{route($routePrefix.'news.by.author',
                                                 ['reporter',$news->reporter_slug])}}">
-                                                <i class="fa fa-user blus"></i>
-                                                {{$news->reporter_name}}
+                                                <nobr>
+                                                    <i class="fa fa-user blus"></i>
+                                                    &nbsp;{{$news->reporter_name}}
+                                                </nobr>
                                             </a>
                                         @endif
                                     </div>
                                 @endif
                                 @if($news->guest_name)
                                     <div class="col-6 col-md-6 col-lg-6 ">
-                                        <div class="circular--portrait">
+                                        <div class="circular--portrait float-left">
                                             <img
                                                 src="{{$news->guest_image ?$news->guest_image:
                                                   asset('/frontend/img/logo.png')}}"
@@ -42,10 +44,12 @@
                                                 class="responsive-img">
                                         </div>
                                         @if($news->guest_slug)
-                                            <a href="{{route($routePrefix.'news.by.author',
-                                           ['guests',$news->guest_slug])}}">
-                                                <i class="fa fa-user blus"></i>
-                                                {{$news->guest_name}}
+                                            <a class="py-2"
+                                               href="{{route($routePrefix.'news.by.author',['guests',$news->guest_slug])}}">
+                                                <nobr>
+                                                    <i class="fa fa-user blus"></i>
+                                                    &nbsp; {{$news->guest_name}}
+                                                </nobr>
                                             </a>
                                         @endif
                                     </div>
@@ -193,6 +197,7 @@
                                   'bodyClass'=> 'blspecial-body bisheshNew'
 
                                   ])
+                    @include('frontend::components.news.news-template',['allNews'=>$trendingNews, 'class' => 'front_body_position_7',])
                     @include('frontend::components.news.news-template',['allNews'=>$detailPageSecondPositionNews,'image'=>'reporter_image'])
                     @include('frontend::components.news.news-template',['allNews'=>$detailPageThirdPositionNews])
                 </div>
