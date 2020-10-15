@@ -36,7 +36,7 @@ class NewsController extends Controller
 
         try {
             $news = $this->getNews($slug);
-            if (!$news->is_active) {
+            if ($news->is_active == 0) {
                 return redirect()->back();
             }
             $tags = DB::table('tags')
@@ -58,6 +58,7 @@ class NewsController extends Controller
                 ->with($advertisements);
 
         } catch (\Exception $exception) {
+            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->back();
         }
@@ -84,6 +85,7 @@ class NewsController extends Controller
                 'news.external_url',
                 'news.video_url',
                 'news.date_line',
+                'news.is_active',
                 'news.publish_date',
                 'news.id as news_slug',
                 'categories.is_video',
