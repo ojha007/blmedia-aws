@@ -189,7 +189,7 @@
                                   'bodyClass'=> 'blspecial-body bisheshNew'
 
                                   ])
-                    @include('frontend::components.news.news-template',['allNews'=>$detailPageSecondPositionNews])
+                    @include('frontend::components.news.news-template',['allNews'=>$detailPageSecondPositionNews,'image'=>'reporter_image'])
                     @include('frontend::components.news.news-template',['allNews'=>$detailPageThirdPositionNews])
                 </div>
                 <!--ended right panel section-->

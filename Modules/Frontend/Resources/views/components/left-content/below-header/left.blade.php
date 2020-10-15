@@ -1,4 +1,6 @@
 @if(count($firstPositionNews))
+    @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
+                        'sub_for'=>$firstPositionNews->first()->category_slug])
     <div class="newsBlock front_body_position_1 type-1">
         @include('frontend::components.news.category-heading',['allNews'=>$firstPositionNews])
         <div class="block-body">
@@ -15,6 +17,6 @@
         </div>
 
     </div>
-
-
+    @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
+                            'sub_for'=>$firstPositionNews->first()->category_slug])
 @endif

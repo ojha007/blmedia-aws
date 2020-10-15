@@ -177,8 +177,8 @@ class NewsRepository extends Repository
     {
         $headerCategories = $this->categoryRepo->getDetailPageHeaderCategoriesByPosition();
         $blSpecialNews = $this->getCacheNewsByExtraColumn('is_special', 5);
-        $detailPageSecondPositionNews = $this->getCacheNews(2, CategoryPositions::DETAIL_BODY_POSITION, 5, 'detailPageSecondPositionNews');
-        $detailPageThirdPositionNews = $this->getCacheNews(3, CategoryPositions::DETAIL_BODY_POSITION, 5, 'detailPageThirdPositionNews');
+        $detailPageSecondPositionNews = $this->getCacheNews(2, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageSecondPositionNews');
+        $detailPageThirdPositionNews = $this->getCacheNews(3, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageThirdPositionNews');
         return [
             'headerCategories' => $headerCategories,
             'blSpecialNews' => $blSpecialNews,
@@ -325,7 +325,7 @@ class NewsRepository extends Repository
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->selectRaw('"' . $category_name . '" as  categories ,"' . $category_slug . '" as category_slug')
-            ->where('news.is_active', true)
+            ->where('news.is_active', '=', 1)
             ->whereNull('news.deleted_at')
             ->where('categories.id', '=', $category->id)
             ->orWhereIn('categories.id', $childCategories)
@@ -341,19 +341,14 @@ class NewsRepository extends Repository
 
         $category_name = trans('messages.news');
         $category_slug = 'news';
-        $mixCategorySlug = [
-            2,
-            35,
-            60,
-            23,
-            62,
-            38,
-            33,
-            13,
-            65,
-
-
-        ];
+        $segment = request()->segment(1);
+        $mixCategorySlug = [33, 3, 6, 13, 23, 36, 37, 38];
+        if ($segment == 'nepali') {
+            $mixCategorySlug = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
+        }
+        if ($segment == 'hindi') {
+            $mixCategorySlug = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
+        }
         if ($category->slug == 'news') {
             return DB::table('news')
                 ->select('news.title',
@@ -376,9 +371,9 @@ class NewsRepository extends Repository
                 ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
                 ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
                 ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                ->orWhereIn('categories.id', $mixCategorySlug)
-                ->orWhere('categories.slug', $category_slug)
-                ->where('news.is_active', true)
+                ->whereIn('categories.id', $mixCategorySlug)
+//                ->where('categories.slug', $category_slug)
+                ->where('news.is_active', '=', 1)
                 ->whereNull('news.deleted_at')
                 ->orderByDesc('publish_date')
                 ->distinct(true)

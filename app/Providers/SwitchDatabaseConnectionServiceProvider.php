@@ -29,14 +29,7 @@ class SwitchDatabaseConnectionServiceProvider extends ServiceProvider
         DB::disconnect();
         $diskName = $edition == 'en' ? 'english' : $edition;
         Config::set('elfinder.disks', $diskName);
-        $timeZone = 'America/Los_Angeles';
-        if ($edition == 'nepali') {
-            $timeZone = 'Asia/Kathmandu';
-        }
-        if ($edition == 'hindi') {
-            $timeZone = 'Asia/Kolkata';
-        }
-        Config::set('app.timezone', $timeZone);
+        Config::set('app.timezone', 'Asia/Kathmandu');
         Config::set('CACHE_PREFIX', $edition);
         Config::set('elfinder.route.prefix', $edition . '/bl-secure/elfinder');
         Config::set('database.default', $edition);

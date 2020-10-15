@@ -36,6 +36,9 @@ class NewsController extends Controller
 
         try {
             $news = $this->getNews($slug);
+            if (!$news->is_active) {
+                return redirect()->back();
+            }
             $tags = DB::table('tags')
                 ->select('name')
                 ->join('taggables', 'taggables.tag_id', '=', 'tags.tag_id')
