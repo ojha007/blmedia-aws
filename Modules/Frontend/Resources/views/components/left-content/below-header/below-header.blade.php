@@ -22,4 +22,14 @@
         @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below',
                             'sub_for'=>$subFor])
     </div>
+
+    <div class="bl-special" style="display: none;">
+        @include('frontend::components.news.news-template',
+[
+'allNews'=>$blSpecialNews,
+'class'=>' bisheshNew front_body_position_3 ',
+'bodyClass' => 'blspecial-body'
+])
+    </div>
+
 </div>

@@ -1,7 +1,7 @@
 @if(count($allNews))
     @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above',
                          'sub_for'=>$allNews->first()->category_slug])
-    <div class="newsBlock type-8 ">
+    <div class="newsBlock type-8 {{$class ?? ''}}">
         <div class="block-header gn-heading">
             <h2>
                 <a href="{{route($routePrefix.'news-category.show',$allNews->first()->category_slug)}}">

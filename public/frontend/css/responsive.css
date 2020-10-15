@@ -97,6 +97,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .bl-special {
+        display: block!important;
+    }
+    .right-below-header-section .bisheshNew{
+        display: none;
+    }
     .front_body_position_12 .block-body .card{
         padding: 0 15px!important;
     }
