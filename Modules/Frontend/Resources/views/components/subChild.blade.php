@@ -2,24 +2,26 @@
     <div class="row">
         @foreach($childCategoriesNews as $childNews)
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
+                <div class="card border-primary mb-3 sub-child-category {{ $positionClass ?? '' }}">
                     @include('frontend::components.card-header',['header'=>$childNews])
-                    <div class="card-body ">
+                    <div class="card-body px-0">
                         @foreach($childNews->take(5) as $key=>$news)
                             @if($key== 0)
-                                <div class="card mb-3">
-                                    @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])
-                                    <div class="card-body">
-                                        @include('frontend::components.news.news-title')
+                                <div class="card text-white mb-3 overlay-main">
+                                    @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])
+                                    <div class="card-img-overlay d-flex flex-column">
+                                        <div class="mt-auto">
+                                            @include('frontend::components.news.news-title', ['contentClass'=>'sub-category-overlay-title'])
+                                        </div>
                                     </div>
                                 </div>
                             @else
-                                <div class="card mb-3">
+                                <div class="card mb-3">config
                                     <div class="row no-gutters">
-                                        <div class="col-md-4">
-                                            @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img'])
+                                        <div class="col-md-5">
+                                            @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-7">
                                             <div class="card-body">
                                                 @include('frontend::components.news.news-title')
                                                 @include('frontend::components.news.news-author')

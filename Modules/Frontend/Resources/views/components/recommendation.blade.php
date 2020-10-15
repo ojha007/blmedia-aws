@@ -6,7 +6,13 @@
 
 @endisset
 <div class="card  border-primary  mb-3 recommendation">
-    <div class="card-header"><h2>{{trans('messages.other_news')}}</h2></div>
+    <div class="card-header custom-heading">
+        <p>
+            <a href="#">
+                {{trans('messages.other_news')}}
+            </a>
+        </p>
+    </div>
     <div class="card-body">
         <div class="row">
             @foreach($sameCategoryNews as $key=>$news)

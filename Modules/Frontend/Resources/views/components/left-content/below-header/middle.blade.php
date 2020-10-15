@@ -4,14 +4,7 @@
         <div class="card-body text-primary">
             @foreach($anchorNews as $key=>$news)
                 @if($key == 0)
-                    <div class="card mb-3">
-                        @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
-                        <div class="card-body">
-                            @include('frontend::components.news.news-title')
-                            @include('frontend::components.news.news-author')
-                            @include('frontend::components.news.news-short-description')
-                        </div>
-                    </div>
+                    @include('frontend::components.news.featured-card')
                 @else
                     <div class="card mb-3">
                         <div class="row no-gutters">

@@ -3,30 +3,52 @@
     <section class="detail-body-section">
         <div class="offset-lg-1 col-lg-10">
             <div class="row ">
-                <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 p-0 sm-mb-3 left-content" >
-                    <div class="card border-primary mb-3" >
-                        <div class="card-header "><h2>{!! $news->title !!}</h2></div>
+                <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 p-0 sm-mb-3 left-content">
+                    <div class="card border-primary mb-3 detail-body">
+                        <div class="card-header px-0">
+                            <h2>{!! $news->title !!}</h2>
+                            <p class="text-bold">
+                                {!! $news->sub_title !!}
+                            </p>
+                        </div>
                         <div class="card-body ">
-                           <div class="row">
-                               <div class="col-sm-4">
-                                   <div class="card">
-                                       <div class="row no-gutters">
-                                           <div class="col-md-4 bg-success rounded-circle">
-                                               <img src="https://breaknlinks.s3.amazonaws.com/nepali/uploads/reporters/ba0f43bd4266c73277f38e448161e81bBarhakhari.jpg" class="card-img  rounded-circle" alt="...">
-                                           </div>
-                                           <div class="col-md-8">
-                                               <div class="card-body pt-0 pb-0 pr-0">
-                                                   <p class="card-text">This is a wider.</p>
-                                                   <p class="card-text"><small class="text-muted"><i class="fas fa-map-marker-alt pr-2"></i>Last updated 3 mins ago</small></p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                               <div class="col-sm-8">
-                                   <div class="sharethis-inline-share-buttons"></div>
-                               </div>
-                           </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="card">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4 bg-success rounded-circle">
+                                                <img src="https://breaknlinks.s3.amazonaws.com/nepali/uploads/reporters/ba0f43bd4266c73277f38e448161e81bBarhakhari.jpg"
+                                                     class="card-img  rounded-circle" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body pt-0 pb-0 pr-0">
+                                                    <p class="card-text">
+                                                        @if($news->reporter || $news->guest)
+                                                            @php($author_type = $news->reporter ? 'reporters' : 'guests')
+                                                            @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)
+                                                            <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}">
+                                                <span class="usr" style="font-size: 16px;
+                                                                      padding-bottom: 5px">
+                                                    {{ $news->reporter ? $news->reporter->name
+                                                     :( $news->guest ? $news->guest->name:'')  }}
+                                                    </span>
+                                                            </a>
+                                                        @endif
+                                                    </p>
+                                                    <p class="card-text">
+                                                        <small class="text-muted"><i
+                                                                    class="fas fa-map-marker-alt pr-2"></i> {{$news->date_line ? $news->date_line : 'Unverified Location'}}
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="sharethis-inline-share-buttons"></div>
+                                </div>
+                            </div>
                             @if($news->video_url)
                                 <div class="video-section">
                                     {!! $news->video_url !!}
@@ -38,19 +60,22 @@
                             @endif
                         </div>
                     </div>
-                    <div class="card border-primary  mb-3" >
+                    <div class="card border-primary  mb-3 detail-text">
                         <div class="card-body">
                             <p class="card-text"> {!! $news->description !!}</p>
                             @if($news->external_url)
-                                <p class="text-center"><a href="{{$news->external_url}}"  class="btn border-0 rounded-0 p-0 btn-viewAll justify-content-center" >
-                                        <span>{{trans('messages.read_all')}}</span> <i class="fas fa-angle-right"></i></a></p>
+                                <p class="text-center"><a href="{{$news->external_url}}"
+                                                          class="btn border-0 rounded-0 p-0 btn-viewAll justify-content-center">
+                                        <span>{{trans('messages.read_all')}}</span> <i
+                                                class="fas fa-angle-right"></i></a></p>
                             @endif
                         </div>
                     </div>
-                    <div class="card border-primary  mb-3" >
+                    <div class="card border-primary  mb-3 tag-collection">
                         <div class="card-body">
-                            <p class="card-text text-bold"> <i class="fas fa-calendar-alt pr-2"></i>{{trans('messages.publish_on')}}&nbsp;
-                                    {{\Carbon\Carbon::parse($news->publish_date)->toDateTimeString()}}</p>
+                            <p class="card-text text-bold"><i
+                                        class="fas fa-calendar-alt pr-2"></i>{{trans('messages.publish_on')}}&nbsp;
+                                {{\Carbon\Carbon::parse($news->publish_date)->toDateTimeString()}}</p>
                             <div class="col-sm-12  py-3">
                                 @foreach($news->tags as $tags)
                                     <span class=" custom-tag">{{$tags->name}}</span>
@@ -58,8 +83,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card  border-primary  mb-3">
-                        <div class="card-header"><h2>{{trans('messages.write_your_comment')}}</h2></div>
+                    <div class="card  border-primary  mb-3 sub-recommendation">
+                        <div class="card-header custom-heading">
+                            <p>
+                                <a href="#">
+                                    {{trans('messages.other_news')}}
+                                </a>
+                            </p>
+                        </div>
                         <div class="card-body ">
                             <div class="row">
                                 @foreach($sameCategoryNews->take(4) as $key=>$news)
@@ -77,14 +108,20 @@
                         </div>
                     </div>
                     <div class="card  border-primary  mb-3">
-                        <div class="card-header"><h2>{{trans('messages.write_your_comment')}}</h2></div>
+                        <div class="card-header custom-heading">
+                            <p>
+                                <a href="#">
+                                    {{trans('messages.write_your_comment')}}
+                                </a>
+                            </p>
+                        </div>
                         <div class="card-body py-5 my-3">
                             <p class="card-text"> This is comment.</p>
                         </div>
                     </div>
                     @include('frontend::components.recommendation')
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 right-content" >
+                <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 right-content">
                     @include('frontend::components.news.news-template',
                               [
                                   'allNews'=>$blSpecialNews,
@@ -289,28 +326,28 @@
             </section>
             <div class="clearfix"></div>
         </div>
-    </section>
-@endsection
-{{--<div class="addthis_inline_share_toolbox"--}}
-{{--     data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
-{{--     data-title="{{$news->title}}"--}}
-{{--     data-description="{{$news->title}}"--}}
-{{--     data-media="{{$news->image}}"--}}
-{{--></div>--}}
-@push('meta')
-    {{--    <meta name="{{$news->title}}"--}}
-    {{--          content="{{$news->short_description}}"--}}
-    {{--          category--}}
-    {{--    />--}}
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
-    <meta property="og:title" content="{{$news->title}}"/>
-    <meta property="og:image" content="{{$news->image}}"/>
-    <meta property="og:description" content="{{$news->short_description}}"/>
-    {{--    <meta name="twitter:card" content="summary_large_image"/>--}}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
-    <meta name="twitter:title" content="{{$news->title}}"/>
-    <meta name="twitter:image:src" content="{{$news->image}}"/>
-    <meta name="twitter:description" content="{{$news->short_description}}"/>
-@endpush
+    </section>--}}
+        @endsection
+        {{--<div class="addthis_inline_share_toolbox"--}}
+        {{--     data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
+        {{--     data-title="{{$news->title}}"--}}
+        {{--     data-description="{{$news->title}}"--}}
+        {{--     data-media="{{$news->image}}"--}}
+        {{--></div>--}}
+        @push('meta')
+            {{--    <meta name="{{$news->title}}"--}}
+            {{--          content="{{$news->short_description}}"--}}
+            {{--          category--}}
+            {{--    />--}}
+            <meta property="og:type" content="article"/>
+            <meta property="og:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
+            <meta property="og:title" content="{{$news->title}}"/>
+            <meta property="og:image" content="{{$news->image}}"/>
+            {{--    <meta property="og:description" content="{{$news->short_description}}"/>--}}
+            {{--    <meta name="twitter:card" content="summary_large_image"/>--}}
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
+            <meta name="twitter:title" content="{{$news->title}}"/>
+            <meta name="twitter:image:src" content="{{$news->image}}"/>
+    {{--    <meta name="twitter:description" content="{{$news->short_description}}"/>--}}
+    @endpush

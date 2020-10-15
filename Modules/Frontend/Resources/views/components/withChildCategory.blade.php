@@ -1,12 +1,12 @@
-<div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
+<div class="card border-primary mb-3 with-child-category {{ $positionClass ?? '' }}">
     @include('frontend::components.card-header',['header'=>$newsByCategory])
-    <div class="card-body ">
+    <div class="card-body px-0">
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 @foreach($newsByCategory as $key=>$news)
                     @if($key == 0)
                         <div class="card mb-3">
-                            @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])
+                            @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                             <div class="card-body">
                                 @include('frontend::components.news.news-title')
                                 @include('frontend::components.news.news-author')
@@ -22,7 +22,7 @@
                         @if($key >0)
                             <div class="col-sm-12 col-md-6">
                                 <div class="card mb-3">
-                                    @include('frontend::components.news.news-image',['image'=>'reporter_image','figureClass'=>'','imgClass'=>'card-img-top'])
+                                    @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                                     <div class="card-body">
                                         @include('frontend::components.news.news-title')
                                         @include('frontend::components.news.news-author')

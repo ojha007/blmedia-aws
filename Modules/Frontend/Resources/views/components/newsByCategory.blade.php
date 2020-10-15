@@ -3,14 +3,18 @@
     @include('frontend::components.breadcrumb')
     <div class="offset-lg-1 col-lg-10">
         <div class="row ">
-            <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 p-0 sm-mb-3 left-content">
-                @if(count($childCategoriesNews))
-                    @include('frontend::components.withChildCategory')
-                @else
-                    @if(count($newsByCategory))
-                        @include('frontend::components.no-childCategory')
-                    @endif
-                @endif
+            <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 p-0 sm-mb-3 left-content ">
+                <div class="card border-primary mb-3 news-by-category">
+                    <div class="card-body p-0">
+                        @if(count($childCategoriesNews))
+                            @include('frontend::components.withChildCategory')
+                        @else
+                            @if(count($newsByCategory))
+                                @include('frontend::components.no-childCategory')
+                            @endif
+                        @endif
+                    </div>
+                </div>
                 {{--<div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
                     @include('frontend::components.card-header',['header'=>$newsByCategory])
                     <div class="card-body ">

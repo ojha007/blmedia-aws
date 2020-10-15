@@ -59,9 +59,9 @@ class FrontendController extends Controller
         $fifthPositionNews = $newsRepo->getCacheNews(5, CategoryPositions::FRONT_BODY_POSITION, 5, 'fifthPositionNews');
         $sixthPositionNews = $newsRepo->getCacheNews(6, CategoryPositions::FRONT_BODY_POSITION, 6, 'sixthPositionNews');
         $seventhPositionNews = $newsRepo->getCacheNews(7, CategoryPositions::FRONT_BODY_POSITION, 6, 'seventhPositionNews');
-        $eighthPositionNews = $newsRepo->getCacheNews(8, CategoryPositions::FRONT_BODY_POSITION, 17, 'eighthPositionNews');
+        $eighthPositionNews = $newsRepo->getCacheNews(8, CategoryPositions::FRONT_BODY_POSITION, 13, 'eighthPositionNews');
         $ninthPositionNews = $newsRepo->getCacheNews(9, CategoryPositions::FRONT_BODY_POSITION, 6, 'ninthPositionNews');
-        $tenthPositionNews = $newsRepo->getCacheNews(10, CategoryPositions::FRONT_BODY_POSITION, 6, 'tenthPositionNews');
+        $tenthPositionNews = $newsRepo->getCacheNews(10, CategoryPositions::FRONT_BODY_POSITION, 8, 'tenthPositionNews');
         $eleventhPositionNews = $newsRepo->getCacheNews(11, CategoryPositions::FRONT_BODY_POSITION, 5, 'eleventhPositionNews');
         $twelvePositionNews = $newsRepo->getCacheNews(12, CategoryPositions::FRONT_BODY_POSITION, 5, 'twelvePositionNews');
         $thirteenPositionNews = $newsRepo->getCacheNews(13, CategoryPositions::FRONT_BODY_POSITION, 4, 'thirteenPositionNews');
