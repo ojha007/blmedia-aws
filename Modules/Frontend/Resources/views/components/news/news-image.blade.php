@@ -1,5 +1,5 @@
 <figure class=" {{ isset($figureClass) ? $figureClass : 'news-image'}}">
-    <a href="{{route($routePrefix.'news.show',$news->news_slug ?? $news->slug)}}">
+    <a href="{{route($routePrefix.'news.show',$news->news_slug ?? $news->slug)}}" class="{{$imageClass ??''}}">
         @if(isset($image))
             <img src="{{
                 is_null($image) ?

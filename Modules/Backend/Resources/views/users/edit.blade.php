@@ -8,6 +8,7 @@
 @section('breadcrumb')
     {{ Breadcrumbs::render('users.edit',$user,$routePrefix) }}
 @stop
+{{--@dd($user)--}}
 @section('content')
     @include('backend::partials.errors')
     <div class="row">

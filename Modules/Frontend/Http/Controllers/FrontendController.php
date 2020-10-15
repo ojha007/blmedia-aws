@@ -54,6 +54,7 @@ class FrontendController extends Controller
         $advertisements = $this->adsRepository->getAllAdvertisements('main_page');
         $anchorNews = $newsRepo->getCacheNewsByExtraColumn('is_anchor', 5);
         $blSpecialNews = $newsRepo->getCacheNewsByExtraColumn('is_special', 5);
+        $trendingNews = $newsRepo->getTrendingNews()->limit(5)->get();
         $firstPositionNews = $newsRepo->getCacheNews(1, CategoryPositions::FRONT_BODY_POSITION, 9, 'firstPositionNews');
         $fourthPositionNews = $newsRepo->getCacheNews(4, CategoryPositions::FRONT_BODY_POSITION, 5, 'fourthPositionNews');
         $fifthPositionNews = $newsRepo->getCacheNews(5, CategoryPositions::FRONT_BODY_POSITION, 5, 'fifthPositionNews');
@@ -84,6 +85,7 @@ class FrontendController extends Controller
             'fourthPositionNews',
             'thirteenPositionNews',
             'fifteenPositionNews',
+            'trendingNews',
             'fourteenPositionNews'))
             ->with($advertisements);
 
@@ -121,14 +123,12 @@ class FrontendController extends Controller
         return redirect('/');
     }
 
-    public
-    function getAllEditions()
+    public function getAllEditions()
     {
         return config('editions');
     }
 
-    public
-    function videos()
+    public function videos()
     {
         $headerCategories = $this->categoryRepository->getFrontPageHeaderCategoriesByPosition();
         $advertisements = $this->adsRepository->getAllAdvertisements('main_page');
@@ -136,20 +136,17 @@ class FrontendController extends Controller
         return view('frontend::components.videos.videos', compact('headerCategories', 'fourthPositionNews'))->with($advertisements);
     }
 
-    public
-    function preetiToUniCode()
+    public function preetiToUniCode()
     {
         return view('frontend::unicode.preeti-to-unicode');
     }
 
-    public
-    function unicodeToPreeti()
+    public function unicodeToPreeti()
     {
         return view('frontend::unicode.unicode-to-preeti');
     }
 
-    public
-    function romanToUnicode()
+    public function romanToUnicode()
     {
         return view('frontend::unicode.roman-to-nepali');
     }

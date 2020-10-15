@@ -11,64 +11,84 @@
                             <p class="subtitles">
                                 {!! $news->sub_title !!}
                             </p>
-                            <div class="row">
-                                <div class="col-sm-6 col-md-4 col-lg-6">
-                                    <div class="post-info">
-                                            <span>
-                                                 <img
-                                                     src="{{$news->reporter->image ?? asset('/frontend/images/logo.png')}}"
-                                                     alt="{{$news->image_alt}}"
-                                                     title="{{$news->sub_description}}"
-                                                     class="responsive-img">
-                                            </span>
-                                        <p>
-                                            @if($news->reporter || $news->guest)
-                                                @php($author_type = $news->reporter ? 'reporters' : 'guests')
-                                                @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)
-                                                <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}"
-                                                   class="highlight">
-                                                <span class="usr" style="font-size: 16px;
-                                                                      padding-bottom: 5px">
-                                                    {{ $news->reporter ? $news->reporter->name
-                                                     :( $news->guest ? $news->guest->name:'')  }}
-                                                    </span>
-                                                </a>
-                                            @endif
+                            <div class="row ">
+                                @if($news->reporter_name)
+                                    <div class="col-6 col-md-6 col-lg-6 ">
+                                        <div class="circular--portrait float-left">
+                                            <img
+                                                src="{{ ($news->reporter_image ? $news->reporter_image: asset('/frontend/img/logo.png'))}}"
+                                                alt="{{$news->image_alt}}"
+                                                title="{{$news->sub_description}}"
+                                                class="responsive-img">
 
-                                        </p>
-                                        <ul class="post-info-details">
-                                            <li>
-                                                <p>
-                                                    <i class="fa fa-map-marker"></i> {{$news->date_line}}
-                                                </p>
-                                            </li>
-                                        </ul>
+                                        </div>
+                                        @if($news->reporter_slug)
+                                            <a  class="py-2 px-2" href="{{route($routePrefix.'news.by.author',
+                                                ['reporter',$news->reporter_slug])}}">
+                                                <nobr>
+                                                    <i class="fa fa-user blus"></i>
+                                                    &nbsp;{{$news->reporter_name}}
+                                                </nobr>
+                                            </a>
+                                        @endif
                                     </div>
-                                </div>
-                                <div class="col-sm-6 col-md-8 col-lg-6">
-                                    <div class="sharethis-inline-share-buttons"></div>
-                                    {{--                                    <div class="addthis_inline_share_toolbox"--}}
-                                    {{--                                         data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
-                                    {{--                                         data-title="{{$news->title}}"--}}
-                                    {{--                                         data-description="{{$news->title}}"--}}
-                                    {{--                                         data-media="{{$news->image}}"--}}
-                                    {{--                                    ></div>--}}
+                                @endif
+                                @if($news->guest_name)
+                                    <div class="col-6 col-md-6 col-lg-6 ">
+                                        <div class="circular--portrait float-left">
+                                            <img
+                                                src="{{$news->guest_image ?$news->guest_image:
+                                                  asset('/frontend/img/logo.png')}}"
+                                                alt="{{$news->image_alt}}"
+                                                title="{{$news->sub_description}}"
+                                                class="responsive-img">
+                                        </div>
+                                        @if($news->guest_slug)
+                                            <a class="py-2"
+                                               href="{{route($routePrefix.'news.by.author',['guests',$news->guest_slug])}}">
+                                                <nobr>
+                                                    <i class="fa fa-user blus"></i>
+                                                    &nbsp; {{$news->guest_name}}
+                                                </nobr>
+                                            </a>
+                                        @endif
+                                    </div>
+                                @endif
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="col-md-4 text-left float-left">
+                                        @if($news->date_line)
+                                            <i class="fa fa-map-marker blus"></i>
+                                            {{$news->date_line}}
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8 float-right">
+                                        <div class="sharethis-inline-share-buttons"></div>
+                                    </div>
 
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-sm-12">
                                 </div>
                             </div>
                         </div>
                         @if($news->video_url)
-                            <div class="video-section">
+                            <div class="video-section user_detail_image">
                                 {!! $news->video_url !!}
                             </div>
                         @else
-                            <div class="news-banner">
+                            <div class="news-banner user_detail_image">
                                 @include('frontend::components.news.news-image',['figureClass'=>'bannerImg'])
-
+                                @if($news->image_description)
+                                    <p class="float-right">
+                                        {{$news->image_description}}
+                                    </p>
+                                @elseif($news->image_alt)
+                                    <p class="float-right">
+                                        {{$news->image_alt}}
+                                    </p>
+                                @endif
                             </div>
                         @endif
                         <div class="news-story">
@@ -83,20 +103,13 @@
                                         </a>
                                     </div>
                                 @endif
-                                <div class="col-sm-6 col-xs-12">
+                                <div class="col-sm-12 col-xs-12 col-md-12">
                                     <strong> {{trans('messages.publish_on')}}
                                         : {{\Carbon\Carbon::parse($news->publish_date)->toDateTimeString()}}</strong>
                                 </div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="adsssss amadam">
-                                        <div class="sharethis-inline-share-buttons"></div>
-                                        {{--                                        <div class="addthis_inline_share_toolbox"--}}
-                                        {{--                                             data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
-                                        {{--                                             data-title="{{$news->title}}"--}}
-                                        {{--                                             data-description="{{$news->title}}"--}}
-                                        {{--                                             data-media="{{$news->image}}"--}}
-                                        {{--                                        ></div>--}}
-                                    </div>
+                                <div class="col-sm-12 col-xs-12 col-md-12">
+                                    <div class="sharethis-inline-share-buttons"></div>
+
                                 </div>
 
 
@@ -109,7 +122,7 @@
                     <div class="section-row">
                         <div class="col-sm-12  py-3 offset-lg-1">
 
-                            @foreach($news->tags as $tags)
+                            @foreach($news_tags as $tags)
                                 <span class=" custom-tag">{{$tags->name}}</span>
                             @endforeach
                         </div>
@@ -152,13 +165,10 @@
                                 <h2>{{trans('messages.write_your_comment')}}</h2>
                             </div>
                             <div class="block-body">
-                            {{--                                <div class="fb-comments"--}}
-                            {{--                                     data-href="https://developers.facebook.com/docs/plugins/comments#configurator"--}}
-                            {{--                                     data-numposts="5" data-width=""></div>--}}
-                            <!--if user is not logged then this block shold be display-->
                                 <div class="commentLogin">
                                     <div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid_desktop"
-                                         data-href="{{route($routePrefix.'news.show',$news->id)}}" data-width="100%"
+                                         data-href="{{route($routePrefix.'news.show',$news->news_slug)}}"
+                                         data-width="100%"
                                          data-numposts="5" fb-xfbml-state="rendered"
                                          fb-iframe-plugin-query="app_id=264188744527053&amp;container_width=912&amp;height=100&amp;href=https%3A%2F%2Fwww.breaknlinks.com%2Fhindi%2Fnews%2F1939&amp;locale=en_US&amp;numposts=5&amp;sdk=joey&amp;version=v4.0&amp;width="
                                          style="width: 100%;"><span
@@ -187,6 +197,7 @@
                                   'bodyClass'=> 'blspecial-body bisheshNew'
 
                                   ])
+                    @include('frontend::components.news.news-template',['allNews'=>$trendingNews, 'class' => 'front_body_position_7',])
                     @include('frontend::components.news.news-template',['allNews'=>$detailPageSecondPositionNews,'image'=>'reporter_image'])
                     @include('frontend::components.news.news-template',['allNews'=>$detailPageThirdPositionNews])
                 </div>
@@ -196,26 +207,44 @@
         </div>
     </section>
 @endsection
-{{--<div class="addthis_inline_share_toolbox"--}}
-{{--     data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
-{{--     data-title="{{$news->title}}"--}}
-{{--     data-description="{{$news->title}}"--}}
-{{--     data-media="{{$news->image}}"--}}
-{{--></div>--}}
 @push('meta')
     {{--    <meta name="{{$news->title}}"--}}
     {{--          content="{{$news->short_description}}"--}}
     {{--          category--}}
     {{--    />--}}
     <meta property="og:type" content="article"/>
-    <meta property="og:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
+    <meta property="og:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
     <meta property="og:title" content="{{$news->title}}"/>
     <meta property="og:image" content="{{$news->image}}"/>
     <meta property="og:description" content="{{$news->short_description}}"/>
     {{--    <meta name="twitter:card" content="summary_large_image"/>--}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>
+    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
     <meta name="twitter:title" content="{{$news->title}}"/>
     <meta name="twitter:image:src" content="{{$news->image}}"/>
     <meta name="twitter:description" content="{{$news->short_description}}"/>
 @endpush
+
+<style>
+    .user_detail_image {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    .circular--portrait {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .circular--portrait img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /*.user_detail_image:hover {*/
+    /*    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);*/
+    /*}*/
+</style>

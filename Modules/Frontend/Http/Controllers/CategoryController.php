@@ -59,12 +59,15 @@ class CategoryController extends Controller
             ->with($advertisements);
     }
 
-    public function getNewsByCategorySlug($slug, $perPage = 15)
+    public function getNewsByCategorySlug($slug, $perPage = 25)
     {
         $category = DB::table('categories')
             ->select('id', 'name')
             ->where('slug', $slug)
             ->first();
+        if ($slug == 'trending') {
+            return (new NewsRepository())->getTrendingNews()->paginate(30);
+        }
         if (!$category) return redirect('/');
         $childCategories = DB::table('categories')
             ->select('id')
@@ -75,13 +78,23 @@ class CategoryController extends Controller
 
         $isExtraCategory = $slug == 'anchor' || $slug == 'bl-special';
         return DB::table('news')
-            ->select('news.sub_title', 'news.id as news_slug', 'news.title', 'news.short_description',
-                'news.description', 'news.publish_date', 'news.image', 'news.image_alt', 'news.image_description',
+            ->select('news.sub_title',
+                'news.id as news_slug',
+                'news.title',
+                'news.short_description',
+                'news.description',
+                'news.publish_date',
+                'news.image',
+                'news.image_alt',
+                'guests.name as guest_name',
+                'guests.slug as guest_slug',
+                'guests.image as guest_image',
+                'reporters.name as reporter_name',
+                'reporters.image as reporter_image',
+                'reporters.slug as reporter_slug',
+                'news.image_description',
                 'news.date_line'
             )
-            ->selectRaw('IFNULL(reporters.name,guests.name) as author_name')
-            ->selectRaw('IF(reporters.name IS NOT  NULL,"reporters","guests") as author_type')
-            ->selectRaw('IFNULL(reporters.slug,guests.slug) as author_slug')
             ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
             ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
             ->when($isExtraCategory, function ($a) use ($slug) {
@@ -123,16 +136,24 @@ class CategoryController extends Controller
                 $query->on('news_categories.category_id', '=', 'cat.c2_id')
                     ->groupBy('cat.cat2_id');
             })
-            ->select('news.sub_title', 'news.id as news_slug', 'news.title',
+            ->select('news.sub_title',
+                'news.id as news_slug',
+                'news.title',
                 'news.short_description',
-                'news.description', 'news.publish_date',
+                'news.description',
+                'news.publish_date',
                 'news.date_line',
-                'news.image', 'news.image_alt', 'news.image_description',
-                'cat.slug as category_slug', 'cat.name as categories', 'cat.c2_id'
+                'guests.name as guest_name',
+                'guests.slug as guest_slug',
+                'guests.image as guest_image',
+                'reporters.name as reporter_name',
+                'reporters.image as reporter_image',
+                'reporters.slug as reporter_slug',
+                'news.image', 'news.image_alt',
+                'news.image_description',
+                'cat.slug as category_slug',
+                'cat.name as categories', 'cat.c2_id'
             )
-            ->selectRaw('IFNULL(reporters.name,guests.name) as author_name')
-            ->selectRaw('IF(reporters.name IS NOT  NULL,"reporters","guests") as author_type')
-            ->selectRaw('IFNULL(reporters.slug,guests.slug) as author_slug')
             ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
             ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
             ->where('news.is_active', true)
