@@ -35,6 +35,9 @@ class NewsController extends Controller
     {
 
         try {
+            DB::table('news')
+                ->where('id', $slug)
+                ->increment('view_count', 100);
             $news = $this->getNews($slug);
             if ($news->is_active == 0) {
                 return redirect()->back();

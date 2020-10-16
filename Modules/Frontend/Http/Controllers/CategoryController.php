@@ -69,7 +69,7 @@ class CategoryController extends Controller
                 ->where('slug', $slug)
                 ->first();
             if ($slug == 'trending') {
-                return (new NewsRepository())->getTrendingNews()->paginate(30);
+                return (new NewsRepository())->getTrendingNews(30);
             }
             $childCategories = [];
             if ($category) {
