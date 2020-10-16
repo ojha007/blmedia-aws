@@ -66,10 +66,7 @@ class CategoryController extends Controller
             return $this->getAnchorOrSpecialNews($slug, $perPage);
         }
         try {
-            $category = DB::table('categories')
-                ->select('id', 'name', 'slug')
-                ->where('slug', '=', $slug)
-                ->first();
+            $category = Category::where('slug', $slug)->first();
             if ($slug == 'trending') {
                 return [];
 //                return (new NewsRepository())->getTrendingNews(30);
