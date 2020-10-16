@@ -34,28 +34,29 @@ class NewsController extends Controller
     {
 
         try {
-            if ($id) {
-                if (is_int($id)) {
-                    DB::table('news')
-                        ->where('id', $id)
-                        ->increment('view_count', 100);
-                }
-
-            }
+//            if ($id) {
+//                if (is_int($id)) {
+//                    DB::table('news')
+//                        ->where('id', $id)
+//                        ->increment('view_count', 100);
+//                }
+//
+//            }
             $news = $this->getNews($id);
-            if (!$news) {
-                return redirect()->back();
-            }
+//            if (!$news) {
+//                return redirect()->back();
+//            }
             $tags = DB::table('tags')
                 ->select('name')
                 ->join('taggables', 'taggables.tag_id', '=', 'tags.tag_id')
                 ->join('news', 'news.id', 'taggables.taggable_id')
                 ->where('news.id', $id)
                 ->get();
-
             $category_slug = $news->category_slug;
             $customRecommendations = $this->bestThreeNews($id);
-            $advertisements = $this->adsRepository->getAllAdvertisements('detail_page');
+            $customRecommendations = [];
+//            $advertisements = $this->adsRepository->getAllAdvertisements('detail_page');
+            $advertisements = [];
             if (!$category_slug) {
                 $category_slug = $this->newsRepository->getCategoryDoesntExitsInDetailPage();
             }
@@ -110,7 +111,7 @@ class NewsController extends Controller
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->where('news.is_active', true)
             ->whereNull('news.deleted_at')
-            ->where('news.id', $id)
+            ->where('news.id', '=', $id)
             ->first();
 
     }

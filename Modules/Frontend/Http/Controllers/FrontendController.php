@@ -3,6 +3,8 @@
 namespace Modules\Frontend\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Modules\Backend\Entities\Advertisement;
 use Modules\Backend\Entities\CategoryPositions;
 use Modules\Backend\Repositories\AdvertisementRepository;
@@ -151,5 +153,78 @@ class FrontendController extends Controller
     public function romanToUnicode()
     {
         return view('frontend::unicode.roman-to-nepali');
+    }
+
+    public function getFrontPageFirstPositionNews($limit)
+    {
+        try {
+            $childCategories = [];
+            $category = $this->getFrontPageCategory(1);
+            $category_slug = $category->slug;
+            $category_name = $category->name;
+            if ($category) {
+                $childCategories = DB::table('categories')
+                    ->select('id')
+                    ->where('parent_id', '=', $category->id)
+                    ->get()->map(function ($cat) {
+                        return $cat->id;
+                    })->toArray();
+                return DB::table('news')
+                    ->select(
+                        'news.title',
+                        'news.sub_title',
+                        'news.id as news_slug',
+                        'news.short_description',
+                        'reporters.image as reporter_image',
+                        'reporters.name as reporter_name',
+                        'reporters.slug as reporter_slug',
+                        'guests.name as guest_name',
+                        'guests.image as guest_image',
+                        'guests.slug as guest_slug',
+                        'news.publish_date',
+                        'news.date_line',
+                        'categories.is_video',
+                        'news.image',
+                        'news.image_description',
+                        'news.image_alt'
+                    )
+                    ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
+                    ->join('categories', 'categories.id', '=', 'news_categories.category_id')
+                    ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+                    ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+                    ->selectRaw('"' . $category_name . '" as  categories ,"' . $category_slug . '" as category_slug')
+                    ->where('news.is_active', '=', 1)
+                    ->whereNull('news.deleted_at')
+                    ->where('categories.id', '=', $category->id)
+                    ->when(count($childCategories), function ($a) use ($childCategories) {
+                        $a->orWhereIn('categories.id', $childCategories);
+                    })
+                    ->orderByDesc('publish_date')
+                    ->limit($limit)
+                    ->get();
+            }
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
+        }
+
+
+    }
+
+    public function getFrontPageCategory($position)
+    {
+        try {
+            return DB::table('categories')
+                ->select(
+                    'categories.id',
+                    'categories.slug',
+                    'categories.name')
+                ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
+                ->where('category_positions.front_body_position', '=', $position)
+                ->first();
+        } catch (\Exception $exception) {
+            Log::error($exception->getTraceAsString() . '-' . $exception->getMessage());
+            return redirect()->back();
+        }
+
     }
 }
