@@ -335,12 +335,15 @@ class NewsRepository extends Repository
     {
         $category_name = $category->name;
         $category_slug = $category->slug;
-        $childCategories = DB::table('categories')
-            ->select('id')
-            ->where('parent_id', '=', $category->id)
-            ->get()->map(function ($cat) {
-                return $cat->id;
-            })->toArray();
+        $childCategories =[];
+        if ($category) {
+            $childCategories = DB::table('categories')
+                ->select('id')
+                ->where('parent_id', '=', $category->id)
+                ->get()->map(function ($cat) {
+                    return $cat->id;
+                })->toArray();
+        }
         return DB::table('news')
             ->select(
                 'news.title',
@@ -368,7 +371,9 @@ class NewsRepository extends Repository
             ->where('news.is_active', '=', 1)
             ->whereNull('news.deleted_at')
             ->where('categories.id', '=', $category->id)
-            ->orWhereIn('categories.id', $childCategories)
+            ->when(count($childCategories), function ($a) use ($childCategories) {
+                $a->orWhereIn('categories.id', $childCategories);
+            })
             ->orderByDesc('publish_date')
             ->distinct(true)
             ->limit($limit)

@@ -49,12 +49,14 @@ class FrontendController extends Controller
                 return $this->redirectClientByIp();
             }
         }
+        $trendingNews = [];
         $newsRepo = $this->newsRepository;
         $headerCategories = $this->categoryRepository->getFrontPageHeaderCategoriesByPosition();
         $advertisements = $this->adsRepository->getAllAdvertisements('main_page');
         $anchorNews = $newsRepo->getCacheNewsByExtraColumn('is_anchor', 5);
         $blSpecialNews = $newsRepo->getCacheNewsByExtraColumn('is_special', 5);
-        $trendingNews = $newsRepo->getTrendingNews()->limit(5)->get();
+//        $trendingNews = $newsRepo->getTrendingNews()->limit(5)->get();
+//        dd($trendingNews);
         $firstPositionNews = $newsRepo->getCacheNews(1, CategoryPositions::FRONT_BODY_POSITION, 9, 'firstPositionNews');
         $fourthPositionNews = $newsRepo->getCacheNews(4, CategoryPositions::FRONT_BODY_POSITION, 5, 'fourthPositionNews');
         $fifthPositionNews = $newsRepo->getCacheNews(5, CategoryPositions::FRONT_BODY_POSITION, 5, 'fifthPositionNews');
@@ -68,6 +70,7 @@ class FrontendController extends Controller
         $thirteenPositionNews = $newsRepo->getCacheNews(13, CategoryPositions::FRONT_BODY_POSITION, 4, 'thirteenPositionNews');
         $fourteenPositionNews = $newsRepo->getCacheNews(14, CategoryPositions::FRONT_BODY_POSITION, 6, 'fourteenPositionNews');
         $fifteenPositionNews = $newsRepo->getCacheNews(15, CategoryPositions::FRONT_BODY_POSITION, 9, 'fifteenPositionNews');
+//        dd($firstPositionNews,$fourthPositionNews,$fifthPositionNews,$fourteenPositionNews);
         return view('frontend::index', compact(
             'headerCategories',
             'firstPositionNews',
@@ -96,7 +99,7 @@ class FrontendController extends Controller
 //        $ip = "43.245.87.255";
         $ip = request()->ip();
         $data = null;
-//        $data = \Location::get($ip);
+        $data = \Location::get($ip);
         if ($data) {
             if ($data->countryName == 'Nepal') {
                 return 'Nepal';
