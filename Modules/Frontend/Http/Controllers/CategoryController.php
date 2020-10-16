@@ -64,9 +64,8 @@ class CategoryController extends Controller
     {
 
         if ($slug == 'anchor' || $slug == 'bl-special') {
-
+            return $this->getAnchorOrSpecialNews($slug, $perPage);
         }
-
         try {
             $category = DB::table('categories')
                 ->select('id', 'name')
@@ -76,16 +75,10 @@ class CategoryController extends Controller
                 return [];
 //                return (new NewsRepository())->getTrendingNews(30);
             }
-            $childCategories = [];
+            $childCategoriesId = [];
             if ($category) {
-                $childCategories = DB::table('categories')
-                    ->select('id')
-                    ->where('parent_id', '=', $category->id)
-                    ->get()->map(function ($cat) {
-                        return $cat->id;
-                    })->toArray();
+                $childCategoriesId = $this->getAllChildCategoriesId($category->id);
             }
-            $isExtraCategory = $slug == 'anchor' || $slug == 'bl-special';
             return DB::table('news')
                 ->select('news.sub_title',
                     'news.id as news_slug',
@@ -107,31 +100,73 @@ class CategoryController extends Controller
                 )
                 ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
                 ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
-                ->when($isExtraCategory, function ($a) use ($slug) {
-                    $category_slug = $slug == 'anchor' ? 'anchor' : 'bl-special';
-                    $category = trans('messages.' . $category_slug);
-                    $column = $slug == 'anchor' ? 'is_anchor' : 'is_special';
-                    $a->selectRaw("'$category' as categories")
-                        ->selectRaw("'$category_slug' as category_slug")
-                        ->where('news.' . $column, '=', true);
-                })->when($isExtraCategory == false, function ($a) use ($slug, $childCategories, $category) {
-                    $a->selectRaw("'$slug'as category_slug")
-                        ->selectRaw("'$category->name'as categories")
-                        ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-                        ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-                        ->where('categories.slug', '=', $slug)
-                        ->orWhereIn('categories.id', $childCategories);
-
+                ->selectRaw("'$slug'as category_slug")
+                ->selectRaw("'$category->name'as categories")
+                ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
+                ->join('categories', 'news_categories.category_id', '=', 'categories.id')
+                ->where('categories.id', '=', $category->id)
+                ->when(count($childCategoriesId), function ($a) use ($childCategoriesId) {
+                    $a->orWhereIn('categories.id', $childCategoriesId);
                 })
                 ->where('news.is_active', '=', 1)
                 ->whereNull('news.deleted_at')
                 ->orderByDesc('news.publish_date')
-                ->distinct(true)
                 ->paginate($perPage);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
         }
 
+    }
+
+    public function getAnchorOrSpecialNews($category, $perPage)
+    {
+        try {
+            $category_slug = $category == 'anchor' ? 'anchor' : 'bl-special';
+            $display_name = trans('messages.' . $category_slug);
+            $column = $category == 'anchor' ? 'is_anchor' : 'is_special';
+            return DB::table('news')
+                ->select('news.sub_title',
+                    'news.id as news_slug',
+                    'news.title',
+                    'news.short_description',
+                    'news.description',
+                    'news.publish_date',
+                    'news.image',
+                    'news.image_alt',
+                    'news.is_active',
+                    'guests.name as guest_name',
+                    'guests.slug as guest_slug',
+                    'guests.image as guest_image',
+                    'reporters.name as reporter_name',
+                    'reporters.image as reporter_image',
+                    'reporters.slug as reporter_slug',
+                    'news.image_description',
+                    'news.date_line'
+                )
+                ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
+                ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
+                ->selectRaw("'$display_name' as categories")
+                ->selectRaw("'$category_slug' as category_slug")
+                ->where('news.' . $column, '=', true)
+                ->where('news.is_active', '=', 1)
+                ->whereNull('news.deleted_at')
+                ->orderByDesc('news.publish_date')
+                ->paginate($perPage);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
+            return redirect()->back();
+        }
+
+    }
+
+    public function getAllChildCategoriesId($parent_id)
+    {
+        return DB::table('categories')
+            ->select('id')
+            ->where('parent_id', '=', $parent_id)
+            ->get()->map(function ($cat) {
+                return $cat->id;
+            })->toArray();
     }
 
     public function getChildCategoryNews($slug, $limit)
@@ -179,54 +214,6 @@ class CategoryController extends Controller
             });
 
 
-    }
-
-
-    public function getAnchorOrSpecialNews($category, $perPage)
-    {
-//        $column = $category
-//        return DB::table('news')
-//            ->select('news.sub_title',
-//                'news.id as news_slug',
-//                'news.title',
-//                'news.short_description',
-//                'news.description',
-//                'news.publish_date',
-//                'news.image',
-//                'news.image_alt',
-//                'news.is_active',
-//                'guests.name as guest_name',
-//                'guests.slug as guest_slug',
-//                'guests.image as guest_image',
-//                'reporters.name as reporter_name',
-//                'reporters.image as reporter_image',
-//                'reporters.slug as reporter_slug',
-//                'news.image_description',
-//                'news.date_line'
-//            )
-//            ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
-//            ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
-//            ->when($isExtraCategory, function ($a) use ($slug) {
-//                $category_slug = $slug == 'anchor' ? 'anchor' : 'bl-special';
-//                $category = trans('messages.' . $category_slug);
-//                $column = $slug == 'anchor' ? 'is_anchor' : 'is_special';
-//                $a->selectRaw("'$category' as categories")
-//                    ->selectRaw("'$category_slug' as category_slug")
-//                    ->where('news.' . $column, '=', true);
-//            })->when($isExtraCategory == false, function ($a) use ($slug, $childCategories, $category) {
-//                $a->selectRaw("'$slug'as category_slug")
-//                    ->selectRaw("'$category->name'as categories")
-//                    ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-//                    ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-//                    ->where('categories.slug', '=', $slug)
-//                    ->orWhereIn('categories.id', $childCategories);
-//
-//            })
-//            ->where('news.is_active', '=', 1)
-//            ->whereNull('news.deleted_at')
-//            ->orderByDesc('news.publish_date')
-//            ->distinct(true)
-//            ->paginate($perPage);
     }
 
 }
