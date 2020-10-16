@@ -98,12 +98,12 @@ class CategoryRepository extends Repository
             ->whereIn('categories.slug', $slug)
 //            ->orderBy('news.created_at', 'DESC')
             ->where('news.is_active', '=', 1)
-            ->whereNull('news.deleted_at')
+//            ->whereNull('news.deleted_at')
             ->where('news.id', '!=', $except)
 //            ->inRandomOrder('news.id')
             ->orderByDesc('news.id')
             ->groupBy('news.id')
-            ->limit($limit)
+//            ->limit($limit)
             ->get();
     }
 
