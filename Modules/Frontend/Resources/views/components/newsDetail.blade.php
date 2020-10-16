@@ -57,7 +57,7 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="col-md-4 text-left float-left">
                                         @if($news->date_line)
-                                            <i class="fa fa-map-marker blus"></i>
+                                            ,
                                             {{$news->date_line}}
                                         @endif
                                     </div>
@@ -74,11 +74,11 @@
                             </div>
                         </div>
                         @if($news->video_url)
-                            <div class="video-section user_detail_image">
+                            <div class="video-section ">
                                 {!! $news->video_url !!}
                             </div>
                         @else
-                            <div class="news-banner user_detail_image">
+                            <div class="news-banner ">
                                 @include('frontend::components.news.news-image',['figureClass'=>'bannerImg'])
                                 @if($news->image_description)
                                     <p class="float-right">
