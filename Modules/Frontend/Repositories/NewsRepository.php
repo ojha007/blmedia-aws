@@ -327,7 +327,7 @@ class NewsRepository extends Repository
                 ->where('news.is_active', true)
                 ->whereNull('news.deleted_at')
                 ->orderByDesc('publish_date')
-                ->distinct(true)
+//                ->distinct(true)
                 ->limit($limit)
                 ->get();
         } else {
@@ -424,7 +424,7 @@ class NewsRepository extends Repository
                 ->where('news.is_active', '=', 1)
                 ->whereNull('news.deleted_at')
                 ->orderByDesc('publish_date')
-                ->distinct(true)
+//                ->distinct(true)
                 ->limit($limit)
                 ->get();
 
