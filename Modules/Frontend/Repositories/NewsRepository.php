@@ -5,7 +5,6 @@ namespace Modules\Frontend\Repositories;
 
 
 use App\Repositories\Repository;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\Backend\Entities\CategoryPositions;
@@ -265,9 +264,9 @@ class NewsRepository extends Repository
 
     public function getCacheNews(int $position, $placement, $limit, $cacheName)
     {
-        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
-            return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
-        });
+//        return Cache::remember('_' . $cacheName, 4800, function () use ($position, $placement, $limit) {
+        return $this->getNewsByPositionAndPlacement($position, $placement, $limit);
+//        });
 
     }
 
