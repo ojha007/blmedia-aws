@@ -29,7 +29,7 @@ class NewsRepository extends Repository
 
         try {
             return DB::table('news')
-                ->selectRaw(DB::raw('SELECT distinct(news.id)'))
+//                ->selectRaw(DB::raw('SELECT distinct(news.id)'))
                 ->select('news.title',
                     'news.description',
                     'guests.name as guest_name',

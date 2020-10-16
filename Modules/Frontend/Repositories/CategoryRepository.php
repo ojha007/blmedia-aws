@@ -102,7 +102,7 @@ class CategoryRepository extends Repository
             ->where('news.id', '!=', $except)
 //            ->inRandomOrder('news.id')
             ->orderByDesc('news.id')
-            ->groupBy('news.id')
+//            ->groupBy('news.id')
 //            ->limit($limit)
             ->get();
     }
