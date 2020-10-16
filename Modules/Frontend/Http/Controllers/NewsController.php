@@ -35,9 +35,12 @@ class NewsController extends Controller
 
         try {
             if ($id) {
-                DB::table('news')
-                    ->where('id', $id)
-                    ->increment('view_count', 100);
+                if (is_int($id)) {
+                    DB::table('news')
+                        ->where('id', $id)
+                        ->increment('view_count', 100);
+                }
+
             }
             $news = $this->getNews($id);
 //            if ($news) {
