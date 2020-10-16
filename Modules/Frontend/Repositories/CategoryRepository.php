@@ -5,6 +5,7 @@ namespace Modules\Frontend\Repositories;
 
 
 use App\Repositories\Repository;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Modules\Backend\Entities\Category;
 
@@ -27,37 +28,34 @@ class CategoryRepository extends Repository
 
     public function getDetailPageHeaderCategoriesByPosition($limit = 10)
     {
-
-        return DB::table('categories')
-            ->select('categories.name', 'categories.slug')
-            ->where('parent_id', null)
-            ->where('is_active', true)
-            ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
-            ->whereNotNull('category_positions.detail_header_position')
-            ->orderBy('category_positions.detail_header_position', 'ASC')
-            ->limit($limit)
-            ->get();
-//        return Cache::remember('_detailPageHeaderCategoriesByPosition', 46000, function () use ($limit) {
-//        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::DETAIL_HEADER_POSITION, 10);
-//        });
+        return Cache::remember('_detailPageHeaderCategoriesByPosition', 46000, function () use ($limit) {
+            return DB::table('categories')
+                ->select('categories.name', 'categories.slug')
+                ->where('parent_id', null)
+                ->where('is_active', true)
+                ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
+                ->whereNotNull('category_positions.detail_header_position')
+                ->orderBy('category_positions.detail_header_position', 'ASC')
+                ->limit($limit)
+                ->get();
+        });
 
     }
 
     public function getFrontPageHeaderCategoriesByPosition($limit = 10)
     {
 
-        return DB::table('categories')
-            ->select('categories.name', 'categories.slug')
-            ->where('parent_id', null)
-            ->where('is_active', true)
-            ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
-            ->whereNotNull('category_positions.front_header_position')
-            ->orderBy('category_positions.front_header_position', 'ASC')
-            ->limit($limit)
-            ->get();
-//        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
-//        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::FRONT_HEADER_POSITION, 10);
-//        });
+        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
+            return DB::table('categories')
+                ->select('categories.name', 'categories.slug')
+                ->where('parent_id', null)
+                ->where('is_active', true)
+                ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
+                ->whereNotNull('category_positions.front_header_position')
+                ->orderBy('category_positions.front_header_position', 'ASC')
+                ->limit($limit)
+                ->get();
+        });
     }
 
     public function getChildCategory($slug, int $limit)
@@ -78,7 +76,6 @@ class CategoryRepository extends Repository
 
         $slug = is_array($slug) ? $slug : [$slug];
         return DB::table('news')
-//            ->selectRaw('SELECT distinct news.id')
             ->select('news.title',
                 'news.description',
                 'news.id as news_slug',
