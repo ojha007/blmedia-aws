@@ -47,7 +47,6 @@ class CategoryController extends Controller
 
     public function showNewsByCategory($slug)
     {
-
         $newsByCategory = $this->getNewsByCategorySlug($slug);
         $advertisements = $this->adsRepository->getAllAdvertisements('category_page');
         $breadcrumbs = $this->repository->getChildCategory($slug, 7);
@@ -68,8 +67,8 @@ class CategoryController extends Controller
         }
         try {
             $category = DB::table('categories')
-                ->select('id', 'name')
-                ->where('slug', $slug)
+                ->select('id', 'name', 'slug')
+                ->where('slug', '=', $slug)
                 ->first();
             if ($slug == 'trending') {
                 return [];
@@ -178,7 +177,6 @@ class CategoryController extends Controller
             ->where('c2.is_active', true);
 
         return DB::table('news')
-            ->selectRaw(DB::raw('SELECT distinct(news.id)'))
             ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
             ->joinSub($category, 'cat', function ($query) {
                 $query->on('news_categories.category_id', '=', 'cat.c2_id')
