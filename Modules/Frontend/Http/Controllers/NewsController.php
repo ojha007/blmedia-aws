@@ -67,8 +67,8 @@ class NewsController extends Controller
     protected function getNews($id)
     {
 
-        DB::table('news')
-            ->increment('view_count', 100);
+//        DB::table('news')
+//            ->increment('view_count', 100);
         return News::with('tags')
             ->without('categories')
             ->select(
