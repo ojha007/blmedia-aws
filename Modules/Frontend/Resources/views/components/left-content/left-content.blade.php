@@ -1,3 +1,4 @@
+
 <section class="below-header-section">
     @include('frontend::components.left-content.below-header.below-header')
 </section>

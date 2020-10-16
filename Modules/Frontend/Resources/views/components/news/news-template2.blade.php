@@ -1,7 +1,7 @@
 @if(count($allNews))
     <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
         @include('frontend::components.card-header',['header'=>$allNews])
-        <div class="card-body text-primary">
+        <div class="card-block">
             @foreach($allNews as $key=>$news)
                 @if($key == 0)
                     @include('frontend::components.news.featured-card')

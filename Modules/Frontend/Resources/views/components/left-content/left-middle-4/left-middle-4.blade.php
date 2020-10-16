@@ -2,7 +2,7 @@
     @if(count($tenthPositionNews))
         <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
             @include('frontend::components.card-header',['header'=>$tenthPositionNews])
-            <div class="card-body ">
+            <div class="card-block">
                 <div class="row row-card">
                     <div class="col-sm-12 col-md-7">
                         @foreach($tenthPositionNews as $key=>$news)

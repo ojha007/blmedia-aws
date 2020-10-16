@@ -1,6 +1,6 @@
 <div class="card border-primary mb-3 with-child-category {{ $positionClass ?? '' }}">
     @include('frontend::components.card-header',['header'=>$newsByCategory])
-    <div class="card-body px-0">
+    <div class="card-block">
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 @foreach($newsByCategory as $key=>$news)

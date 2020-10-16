@@ -1,6 +1,6 @@
-@include('frontend::components.news.news-template',
-[
+@include('frontend::components.news.news-template3',[
             'allNews'=>$fourteenPositionNews,
-            'imgClass'=>'circle-img',
+            'imgClass'=>'prakash',
+
             'positionClass'=>'front_body_position_11'
 ])

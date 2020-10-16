@@ -3,9 +3,9 @@
     @include('frontend::components.breadcrumb')
     <div class="offset-lg-1 col-lg-10">
         <div class="row ">
-            <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 p-0 sm-mb-3 left-content ">
+            <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 sm-mb-3 left-content ">
                 <div class="card border-primary mb-3 news-by-category">
-                    <div class="card-body p-0">
+                    <div class="card-block">
                         @if(count($childCategoriesNews))
                             @include('frontend::components.withChildCategory')
                         @else
@@ -35,8 +35,8 @@
                               'allNews'=>$blSpecialNews,
                              'positionClass'=>'detail_body_position_1'
                               ])
-                @include('frontend::components.news.news-template',['allNews'=>$detailPageSecondPositionNews,  'positionClass'=>'detail_body_position_2'])
-                @include('frontend::components.news.news-template',['allNews'=>$detailPageThirdPositionNews,  'positionClass'=>'detail_body_position_3'])
+                @include('frontend::components.news.news-template3',['allNews'=>$detailPageSecondPositionNews,  'positionClass'=>'detail_body_position_2'])
+                @include('frontend::components.news.news-template2',['allNews'=>$detailPageThirdPositionNews,  'positionClass'=>'detail_body_position_3'])
             </div>
         </div>
     </div>

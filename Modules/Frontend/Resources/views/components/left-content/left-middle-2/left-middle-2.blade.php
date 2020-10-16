@@ -29,7 +29,7 @@
         <div class="col-12">
             <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
                 @include('frontend::components.card-header',['header'=>$sixthPositionNews])
-                <div class="card-body ">
+                <div class="card-block">
                     @foreach($sixthPositionNews as $key=>$news)
                         @if($key == 0)
                             <div class="card mb-3">

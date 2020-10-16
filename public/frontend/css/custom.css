@@ -12,6 +12,14 @@ body {
 }
 
 /*.............................custom design......................................*/
+.rounded-img {
+    max-height: 110px;
+    max-width: 110px;
+    height: 110px;
+    width: 110px;
+    border-radius: 100%;
+    object-fit: cover;
+}
 
 .card-img-wrap {
     overflow: hidden;
@@ -238,17 +246,17 @@ body {
 .card.detail_body_position_1 .card-body, .card.detail_body_position_2 .card-body, .card.detail_body_position_3 .card-body,
 .card.recommendation .card-body, .card.sub-recommendation .card-body, .card.tag-collection .card-body, .card.detail-body .card-body
 {
-    padding-left: 0;
-    padding-right: 0;
+    /*padding-left: 0;*/
+    /*padding-right: 0;*/
 }
 
-.card.front_body_position_1 .card-body .card .card-body, .card.front_body_position_2 .card-body .card .card-body, .card.front_body_position_3 .card-body .card .card-body,
-.card.front_body_position_4 .card-body .card .card-body, .card.front_body_position_5 .card-body .card .card-body, .card.front_body_position_6 .card-body .card .card-body,
-.card.front_body_position_7 .card-body .card .card-body, .card.front_body_position_8 .card-body .card .card-body, .card.front_body_position_9 .card-body .card .card-body,
-.card.front_body_position_10 .card-body .card .card-body, .card.front_body_position_11 .card-body .card .card-body, .card.front_body_position_12 .card-body .card .card-body,
-.card.front_body_position_13 .card-body .card .card-body, .card.front_body_position_14 .card-body .card .card-body, .card.front_body_position_15 .card-body .card .card-body,
-.card.detail_body_position_1 .card-body .card .card-body, .card.detail_body_position_2 .card-body .card .card-body, .card.detail_body_position_3 .card-body .card .card-body,
-.card.news-by-category .card-body .card .card-body
+.card.front_body_position_1 .card-block .card .card-body, .card.front_body_position_2 .card-block .card .card-body, .card.front_body_position_3 .card-block .card .card-body,
+.card.front_body_position_4 .card-block .card .card-body, .card.front_body_position_5 .card-block .card .card-body, .card.front_body_position_6 .card-block .card .card-body,
+.card.front_body_position_7 .card-block .card .card-body, .card.front_body_position_8 .card-block .card .card-body, .card.front_body_position_9 .card-block .card .card-body,
+.card.front_body_position_10 .card-block .card .card-body, .card.front_body_position_11 .card-block .card .card-body, .card.front_body_position_12 .card-block .card .card-body,
+.card.front_body_position_13 .card-block .card .card-body, .card.front_body_position_14 .card-block .card .card-body, .card.front_body_position_15 .card-block .card .card-body,
+.card.detail_body_position_1 .card-block .card .card-body, .card.detail_body_position_2 .card-block .card .card-body, .card.detail_body_position_3 .card-block .card .card-body,
+.card.news-by-category .card-block .card .card-body
 {
     padding-top: 0;
     padding-bottom: 0;
@@ -325,15 +333,15 @@ body {
     /*padding: 0 15px;*/
 }
 .card.sub-child-category .card.overlay-main .sub-category-overlay-title p {
-    color: white!important;
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.5);
-    line-height: 10px;
+    /*color: white!important;*/
+    /*font-size: 20px;*/
+    /*text-transform: uppercase;*/
+    /*font-weight: bold;*/
+    /*background: rgba(0, 0, 0, 0.5);*/
+    /*line-height: 10px;*/
 }
 .card.sub-child-category .card.overlay-main .sub-category-overlay-title .hover-site-color:hover {
-    color: #FF5E14!important;
+    /*color: #FF5E14!important;*/
 }
 
 

@@ -2,7 +2,7 @@
     @if(count($thirteenPositionNews))
         <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
             @include('frontend::components.card-header',['header'=>$thirteenPositionNews])
-            <div class="card-body ">
+            <div class="card-block">
                 @foreach($thirteenPositionNews as $key=>$news)
                     @if($key == 0)
                         <div class="card text-white overlay-main ">
@@ -25,7 +25,7 @@
                     @foreach($thirteenPositionNews as $key=>$news)
                         @if($key >0)
                             <div class="col-sm-12 col-md-4">
-                                <div class="card mb-3">
+                                <div class="card my-3">
                                     @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                                     <div class="card-body">
                                         @include('frontend::components.news.news-title')

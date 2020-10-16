@@ -3,7 +3,7 @@
     <section class="detail-body-section">
         <div class="offset-lg-1 col-lg-10">
             <div class="row ">
-                <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 p-0 sm-mb-3 left-content">
+                <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 sm-mb-3 left-content">
                     <div class="card border-primary mb-3 detail-body">
                         <div class="card-header px-0">
                             <h2>{!! $news->title !!}</h2>
@@ -11,7 +11,7 @@
                                 {!! $news->sub_title !!}
                             </p>
                         </div>
-                        <div class="card-body ">
+                        <div class="card-block">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="card">
@@ -21,7 +21,7 @@
                                                      class="card-img  rounded-circle" alt="...">
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="card-body pt-0 pb-0 pr-0">
+                                                <div class="card-block pt-0 pb-0 pr-0">
                                                     <p class="card-text">
                                                         @if($news->reporter || $news->guest)
                                                             @php($author_type = $news->reporter ? 'reporters' : 'guests')
@@ -45,8 +45,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-8">
-                                    <div class="sharethis-inline-share-buttons"></div>
+                                <div class="col-sm-8 py-2">
+                                    <div class="sharethis-inline-share-buttons float-left"></div>
                                 </div>
                             </div>
                             @if($news->video_url)
@@ -54,14 +54,14 @@
                                     {!! $news->video_url !!}
                                 </div>
                             @else
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 px-0">
                                     @include('frontend::components.news.news-image',['figureClass'=>' ', 'imgClass'=>'w-100 img-responsive img-fluid'])
                                 </div>
                             @endif
                         </div>
                     </div>
                     <div class="card border-primary  mb-3 detail-text">
-                        <div class="card-body">
+                        <div class="card-block">
                             <p class="card-text"> {!! $news->description !!}</p>
                             @if($news->external_url)
                                 <p class="text-center"><a href="{{$news->external_url}}"
@@ -91,7 +91,7 @@
                                 </a>
                             </p>
                         </div>
-                        <div class="card-body ">
+                        <div class="card-block">
                             <div class="row">
                                 @foreach($sameCategoryNews->take(4) as $key=>$news)
                                     <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
@@ -127,8 +127,8 @@
                                   'allNews'=>$blSpecialNews,
                                  'positionClass'=>'detail_body_position_1'
                                   ])
-                    @include('frontend::components.news.news-template',['allNews'=>$detailPageSecondPositionNews,  'positionClass'=>'detail_body_position_2'])
-                    @include('frontend::components.news.news-template',['allNews'=>$detailPageThirdPositionNews,  'positionClass'=>'detail_body_position_3'])
+                    @include('frontend::components.news.news-template3',['allNews'=>$detailPageSecondPositionNews,  'positionClass'=>'detail_body_position_2'])
+                    @include('frontend::components.news.news-template2',['allNews'=>$detailPageThirdPositionNews,  'positionClass'=>'detail_body_position_3'])
                 </div>
             </div>
         </div>

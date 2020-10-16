@@ -13,7 +13,7 @@
             </a>
         </p>
     </div>
-    <div class="card-body">
+    <div class="card-block">
         <div class="row">
             @foreach($sameCategoryNews as $key=>$news)
                 <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">

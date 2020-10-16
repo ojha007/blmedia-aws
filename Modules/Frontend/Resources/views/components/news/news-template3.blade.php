@@ -6,10 +6,10 @@
                 @foreach($allNews as $news)
                     <div class="card mb-3">
                         <div class="row no-gutters">
-                            <div class="col-md-6">
-                                @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])
+                            <div class="col-4">
+                                @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>' rounded-img'])
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-8">
                                 <div class="card-body">
                                     @include('frontend::components.news.news-title')
                                     @include('frontend::components.news.news-author')
