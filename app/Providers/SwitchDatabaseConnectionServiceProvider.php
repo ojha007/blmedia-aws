@@ -76,16 +76,16 @@ class SwitchDatabaseConnectionServiceProvider extends ServiceProvider
     {
         $ip = request()->ip();
         if ($ip) {
-            $data = \Location::get($ip);
-            if ($data) {
-                if ($data->countryName == 'Nepal') {
-                    return 'Asia/Kathmandu';
-                }
-                if ($data->countryName == 'India') {
-                    return 'Asia/Kolkata';
-                }
-                return 'America/Los_Angeles';
-            }
+//            $data = \Location::get($ip);
+//            if ($data) {
+//                if ($data->countryName == 'Nepal') {
+//                    return 'Asia/Kathmandu';
+//                }
+//                if ($data->countryName == 'India') {
+//                    return 'Asia/Kolkata';
+//                }
+//                return 'America/Los_Angeles';
+//            }
             return 'Asia/Kathmandu';
         }
 
