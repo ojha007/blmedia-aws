@@ -5,7 +5,6 @@ namespace Modules\Frontend\Repositories;
 
 
 use App\Repositories\Repository;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Modules\Backend\Entities\Category;
 use Modules\Backend\Entities\CategoryPositions;
@@ -30,9 +29,9 @@ class CategoryRepository extends Repository
     public function getDetailPageHeaderCategoriesByPosition($limit = 10)
     {
 
-        return Cache::remember('_detailPageHeaderCategoriesByPosition', 46000, function () use ($limit) {
-            return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::DETAIL_HEADER_POSITION, 10);
-        });
+//        return Cache::remember('_detailPageHeaderCategoriesByPosition', 46000, function () use ($limit) {
+        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::DETAIL_HEADER_POSITION, 10);
+//        });
 
     }
 
@@ -51,9 +50,9 @@ class CategoryRepository extends Repository
 
     public function getFrontPageHeaderCategoriesByPosition($limit = 10)
     {
-        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
-            return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::FRONT_HEADER_POSITION, 10);
-        });
+//        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
+        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::FRONT_HEADER_POSITION, 10);
+//        });
     }
 
     public function getChildCategory($slug, int $limit)
@@ -81,6 +80,7 @@ class CategoryRepository extends Repository
                 'news.publish_date',
                 'news.image',
                 'news.date_line',
+                'news.is_active',
                 'news.image_description',
                 'reporters.name as reporter_name',
                 'guests.name as guest_name',

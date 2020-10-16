@@ -90,6 +90,7 @@ class CategoryController extends Controller
                     'news.publish_date',
                     'news.image',
                     'news.image_alt',
+                    'news.is_active',
                     'guests.name as guest_name',
                     'guests.slug as guest_slug',
                     'guests.image as guest_image',

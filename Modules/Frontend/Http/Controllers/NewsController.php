@@ -34,16 +34,17 @@ class NewsController extends Controller
     {
 
         try {
-            DB::table('news')
-                ->where('id', $id)
-                ->increment('view_count', 100);
-
+            if ($id) {
+                DB::table('news')
+                    ->where('id', $id)
+                    ->increment('view_count', 100);
+            }
             $news = $this->getNews($id);
-            if ($news) {
-                if ($news->is_active == 0)
-                    return redirect()->back();
-            } else
-                return redirect()->back();
+//            if ($news) {
+//                if ($news->is_active == 0)
+//                    return redirect()->back();
+//            } else
+//                return redirect()->back();
             $tags = DB::table('tags')
                 ->select('name')
                 ->join('taggables', 'taggables.tag_id', '=', 'tags.tag_id')
@@ -65,7 +66,7 @@ class NewsController extends Controller
                 ->with($advertisements);
 
         } catch (\Exception $exception) {
-            dd($exception);
+//            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->back();
         }
