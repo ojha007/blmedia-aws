@@ -4,6 +4,7 @@ namespace Modules\Frontend\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Modules\Backend\Entities\Advertisement;
 use Modules\Backend\Repositories\AdvertisementRepository;
 use Modules\Frontend\Entities\Category;
@@ -61,63 +62,69 @@ class CategoryController extends Controller
 
     public function getNewsByCategorySlug($slug, $perPage = 25)
     {
-        $category = DB::table('categories')
-            ->select('id', 'name')
-            ->where('slug', $slug)
-            ->first();
-        if ($slug == 'trending') {
-            return (new NewsRepository())->getTrendingNews()->paginate(30);
+
+        try {
+            $category = DB::table('categories')
+                ->select('id', 'name')
+                ->where('slug', $slug)
+                ->first();
+            if ($slug == 'trending') {
+                return (new NewsRepository())->getTrendingNews(30);
+            }
+            $childCategories = [];
+            if ($category) {
+                $childCategories = DB::table('categories')
+                    ->select('id')
+                    ->where('parent_id', '=', $category->id)
+                    ->get()->map(function ($cat) {
+                        return $cat->id;
+                    })->toArray();
+            }
+            $isExtraCategory = $slug == 'anchor' || $slug == 'bl-special';
+            return DB::table('news')
+                ->select('news.sub_title',
+                    'news.id as news_slug',
+                    'news.title',
+                    'news.short_description',
+                    'news.description',
+                    'news.publish_date',
+                    'news.image',
+                    'news.image_alt',
+                    'guests.name as guest_name',
+                    'guests.slug as guest_slug',
+                    'guests.image as guest_image',
+                    'reporters.name as reporter_name',
+                    'reporters.image as reporter_image',
+                    'reporters.slug as reporter_slug',
+                    'news.image_description',
+                    'news.date_line'
+                )
+                ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
+                ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
+                ->when($isExtraCategory, function ($a) use ($slug) {
+                    $category_slug = $slug == 'anchor' ? 'anchor' : 'bl-special';
+                    $category = trans('messages.' . $category_slug);
+                    $column = $slug == 'anchor' ? 'is_anchor' : 'is_special';
+                    $a->selectRaw("'$category' as categories")
+                        ->selectRaw("'$category_slug' as category_slug")
+                        ->where('news.' . $column, '=', true);
+                })->when($isExtraCategory == false, function ($a) use ($slug, $childCategories, $category) {
+                    $a->selectRaw("'$slug'as category_slug")
+                        ->selectRaw("'$category->name'as categories")
+                        ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
+                        ->join('categories', 'news_categories.category_id', '=', 'categories.id')
+                        ->where('categories.slug', '=', $slug)
+                        ->orWhereIn('categories.id', $childCategories);
+
+                })
+                ->where('news.is_active', '=', 1)
+                ->whereNull('news.deleted_at')
+                ->orderByDesc('news.publish_date')
+                ->distinct(true)
+                ->paginate($perPage);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
         }
-        if (!$category) return redirect('/');
-        $childCategories = DB::table('categories')
-            ->select('id')
-            ->where('parent_id', '=', $category->id)
-            ->get()->map(function ($cat) {
-                return $cat->id;
-            })->toArray();
-
-        $isExtraCategory = $slug == 'anchor' || $slug == 'bl-special';
-        return DB::table('news')
-            ->select('news.sub_title',
-                'news.id as news_slug',
-                'news.title',
-                'news.short_description',
-                'news.description',
-                'news.publish_date',
-                'news.image',
-                'news.image_alt',
-                'guests.name as guest_name',
-                'guests.slug as guest_slug',
-                'guests.image as guest_image',
-                'reporters.name as reporter_name',
-                'reporters.image as reporter_image',
-                'reporters.slug as reporter_slug',
-                'news.image_description',
-                'news.date_line'
-            )
-            ->leftJoin('reporters', 'reporters.id', '=', 'news.reporter_id')
-            ->leftJoin('guests', 'guests.id', '=', 'news.guest_id')
-            ->when($isExtraCategory, function ($a) use ($slug) {
-                $category_slug = $slug == 'anchor' ? 'anchor' : 'bl-special';
-                $category = trans('messages.' . $category_slug);
-                $column = $slug == 'anchor' ? 'is_anchor' : 'is_special';
-                $a->selectRaw("'$category' as categories")
-                    ->selectRaw("'$category_slug' as category_slug")
-                    ->where('news.' . $column, '=', true);
-            })->when($isExtraCategory == false, function ($a) use ($slug, $childCategories, $category) {
-                $a->selectRaw("'$slug'as category_slug")
-                    ->selectRaw("'$category->name'as categories")
-                    ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-                    ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-                    ->where('categories.slug', '=', $slug)
-                    ->orWhereIn('categories.id', $childCategories);
-
-            })
-            ->where('news.is_active', '=', 1)
-            ->whereNull('news.deleted_at')
-            ->orderByDesc('news.publish_date')
-            ->distinct(true)
-            ->paginate($perPage);
 
     }
 

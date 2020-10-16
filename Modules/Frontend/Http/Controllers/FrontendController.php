@@ -49,12 +49,14 @@ class FrontendController extends Controller
                 return $this->redirectClientByIp();
             }
         }
+//        $trendingNews = [];
         $newsRepo = $this->newsRepository;
         $headerCategories = $this->categoryRepository->getFrontPageHeaderCategoriesByPosition();
         $advertisements = $this->adsRepository->getAllAdvertisements('main_page');
         $anchorNews = $newsRepo->getCacheNewsByExtraColumn('is_anchor', 5);
         $blSpecialNews = $newsRepo->getCacheNewsByExtraColumn('is_special', 5);
-        $trendingNews = $newsRepo->getTrendingNews()->limit(5)->get();
+        $trendingNews =[];
+//        $trendingNews = $newsRepo->getTrendingNews(5);
         $firstPositionNews = $newsRepo->getCacheNews(1, CategoryPositions::FRONT_BODY_POSITION, 9, 'firstPositionNews');
         $fourthPositionNews = $newsRepo->getCacheNews(4, CategoryPositions::FRONT_BODY_POSITION, 5, 'fourthPositionNews');
         $fifthPositionNews = $newsRepo->getCacheNews(5, CategoryPositions::FRONT_BODY_POSITION, 5, 'fifthPositionNews');
@@ -95,6 +97,7 @@ class FrontendController extends Controller
     {
 //        $ip = "43.245.87.255";
         $ip = request()->ip();
+        $data = null;
         $data = \Location::get($ip);
         if ($data) {
             if ($data->countryName == 'Nepal') {

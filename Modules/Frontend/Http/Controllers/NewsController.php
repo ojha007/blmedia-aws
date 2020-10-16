@@ -35,6 +35,9 @@ class NewsController extends Controller
     {
 
         try {
+            DB::table('news')
+                ->where('id', $slug)
+                ->increment('view_count', 100);
             $news = $this->getNews($slug);
             if ($news->is_active == 0) {
                 return redirect()->back();
@@ -67,8 +70,8 @@ class NewsController extends Controller
     protected function getNews($id)
     {
 
-        DB::table('news')
-            ->increment('view_count', 100);
+//        DB::table('news')
+//            ->increment('view_count', 100);
         return News::with('tags')
             ->without('categories')
             ->select(
