@@ -88,6 +88,8 @@ class CategoryRepository extends Repository
                 'guests.slug as guest_slug',
                 'guests.image as guest_image',
                 'reporters.slug as reporter_slug',
+                'categories.name as categories',
+                'categories.slug as category_slug',
                 'news.image_alt')
             ->join('news_categories', 'news_categories.news_id', 'news.id')
             ->join('categories', 'categories.id', '=', 'news_categories.category_id')
