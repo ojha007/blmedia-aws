@@ -30,8 +30,10 @@
                                            href="{{route($routePrefix.'news.by.author',['guests',$news->guest_slug])}}">
                                             <div class="circular--portrait float-left">
                                                 <img
-                                                    src="{{$news->guest_image ?$news->guest_image:
-                                                     asset('/frontend/img/logo.png')}}"
+                                                    src="{{
+                                                    $news->guest_image ? $news->guest_image:
+                                                    ($news->reporter_image ? $news->reporter_image:
+                                                     asset('/frontend/img/logo.png'))}}"
                                                     alt="{{$news->guest_name}}"
                                                     title="{{$news->reporter_name}}"
                                                     class="responsive-img">

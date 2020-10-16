@@ -8,6 +8,9 @@
                 </a>
             </div>
             <div class="col-md-4 col-lg-0 col-xl-4 nav-pills-float">
+                <div class="col-md-offset-2 customAdds">
+                    @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'aside','sub_for'=>'logo'])
+                </div>
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <form class="form-inline base-form">
@@ -41,7 +44,7 @@
                                                              $urlPrefix,
                                                              $urlPrefix.'/'
                                                              )
-                                                     ? 'active':''}}">
+                                                     ? 'customActive':''}}">
                                 <a href="{{route($routePrefix.'index')}}" class="nav-link"><i
                                         class="fa fa-home"></i> <span class="sr-only">Home</span>
                                 </a>
@@ -59,7 +62,7 @@
                                                              $urlPrefix.'category/'.$category->slug,
                                                              $urlPrefix.'category/'.$category->slug.'/*'
                                                              )
-                                                     ? 'active':''}}">
+                                                     ? 'customActive':''}}">
                                     <a href="{{route($routePrefix.'news-category.show',$category->slug)}}"
                                        class="nav-link" style="padding: 0.8em 1.2em !important">
                                         <nobr>
@@ -104,6 +107,7 @@
         </div>
     </div>
 </section>
+
 <div class="container-fluid text-center">
     @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'below','sub_for'=>'logo_and_menu'])
 </div>

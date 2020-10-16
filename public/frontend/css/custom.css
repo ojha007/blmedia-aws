@@ -295,6 +295,13 @@ html {
     font-weight: bold;
 }
 
-.custom-news-title a:hover {
-    color: #FF5E14;
+/*.custom-news-title a:hover {*/
+/*    color: #FF5E14;*/
+/*}*/
+
+.customActive {
+    color: black !important;
+    /*padding: 0.8em 1.2em !important;*/
+    background: #FF5E14;
+
 }

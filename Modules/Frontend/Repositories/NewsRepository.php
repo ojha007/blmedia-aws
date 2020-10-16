@@ -177,8 +177,8 @@ class NewsRepository extends Repository
     {
         $headerCategories = $this->categoryRepo->getDetailPageHeaderCategoriesByPosition();
         $blSpecialNews = $this->getCacheNewsByExtraColumn('is_special', 5);
-        $trendingNews = [];
-//        $trendingNews = (new NewsRepository())->getTrendingNews(5);
+//        $trendingNews = [];
+        $trendingNews = (new NewsRepository())->getTrendingNews(5);
         $detailPageSecondPositionNews = $this->getCacheNews(2, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageSecondPositionNews');
         $detailPageThirdPositionNews = $this->getCacheNews(3, CategoryPositions::DETAIL_BODY_POSITION, 4, 'detailPageThirdPositionNews');
         return [
@@ -222,6 +222,48 @@ class NewsRepository extends Repository
             ->limit($limit)
             ->get();
 //        });
+    }
+
+    public function getTrendingNews($limit)
+    {
+//        dd(array_key_first($options),$options);
+        $trending = trans('messages.trending');
+        $slug = 'trending';
+        return DB::table('news')
+            ->select(
+                'news.title',
+                'news.sub_title',
+                'news.short_description',
+                'news.description',
+                'reporters.name as reporter_name',
+                'reporters.image as reporter_image',
+                'reporters.slug as reporter_slug',
+                'guests.slug as guest_slug',
+                'guests.name as guest_name',
+                'guests.image as guest_image',
+                'news.image_description',
+                'news.external_url',
+                'news.video_url',
+                'news.date_line',
+                'news.is_active',
+                'news.publish_date',
+                'news.id as news_slug',
+                'news.image',
+                'news.view_count',
+                'news.image_alt'
+            )
+            ->selectRaw("'$trending' as categories")
+            ->selectRaw("'$slug' as category_slug")
+            ->selectRaw("'0' as is_video")
+            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->where('news.is_active', '=', true)
+            ->whereNull('news.deleted_at')
+            ->orderByDesc('news.publish_date')
+            ->orderByDesc('news.view_count')
+            ->paginate($limit);
+
+
     }
 
     public function getCacheNews(int $position, $placement, $limit, $cacheName)
@@ -389,48 +431,6 @@ class NewsRepository extends Repository
         } else {
             return $this->newsByPosition($category, $limit);
         }
-    }
-
-    public function getTrendingNews($limit)
-    {
-//        dd(array_key_first($options),$options);
-        $trending = trans('messages.trending');
-        $slug = 'trending';
-        return DB::table('news')
-            ->select(
-                'news.title',
-                'news.sub_title',
-                'news.short_description',
-                'news.description',
-                'reporters.name as reporter_name',
-                'reporters.image as reporter_image',
-                'reporters.slug as reporter_slug',
-                'guests.slug as guest_slug',
-                'guests.name as guest_name',
-                'guests.image as guest_image',
-                'news.image_description',
-                'news.external_url',
-                'news.video_url',
-                'news.date_line',
-                'news.is_active',
-                'news.publish_date',
-                'news.id as news_slug',
-                'news.image',
-                'news.view_count',
-                'news.image_alt'
-            )
-            ->selectRaw("'$trending' as categories")
-            ->selectRaw("'$slug' as category_slug")
-            ->selectRaw("'0' as is_video")
-            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
-            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
-            ->where('news.is_active', '=', true)
-            ->whereNull('news.deleted_at')
-            ->orderByDesc('news.view_count')
-            ->orderByDesc('news.publish_date')
-            ->paginate($limit);
-
-
     }
 
     protected function childNewsToParent()
