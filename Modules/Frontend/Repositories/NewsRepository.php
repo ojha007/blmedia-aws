@@ -45,8 +45,8 @@ class NewsRepository extends Repository
                 ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
                 ->where('news_category_id', '=', $category_id)
                 ->where('news.is_active', true)
-                ->orderByDesc('news.publish_date')
                 ->whereNull('news.deleted_at')
+                ->orderByDesc('news.publish_date')
                 ->limit($limit);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());

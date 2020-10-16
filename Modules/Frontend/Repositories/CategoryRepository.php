@@ -29,10 +29,27 @@ class CategoryRepository extends Repository
     public function getDetailPageHeaderCategoriesByPosition($limit = 10)
     {
 
+        return DB::table('categories')
+            ->select('categories.name', 'categories.slug')
+            ->where('parent_id', null)
+            ->where('is_active', true)
+            ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
+            ->whereNotNull('category_positions.detail_header_position')
+            ->orderBy('category_positions.detail_header_position', 'ASC')
+            ->limit($limit)
+            ->get();
 //        return Cache::remember('_detailPageHeaderCategoriesByPosition', 46000, function () use ($limit) {
-        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::DETAIL_HEADER_POSITION, 10);
+//        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::DETAIL_HEADER_POSITION, 10);
 //        });
 
+    }
+
+    public function getFrontPageHeaderCategoriesByPosition($limit = 10)
+    {
+
+//        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
+        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::FRONT_HEADER_POSITION, 10);
+//        });
     }
 
     protected function getNavbarCategoriesByPositionAndPlacement($placement, $limit)
@@ -46,13 +63,6 @@ class CategoryRepository extends Repository
             ->orderBy('category_positions.' . $placement, 'ASC')
             ->limit($limit)
             ->get();
-    }
-
-    public function getFrontPageHeaderCategoriesByPosition($limit = 10)
-    {
-//        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
-        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::FRONT_HEADER_POSITION, 10);
-//        });
     }
 
     public function getChildCategory($slug, int $limit)
