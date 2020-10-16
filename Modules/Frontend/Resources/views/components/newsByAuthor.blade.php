@@ -3,12 +3,12 @@
     <section class="body-section">
         <section class="page-body">
             <div class="container-fluid">
-                @if($newsByAuthor->first())
-                    @include('frontend::components.ads.ads-2',[
-                                        'ads'=>$allAds,'placement'=>'above',
-                                        'sub_for'=>$newsByAuthor->first()->category_slug
-                                            ])
-                @endif
+                {{--                @if($newsByAuthor->first())--}}
+                {{--                    @include('frontend::components.ads.ads-2',[--}}
+                {{--                                        'ads'=>$allAds,'placement'=>'above',--}}
+                {{--                                        'sub_for'=>$newsByAuthor->first()->category_slug--}}
+                {{--                                            ])--}}
+                {{--                @endif--}}
                 <section class="cmn-section">
                     <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 float-left">
                         <div class="block-header gn-heading">
@@ -37,10 +37,10 @@
                     </div>
                 </section>
 
-                @include('frontend::components.ads.ads-2',[
-                                    'ads'=>$allAds,'placement'=>'below',
-                                    'sub_for'=>$newsByAuthor->first()->category_slug
-                                        ])
+                {{--                @include('frontend::components.ads.ads-2',[--}}
+                {{--                                    'ads'=>$allAds,'placement'=>'below',--}}
+                {{--                                    'sub_for'=>$newsByAuthor->first()->category_slug--}}
+                {{--                                        ])--}}
             </div>
         </section>
     </section>
