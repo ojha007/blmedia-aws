@@ -12,15 +12,15 @@
                 <section class="cmn-section">
                     <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 float-left">
                         <div class="block-header gn-heading">
-                            @if($newsByAuthor->first()->reporter_name )
-                                <h2>
-                                    {{$newsByAuthor->first()->reporter_name}}
-                                </h2>
-                            @elseif($newsByAuthor->first()->guest_name)
-                                <h2>
-                                    {{$newsByAuthor->first()->guest_name}}
-                                </h2>
-                            @endif
+{{--                            @if($newsByAuthor->first()->reporter_name )--}}
+{{--                                <h2>--}}
+{{--                                    {{$newsByAuthor->first()->reporter_name}}--}}
+{{--                                </h2>--}}
+{{--                            @elseif($newsByAuthor->first()->guest_name)--}}
+{{--                                <h2>--}}
+{{--                                    {{$newsByAuthor->first()->guest_name}}--}}
+{{--                                </h2>--}}
+{{--                            @endif--}}
                         </div>
                         @include('frontend::components.no-childCategory',['newsByCategory'=>$newsByAuthor])
                     </div>
