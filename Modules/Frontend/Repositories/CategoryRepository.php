@@ -98,14 +98,14 @@ class CategoryRepository extends Repository
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->whereIn('categories.slug', $slug)
-//            ->orderBy('news.created_at', 'DESC')
+            ->orderBy('news.created_at', 'DESC')
             ->where('news.is_active', '=', 1)
-//            ->whereNull('news.deleted_at')
+            ->whereNull('news.deleted_at')
             ->where('news.id', '!=', $except)
-//            ->inRandomOrder('news.id')
+            ->inRandomOrder('news.id')
             ->orderByDesc('news.id')
 //            ->groupBy('news.id')
-//            ->limit($limit)
+            ->limit($limit)
             ->get();
     }
 
