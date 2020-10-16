@@ -7,7 +7,6 @@ namespace Modules\Frontend\Repositories;
 use App\Repositories\Repository;
 use Illuminate\Support\Facades\DB;
 use Modules\Backend\Entities\Category;
-use Modules\Backend\Entities\CategoryPositions;
 
 class CategoryRepository extends Repository
 {
@@ -47,22 +46,18 @@ class CategoryRepository extends Repository
     public function getFrontPageHeaderCategoriesByPosition($limit = 10)
     {
 
-//        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
-        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::FRONT_HEADER_POSITION, 10);
-//        });
-    }
-
-    protected function getNavbarCategoriesByPositionAndPlacement($placement, $limit)
-    {
         return DB::table('categories')
             ->select('categories.name', 'categories.slug')
             ->where('parent_id', null)
             ->where('is_active', true)
             ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
-            ->whereNotNull('category_positions.' . $placement)
-            ->orderBy('category_positions.' . $placement, 'ASC')
+            ->whereNotNull('category_positions.front_header_position')
+            ->orderBy('category_positions.front_header_position', 'ASC')
             ->limit($limit)
             ->get();
+//        return Cache::remember('_frontPageHeaderCategoriesByPosition', 10000, function () use ($limit) {
+//        return $this->getNavbarCategoriesByPositionAndPlacement(CategoryPositions::FRONT_HEADER_POSITION, 10);
+//        });
     }
 
     public function getChildCategory($slug, int $limit)
@@ -125,5 +120,18 @@ class CategoryRepository extends Repository
             ->first();
         if ($a) return $a->slug;
         return '';
+    }
+
+    protected function getNavbarCategoriesByPositionAndPlacement($placement, $limit)
+    {
+        return DB::table('categories')
+            ->select('categories.name', 'categories.slug')
+            ->where('parent_id', null)
+            ->where('is_active', true)
+            ->join('category_positions', 'categories.id', '=', 'category_positions.category_id')
+            ->whereNotNull('category_positions.' . $placement)
+            ->orderBy('category_positions.' . $placement, 'ASC')
+            ->limit($limit)
+            ->get();
     }
 }
