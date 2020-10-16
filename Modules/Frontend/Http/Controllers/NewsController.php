@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\Backend\Entities\Advertisement;
-use Modules\Backend\Entities\News;
 use Modules\Backend\Repositories\AdvertisementRepository;
 use Modules\Frontend\Entities\Category;
 use Modules\Frontend\Repositories\CategoryRepository;
@@ -31,36 +30,42 @@ class NewsController extends Controller
         $this->newsRepository = new NewsRepository();
     }
 
-    public function showNews($slug)
+    public function showNews($id)
     {
 
         try {
             DB::table('news')
-                ->where('id', $slug)
+                ->where('id', $id)
                 ->increment('view_count', 100);
-            $news = $this->getNews($slug);
-            if ($news->is_active == 0) {
+
+            $news = $this->getNews($id);
+            if ($news) {
+                if ($news->is_active == 0)
+                    return redirect()->back();
+            } else
                 return redirect()->back();
-            }
             $tags = DB::table('tags')
                 ->select('name')
                 ->join('taggables', 'taggables.tag_id', '=', 'tags.tag_id')
                 ->join('news', 'news.id', 'taggables.taggable_id')
-                ->where('news.id', $slug)
+                ->where('news.id', $id)
                 ->get();
             $category_slug = $news->category_slug;
+            $customRecommendations = $this->bestThreeNews($id);
+//            dd($customRecommendations);
             $advertisements = $this->adsRepository->getAllAdvertisements('detail_page');
             if (!$category_slug) {
                 $category_slug = $this->newsRepository->getCategoryDoesntExitsInDetailPage();
             }
             $sameCategoryNews = $this->categoryRepository->getSimilarNewsByCategorySlug($category_slug, $news->news_slug, 9);
             return view($this->viewPath . '.newsDetail',
-                compact('news', 'sameCategoryNews'))
+                compact('news', 'sameCategoryNews', 'customRecommendations'))
                 ->with($this->newsRepository->getDetailPageCommonData())
                 ->with('news_tags', $tags)
                 ->with($advertisements);
 
         } catch (\Exception $exception) {
+            dd($exception);
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->back();
         }
@@ -70,10 +75,7 @@ class NewsController extends Controller
     protected function getNews($id)
     {
 
-//        DB::table('news')
-//            ->increment('view_count', 100);
-        return News::with('tags')
-            ->without('categories')
+        return DB::table('news')
             ->select(
                 'news.title',
                 'news.sub_title',
@@ -111,6 +113,79 @@ class NewsController extends Controller
 
     }
 
+    public function bestThreeNews($notEqualTo)
+    {
+        $partialBestNews = $this->getBestNewsPartials($notEqualTo);
+        $bestNews[2] = DB::table('news')
+            ->select(
+                'news.title',
+                'news.sub_title',
+                'news.short_description',
+                'news.description',
+                'news.image_description',
+                'news.external_url',
+                'news.video_url',
+                'news.date_line',
+                'news.is_active',
+                'news.publish_date',
+                'news.id as news_slug',
+                'news.image',
+                'news.image_description',
+                'news.image_alt',
+                'reporters.name as reporter_name',
+                'reporters.slug as reporter_slug',
+                'reporters.image as reporter_image',
+                'guests.name as guest_name',
+                'guests.slug as guest_slug',
+                'guests.image as guest_image'
+            )
+            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->where('news.is_active', true)
+            ->whereNull('news.deleted_at')
+            ->orderByDesc('publish_date')
+            ->where('is_anchor', false)
+            ->where('is_special', false)
+            ->where('news.id', '<>', $notEqualTo)
+            ->first();
+        return array_merge($bestNews, $partialBestNews);
+
+    }
+
+    public function getBestNewsPartials($notEqualTo)
+    {
+        return DB::table('news')
+            ->select('news.title',
+                'news.id',
+                'news.sub_title',
+                'news.short_description',
+                'news.id as news_slug',
+                'news.publish_date',
+                'news.image',
+                'news.date_line',
+                'news.image_description',
+                'news.image_alt',
+                'reporters.image as reporter_image',
+                'reporters.name as reporter_name',
+                'reporters.slug as reporter_slug',
+                'guests.slug as guest_slug',
+                'guests.name as guest_name',
+                'guests.image as guest_image'
+            )
+            ->selectRaw('(SELECT distinct (news.id)) as news_id')
+            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->orderByDesc('news.publish_date')
+            ->where('news.is_active', true)
+            ->whereNotNull('news.deleted_at')
+            ->where('news.is_special', true)
+            ->orWhere('news.is_anchor', true)
+            ->orderByDesc('news.publish_date')
+            ->where('news.id', '<>', $notEqualTo)
+            ->get()
+            ->take(2)
+            ->toArray();
+    }
 
     public function newsByAuthor($author_type, $author_slug)
     {
@@ -156,11 +231,6 @@ class NewsController extends Controller
             Log::error($exception->getMessage() . '-' . $exception->getTraceAsString());
             return redirect()->back();
         }
-
-    }
-
-    public function bestThreeNews()
-    {
 
     }
 

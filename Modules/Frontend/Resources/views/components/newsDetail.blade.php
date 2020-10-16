@@ -1,4 +1,16 @@
 @extends('frontend::layouts.master')
+@push('meta')
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
+    <meta property="og:title" content="{{$news->title}}"/>
+    <meta property="og:image" content="{{$news->image}}"/>
+    <meta property="og:description" content="{{$news->short_description}}"/>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
+    <meta name="twitter:title" content="{{$news->title}}"/>
+    <meta name="twitter:image:src" content="{{$news->image}}"/>
+    <meta name="twitter:description" content="{{$news->short_description}}"/>
+@endpush
 @section('content')
     <section class="page-body">
         <div class="container-fluid">
@@ -12,76 +24,58 @@
                                 {!! $news->sub_title !!}
                             </p>
                             <div class="row ">
-                                @if($news->reporter_name)
-                                    <div class="col-6 col-md-6 col-lg-6 ">
-                                        <div class="circular--portrait float-left">
-                                            <img
-                                                src="{{ ($news->reporter_image ? $news->reporter_image: asset('/frontend/img/logo.png'))}}"
-                                                alt="{{$news->image_alt}}"
-                                                title="{{$news->sub_description}}"
-                                                class="responsive-img">
-
-                                        </div>
-                                        @if($news->reporter_slug)
-                                            <a  class="py-2 px-2" href="{{route($routePrefix.'news.by.author',
+                                <div class="col-6 col-md-6 col-lg-6 py-2 px-2 ">
+                                    @if($news->guest_name)
+                                        <a class="text-center py-2"
+                                           href="{{route($routePrefix.'news.by.author',['guests',$news->guest_slug])}}">
+                                            <div class="circular--portrait float-left">
+                                                <img
+                                                    src="{{$news->guest_image ?$news->guest_image:
+                                                     asset('/frontend/img/logo.png')}}"
+                                                    alt="{{$news->guest_name}}"
+                                                    title="{{$news->reporter_name}}"
+                                                    class="responsive-img">
+                                            </div>
+                                            &nbsp; <span>
+                                                    {{$news->guest_name}}
+                                                </span>
+                                        </a>
+                                    @elseif($news->reporter_name)
+                                        <a class="text-center py-2" href="{{route($routePrefix.'news.by.author',
                                                 ['reporter',$news->reporter_slug])}}">
-                                                <nobr>
-                                                    <i class="fa fa-user blus"></i>
-                                                    &nbsp;{{$news->reporter_name}}
-                                                </nobr>
-                                            </a>
-                                        @endif
-                                    </div>
-                                @endif
-                                @if($news->guest_name)
-                                    <div class="col-6 col-md-6 col-lg-6 ">
-                                        <div class="circular--portrait float-left">
-                                            <img
-                                                src="{{$news->guest_image ?$news->guest_image:
-                                                  asset('/frontend/img/logo.png')}}"
-                                                alt="{{$news->image_alt}}"
-                                                title="{{$news->sub_description}}"
-                                                class="responsive-img">
-                                        </div>
-                                        @if($news->guest_slug)
-                                            <a class="py-2"
-                                               href="{{route($routePrefix.'news.by.author',['guests',$news->guest_slug])}}">
-                                                <nobr>
-                                                    <i class="fa fa-user blus"></i>
-                                                    &nbsp; {{$news->guest_name}}
-                                                </nobr>
-                                            </a>
-                                        @endif
-                                    </div>
-                                @endif
-                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                    <div class="col-md-4 text-left float-left">
-                                        @if($news->date_line)
-                                            <i class="fa fa-map-marker blus"></i>
-                                            {{$news->date_line}}
-                                        @endif
-                                    </div>
-                                    <div class="col-md-8 float-right">
-                                        <div class="sharethis-inline-share-buttons"></div>
-                                    </div>
-
+                                            <div class="circular--portrait float-left">
+                                                <img
+                                                    src="{{ ($news->reporter_image ? $news->reporter_image: asset('/frontend/img/logo.png'))}}"
+                                                    alt="{{$news->reporter_name}}"
+                                                    title="{{$news->reporter_name}}"
+                                                    class="responsive-img">
+                                            </div>
+                                            <span>
+                                                &nbsp;{{$news->reporter_name}}
+                                            </span>
+                                        </a>
+                                    @endif
+                                    @if($news->date_line)
+                                        -{{$news->date_line}}
+                                    @endif
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-md-6 col-6 col-sm-6 col-lg-6 float-right text-center py-2 px-2">
+                                    <div class="sharethis-inline-share-buttons"></div>
                                 </div>
                             </div>
                         </div>
                         @if($news->video_url)
-                            <div class="video-section user_detail_image">
+                            <div class="video-section user_detail_image ">
                                 {!! $news->video_url !!}
                             </div>
                         @else
-                            <div class="news-banner user_detail_image">
-                                @include('frontend::components.news.news-image',['figureClass'=>'bannerImg'])
+                            <div class="news-banner">
+                                <div class="user_detail_image">
+                                    @include('frontend::components.news.news-image',['figureClass'=>'bannerImg'])
+                                </div>
+
                                 @if($news->image_description)
-                                    <p class="float-right">
+                                    <p class="float-right" style="font-size: 14px;">
                                         {{$news->image_description}}
                                     </p>
                                 @elseif($news->image_alt)
@@ -128,6 +122,7 @@
                         </div>
                     </div>
 
+
                     {{--                    @include('frontend::components.tags-news')--}}
                     <div class="cmn-fw">
                         <div class="hr-c">
@@ -136,29 +131,30 @@
                         </div>
                     </div>
                     <!--ended horizontal wide banner ad-->
-                    {{--                    <div class="section-row">--}}
-                    {{--                        <div class="newsBlock type-4 recommendation">--}}
-                    {{--                            <div class="block-header gn-heading">--}}
-                    {{--                                <h2><a href="#">{{trans('messages.other_news')}}</a></h2>--}}
-                    {{--                            </div>--}}
-                    {{--                            <div class="block-body">--}}
-                    {{--                                <div class="row">--}}
-                    {{--                                    @foreach($sameCategoryNews->take(3) as $key=>$news)--}}
-                    {{--                                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left">--}}
-                    {{--                                            <div class="news-item recommendation-card">--}}
-                    {{--                                                @include('frontend::components.news.news-image' ,['imgClass'=>'card-img-top','figureClass'=>''])--}}
-                    {{--                                                <div class="news-content">--}}
-                    {{--                                                    @include('frontend::components.news.news-content')--}}
-                    {{--                                                    @include('frontend::components.news.news-author')--}}
-                    {{--                                                </div>--}}
-                    {{--                                            </div>--}}
-                    {{--                                        </div>--}}
-                    {{--                                    @endforeach--}}
-                    {{--                                </div>--}}
-                    {{--                            </div>--}}
-
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                    @if(count($customRecommendations))
+                        <div class="section-row">
+                            <div class="newsBlock type-4 recommendation">
+                                <div class="block-header gn-heading">
+                                    <h2>{{trans('messages.read_this_also')}}</h2>
+                                </div>
+                                <div class="block-body">
+                                    <div class="row">
+                                        @foreach($customRecommendations as $key=>$news)
+                                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 float-left">
+                                                <div class="news-item recommendation-card">
+                                                    @include('frontend::components.news.news-image' ,['imgClass'=>'card-img-top','figureClass'=>''])
+                                                    <div class="news-content">
+                                                        @include('frontend::components.news.news-content')
+                                                        @include('frontend::components.news.news-author')
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="section-row">
                         <div class="commentReview">
                             <div class="block-header">
@@ -207,23 +203,7 @@
         </div>
     </section>
 @endsection
-@push('meta')
-    {{--    <meta name="{{$news->title}}"--}}
-    {{--          content="{{$news->short_description}}"--}}
-    {{--          category--}}
-    {{--    />--}}
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
-    <meta property="og:title" content="{{$news->title}}"/>
-    <meta property="og:image" content="{{$news->image}}"/>
-    <meta property="og:description" content="{{$news->short_description}}"/>
-    {{--    <meta name="twitter:card" content="summary_large_image"/>--}}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
-    <meta name="twitter:title" content="{{$news->title}}"/>
-    <meta name="twitter:image:src" content="{{$news->image}}"/>
-    <meta name="twitter:description" content="{{$news->short_description}}"/>
-@endpush
+
 
 <style>
     .user_detail_image {

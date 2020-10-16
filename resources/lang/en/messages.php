@@ -20,5 +20,6 @@ return [
     'read_all' => 'Read All',
     'break' => 'Break',
     'home' => 'Home',
+    'read_this_also' => 'Read this also',
 
 ];
