@@ -43,11 +43,9 @@ class NewsController extends Controller
 
             }
             $news = $this->getNews($id);
-//            if ($news) {
-//                if ($news->is_active == 0)
-//                    return redirect()->back();
-//            } else
-//                return redirect()->back();
+            if (!$news) {
+                return redirect()->back();
+            }
             $tags = DB::table('tags')
                 ->select('name')
                 ->join('taggables', 'taggables.tag_id', '=', 'tags.tag_id')
@@ -56,7 +54,6 @@ class NewsController extends Controller
                 ->get();
             $category_slug = $news->category_slug;
             $customRecommendations = $this->bestThreeNews($id);
-//            dd($customRecommendations);
             $advertisements = $this->adsRepository->getAllAdvertisements('detail_page');
             if (!$category_slug) {
                 $category_slug = $this->newsRepository->getCategoryDoesntExitsInDetailPage();
