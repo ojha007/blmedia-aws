@@ -5,7 +5,6 @@ namespace Modules\Frontend\Repositories;
 
 
 use App\Repositories\Repository;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Modules\Backend\Entities\CategoryPositions;
@@ -196,32 +195,32 @@ class NewsRepository extends Repository
         $category = $column == 'is_special' ? trans('messages.bl_special') : trans('messages.anchor');
         $category_slug = $column == 'is_special' ? 'bl-special' : 'anchor';
 //        return Cache::remember($column . '_news', 45500, function () use ($column, $limit, $category, $category_slug) {
-            return DB::table('news')
-                ->select('news.title',
-                    'news.id as news_slug',
-                    'news.image as image',
-                    'news.' . $column,
-                    'news.publish_date',
-                    'news.short_description',
-                    'news.date_line',
-                    'news.sub_title',
-                    'reporters.image as reporter_image',
-                    'reporters.name as reporter_name',
-                    'reporters.slug as reporter_slug',
-                    'guests.name as guest_name',
-                    'guests.image as guest_image',
-                    'guests.slug as guest_slug',
-                    'news.image_alt',
-                    'news.image_description')
-                ->selectRaw("'$category' as categories")
-                ->selectRaw("'$category_slug' as category_slug")
-                ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
-                ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
-                ->where('news.is_active', true)
-                ->where('news.' . $column, '=', 1)
-                ->orderByDesc('news.publish_date')
-                ->limit($limit)
-                ->get();
+        return DB::table('news')
+            ->select('news.title',
+                'news.id as news_slug',
+                'news.image as image',
+                'news.' . $column,
+                'news.publish_date',
+                'news.short_description',
+                'news.date_line',
+                'news.sub_title',
+                'reporters.image as reporter_image',
+                'reporters.name as reporter_name',
+                'reporters.slug as reporter_slug',
+                'guests.name as guest_name',
+                'guests.image as guest_image',
+                'guests.slug as guest_slug',
+                'news.image_alt',
+                'news.image_description')
+            ->selectRaw("'$category' as categories")
+            ->selectRaw("'$category_slug' as category_slug")
+            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->where('news.is_active', true)
+            ->where('news.' . $column, '=', 1)
+            ->orderByDesc('news.publish_date')
+            ->limit($limit)
+            ->get();
 //        });
     }
 
@@ -349,12 +348,12 @@ class NewsRepository extends Repository
         $category_name = trans('messages.news');
         $category_slug = 'news';
         $segment = request()->segment(1);
-        $mixCategorySlug = [33, 3, 6, 13, 23, 36, 37, 38];
+        $mixCategoryId = [33, 3, 6, 13, 23, 36, 37, 38];
         if ($segment == 'nepali') {
-            $mixCategorySlug = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
+            $mixCategoryId = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
         }
         if ($segment == 'hindi') {
-            $mixCategorySlug = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
+            $mixCategoryId = [2, 35, 60, 23, 62, 38, 33, 13, 65,];
         }
         if ($category->slug == 'news') {
             return DB::table('news')
@@ -378,7 +377,7 @@ class NewsRepository extends Repository
                 ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
                 ->join('news_categories', 'news_categories.news_id', '=', 'news.id')
                 ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                ->whereIn('categories.id', $mixCategorySlug)
+                ->whereIn('categories.id', $mixCategoryId)
 //                ->where('categories.slug', $category_slug)
                 ->where('news.is_active', '=', 1)
                 ->whereNull('news.deleted_at')
@@ -394,6 +393,7 @@ class NewsRepository extends Repository
 
     public function getTrendingNews($limit)
     {
+//        dd(array_key_first($options),$options);
         $trending = trans('messages.trending');
         $slug = 'trending';
         return DB::table('news')
@@ -417,7 +417,6 @@ class NewsRepository extends Repository
                 'news.id as news_slug',
                 'news.image',
                 'news.view_count',
-                'news.image_description',
                 'news.image_alt'
             )
             ->selectRaw("'$trending' as categories")
@@ -425,11 +424,13 @@ class NewsRepository extends Repository
             ->selectRaw("'0' as is_video")
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
-            ->where('news.is_active', true)
+            ->where('news.is_active', '=', true)
             ->whereNull('news.deleted_at')
+            ->orderByDesc('news.view_count')
             ->orderByDesc('news.publish_date')
-            ->orderByDesc('view_count')
             ->paginate($limit);
+
+
     }
 
     protected function childNewsToParent()

@@ -30,7 +30,7 @@
                 </li>
                 <li>
                     @if($news->date_line)
-                        <i class="fa fa-map-marker blus"></i>
+                       ,
                         {{$news->date_line}}
                     @endif
                 </li>
