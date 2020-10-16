@@ -195,7 +195,7 @@ class NewsRepository extends Repository
     {
         $category = $column == 'is_special' ? trans('messages.bl_special') : trans('messages.anchor');
         $category_slug = $column == 'is_special' ? 'bl-special' : 'anchor';
-        return Cache::remember($column . '_news', 45500, function () use ($column, $limit, $category, $category_slug) {
+//        return Cache::remember($column . '_news', 45500, function () use ($column, $limit, $category, $category_slug) {
             return DB::table('news')
                 ->select('news.title',
                     'news.id as news_slug',
@@ -222,7 +222,7 @@ class NewsRepository extends Repository
                 ->orderByDesc('news.publish_date')
                 ->limit($limit)
                 ->get();
-        });
+//        });
     }
 
     public function getCacheNews(int $position, $placement, $limit, $cacheName)
