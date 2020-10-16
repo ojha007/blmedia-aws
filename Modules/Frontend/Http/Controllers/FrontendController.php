@@ -99,7 +99,7 @@ class FrontendController extends Controller
 //        $ip = "43.245.87.255";
         $ip = request()->ip();
         $data = null;
-//        $data = \Location::get($ip);
+        $data = \Location::get($ip);
         if ($data) {
             if ($data->countryName == 'Nepal') {
                 return 'Nepal';
