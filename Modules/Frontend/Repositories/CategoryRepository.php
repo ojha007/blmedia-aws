@@ -73,7 +73,7 @@ class CategoryRepository extends Repository
 
         $slug = is_array($slug) ? $slug : [$slug];
         return DB::table('news')
-            ->selectRaw('SELECT distinct news.id')
+//            ->selectRaw('SELECT distinct news.id')
             ->select('news.title',
                 'news.description',
                 'news.id as news_slug',
@@ -96,11 +96,11 @@ class CategoryRepository extends Repository
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->whereIn('categories.slug', $slug)
-            ->orderBy('news.created_at', 'DESC')
+//            ->orderBy('news.created_at', 'DESC')
             ->where('news.is_active', '=', 1)
             ->whereNull('news.deleted_at')
-            ->where('news.slug', '!=', $except)
-            ->inRandomOrder('news.id')
+            ->where('news.id', '!=', $except)
+//            ->inRandomOrder('news.id')
             ->orderByDesc('news.id')
             ->groupBy('news.id')
             ->limit($limit)
