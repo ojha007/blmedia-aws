@@ -55,8 +55,8 @@ class FrontendController extends Controller
         $advertisements = $this->adsRepository->getAllAdvertisements('main_page');
         $anchorNews = $newsRepo->getCacheNewsByExtraColumn('is_anchor', 5);
         $blSpecialNews = $newsRepo->getCacheNewsByExtraColumn('is_special', 5);
-//        $trendingNews = [];
-        $trendingNews = $newsRepo->getTrendingNews(5);
+        $trendingNews = [];
+//        $trendingNews = $newsRepo->getTrendingNews(5);
         $firstPositionNews = $newsRepo->getCacheNews(1, CategoryPositions::FRONT_BODY_POSITION, 9, 'firstPositionNews');
         $fourthPositionNews = $newsRepo->getCacheNews(4, CategoryPositions::FRONT_BODY_POSITION, 5, 'fourthPositionNews');
         $fifthPositionNews = $newsRepo->getCacheNews(5, CategoryPositions::FRONT_BODY_POSITION, 5, 'fifthPositionNews');
