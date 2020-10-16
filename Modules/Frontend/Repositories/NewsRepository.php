@@ -379,7 +379,7 @@ class NewsRepository extends Repository
                 $a->orWhereIn('categories.id', $childCategories);
             })
             ->orderByDesc('publish_date')
-            ->distinct(true)
+//            ->distinct(true)
             ->limit($limit)
             ->get();
     }
