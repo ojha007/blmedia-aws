@@ -60,7 +60,7 @@ class NewsRepository extends Repository
     {
 
         return DB::table('news')
-            ->selectRaw('SELECT DISTINCT (news.slug) ')
+//            ->selectRaw('SELECT DISTINCT (news.slug) ')
             ->select('news.title',
                 'news.sub_title',
                 'news.short_description',
