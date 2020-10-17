@@ -4,24 +4,25 @@
         <section class="page-body">
             <div class="container-fluid">
                 <section class="cmn-section">
-                    <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 float-left">
-                        <div class="block-header gn-heading">
-                            {{--                            @if($newsByAuthor->first()->reporter_name )--}}
-                            {{--                                <h2>--}}
-                            {{--                                    {{$newsByAuthor->first()->reporter_name}}--}}
-                            {{--                                </h2>--}}
-                            {{--                            @elseif($newsByAuthor->first()->guest_name)--}}
-                            {{--                                <h2>--}}
-                            {{--                                    {{$newsByAuthor->first()->guest_name}}--}}
-                            {{--                                </h2>--}}
-                            {{--                            @endif--}}
-                        </div>
-                        @isset($newsByAuthor)
-                            @if(is_array($newsByAuthor) && count($newsByAuthor))
+                    @isset($newsByAuthor)
+                        @if(count($newsByAuthor))
+                            <div class="col-sm-12 col-md-8 col-lg-9 col-xl-9 float-left">
+                                <div class="block-header gn-heading">
+                                    @if($newsByAuthor->first()->reporter_name )
+                                        <h2>
+                                            {{$newsByAuthor->first()->reporter_name}}
+                                        </h2>
+                                    @elseif($newsByAuthor->first()->guest_name)
+                                        <h2>
+                                            {{$newsByAuthor->first()->guest_name}}
+                                        </h2>
+                                    @endif
+                                </div>
                                 @include('frontend::components.no-childCategory',['newsByCategory'=>$newsByAuthor])
-                            @endif
+
+                            </div>
                         @endif
-                    </div>
+                    @endif
                     <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 float-right">
                         @include('frontend::components.news.news-template',
                                   [
