@@ -35,17 +35,16 @@ class NewsController extends Controller
 
         try {
             if ($id) {
-                if (is_int($id)) {
+                try {
                     DB::table('news')
                         ->where('id', $id)
                         ->increment('view_count', 100);
+                } catch (\Exception $exception) {
+                    Log::error($exception->getTraceAsString() . '-' . $exception->getMessage());
                 }
 
             }
             $news = $this->getNews($id);
-//            if (!$news) {
-//                return redirect()->back();
-//            }
             $tags = DB::table('tags')
                 ->select('name')
                 ->join('taggables', 'taggables.tag_id', '=', 'tags.tag_id')
@@ -115,41 +114,6 @@ class NewsController extends Controller
 
     }
 
-    public function getBestNewsPartials($notEqualTo)
-    {
-        return DB::table('news')
-            ->select('news.title',
-                'news.id',
-                'news.sub_title',
-                'news.short_description',
-                'news.id as news_slug',
-                'news.publish_date',
-                'news.image',
-                'news.date_line',
-                'news.image_description',
-                'news.image_alt',
-                'reporters.image as reporter_image',
-                'reporters.name as reporter_name',
-                'reporters.slug as reporter_slug',
-                'guests.slug as guest_slug',
-                'guests.name as guest_name',
-                'guests.image as guest_image'
-            )
-            ->selectRaw('(SELECT distinct (news.id)) as news_id')
-            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
-            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
-            ->orderByDesc('news.publish_date')
-            ->where('news.is_active', true)
-            ->whereNotNull('news.deleted_at')
-            ->where('news.is_special', true)
-            ->orWhere('news.is_anchor', true)
-            ->orderByDesc('news.publish_date')
-            ->where('news.id', '<>', $notEqualTo)
-            ->get()
-            ->take(2)
-            ->toArray();
-    }
-
     public function bestThreeNews($notEqualTo)
     {
         $partialBestNews = $this->getBestNewsPartials($notEqualTo);
@@ -187,6 +151,41 @@ class NewsController extends Controller
             ->first();
         return array_merge($bestNews, $partialBestNews);
 
+    }
+
+    public function getBestNewsPartials($notEqualTo)
+    {
+        return DB::table('news')
+            ->select('news.title',
+                'news.id',
+                'news.sub_title',
+                'news.short_description',
+                'news.id as news_slug',
+                'news.publish_date',
+                'news.image',
+                'news.date_line',
+                'news.image_description',
+                'news.image_alt',
+                'reporters.image as reporter_image',
+                'reporters.name as reporter_name',
+                'reporters.slug as reporter_slug',
+                'guests.slug as guest_slug',
+                'guests.name as guest_name',
+                'guests.image as guest_image'
+            )
+            ->selectRaw('(SELECT distinct (news.id)) as news_id')
+            ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
+            ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
+            ->orderByDesc('news.publish_date')
+            ->where('news.is_active', true)
+            ->whereNotNull('news.deleted_at')
+            ->where('news.is_special', true)
+            ->orWhere('news.is_anchor', true)
+            ->orderByDesc('news.publish_date')
+            ->where('news.id', '<>', $notEqualTo)
+            ->get()
+            ->take(2)
+            ->toArray();
     }
 
     public function newsByAuthor($author_type, $author_slug)
