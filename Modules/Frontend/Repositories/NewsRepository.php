@@ -258,7 +258,7 @@ class NewsRepository extends Repository
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->where('news.is_active', '=', true)
             ->whereNull('news.deleted_at')
-            ->orderByDesc('news.publish_date')
+//            ->orderByDesc('news.publish_date')
             ->orderByDesc('news.view_count')
             ->paginate($limit);
 
