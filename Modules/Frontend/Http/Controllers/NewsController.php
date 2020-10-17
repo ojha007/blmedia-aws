@@ -51,7 +51,12 @@ class NewsController extends Controller
                 ->join('news', 'news.id', 'taggables.taggable_id')
                 ->where('news.id', $id)
                 ->get();
-            $category_slug = $news->category_slug;
+            $category_slug = null;
+//            dd(property_exists($news, 'category_slug'));
+            if (property_exists($news, 'category_slug')) {
+                $category_slug = $news->category_slug;
+            }
+
             $customRecommendations = $this->bestThreeNews($id);
             $advertisements = $this->adsRepository->getAllAdvertisements('detail_page');
 //            $advertisements = [];
