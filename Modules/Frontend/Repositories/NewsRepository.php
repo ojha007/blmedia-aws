@@ -226,7 +226,6 @@ class NewsRepository extends Repository
 
     public function getTrendingNews($limit)
     {
-//        dd(array_key_first($options),$options);
         $trending = trans('messages.trending');
         $slug = 'trending';
         return DB::table('news')
