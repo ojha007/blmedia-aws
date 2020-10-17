@@ -192,8 +192,8 @@ class NewsRepository extends Repository
 
     public function getCacheNewsByExtraColumn($column, $limit)
     {
-        $category = $column == 'is_special' ? trans('messages.bl_special') : trans('messages.anchor');
-        $category_slug = $column == 'is_special' ? 'bl-special' : 'anchor';
+        $category = ($column == 'is_special' ? trans('messages.bl_special') : trans('messages.anchor'));
+        $category_slug = ($column == 'is_special' ? 'bl-special' : 'anchor');
 //        return Cache::remember($column . '_news', 45500, function () use ($column, $limit, $category, $category_slug) {
         return DB::table('news')
             ->select('news.title',

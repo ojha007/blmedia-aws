@@ -1,5 +1,5 @@
 @isset($allNews)
-    @if( is_array($allNews) && count($allNews) )
+    @if(count($allNews) )
         @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above',
                              'sub_for'=>$allNews->first()->category_slug
                              ])
