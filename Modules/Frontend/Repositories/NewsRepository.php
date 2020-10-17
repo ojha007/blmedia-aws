@@ -214,11 +214,14 @@ class NewsRepository extends Repository
                 'news.image_description')
             ->selectRaw("'$category' as categories")
             ->selectRaw("'$category_slug' as category_slug")
+            ->selectRaw('(SELECT DISTINCT (news.id))')
             ->leftJoin('guests', 'news.guest_id', '=', 'guests.id')
             ->leftJoin('reporters', 'news.reporter_id', '=', 'reporters.id')
             ->where('news.is_active', true)
+            ->whereNull('news.deleted_at')
             ->where('news.' . $column, '=', 1)
             ->orderByDesc('news.publish_date')
+            ->distinct(true)
             ->limit($limit)
             ->get();
 //        });
