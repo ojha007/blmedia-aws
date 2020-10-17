@@ -53,7 +53,7 @@ class NewsController extends Controller
                 ->where('news.id', $id)
                 ->get();
             $category_slug = $news->category_slug;
-            $customRecommendations = $this->getBestNewsPartials($id);
+            $customRecommendations = $this->bestThreeNews($id);
             $advertisements = $this->adsRepository->getAllAdvertisements('detail_page');
 //            $advertisements = [];
             if (!$category_slug) {
