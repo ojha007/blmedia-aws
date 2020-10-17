@@ -37,6 +37,18 @@
 @include('frontend::partials.footer')
 {{--    Close Footer--}}
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135460811-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-135460811-2');
+</script>
 </body>
 @include('frontend::partials.script')
 @stack('scripts')
