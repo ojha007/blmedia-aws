@@ -3,6 +3,10 @@
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
     <meta property="og:title" content="{{$news->title}}"/>
+    <meta content="{{$news->title}}"/>
+    <meta name="title" content="{{$news->title}}">
+    <meta name="description" content="{{$news->short_description}}">
+    {{--    <meta name="keywords" content="Media for all across the globe">--}}
     <meta property="og:image" content="{{$news->image}}"/>
     <meta property="og:description" content="{{$news->short_description}}"/>
     <meta name="twitter:card" content="summary_large_image">
