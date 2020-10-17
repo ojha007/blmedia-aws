@@ -34,16 +34,16 @@ class NewsController extends Controller
     {
 
         try {
-            if ($id) {
-                try {
-                    DB::table('news')
-                        ->where('id', $id)
-                        ->increment('view_count', 100);
-                } catch (\Exception $exception) {
-                    Log::error($exception->getTraceAsString() . '-' . $exception->getMessage());
-                }
+//            if ($id) {
+//                try {
+//                    DB::table('news')
+//                        ->where('id', $id)
+//                        ->increment('view_count', 100);
+//                } catch (\Exception $exception) {
+//                    Log::error($exception->getTraceAsString() . '-' . $exception->getMessage());
+//                }
 
-            }
+//            }
             $news = $this->getNews($id);
             $tags = DB::table('tags')
                 ->select('name')
