@@ -1,4 +1,3 @@
-
 @media only screen and (max-width: 768px) {
     .card.front_body_position_1 .card-block .card .card-body, .card.front_body_position_2 .card-block .card .card-body, .card.front_body_position_3 .card-block .card .card-body,
     .card.front_body_position_4 .card-block .card .card-body, .card.front_body_position_5 .card-block .card .card-body, .card.front_body_position_6 .card-block .card .card-body,
@@ -6,28 +5,32 @@
     .card.front_body_position_10 .card-block .card .card-body, .card.front_body_position_11 .card-block .card .card-body, .card.front_body_position_12 .card-block .card .card-body,
     .card.front_body_position_13 .card-block .card .card-body, .card.front_body_position_14 .card-block .card .card-body, .card.front_body_position_15 .card-block .card .card-body,
     .card.detail_body_position_1 .card-block .card .card-body, .card.detail_body_position_2 .card-block .card .card-body, .card.detail_body_position_3 .card-block .card .card-body,
-    .card.news-by-category .card-block .card .card-body
-    {
+    .card.news-by-category .card-block .card .card-body {
         padding-top: 0;
         padding-bottom: 0;
-        padding-left: 0!important;
+        padding-left: 0 !important;
         padding-right: 0;
     }
+
     .rounded-img {
         max-height: 95px;
         max-width: 95px;
-        height: 95px!important;
-        width: 95px!important;
+        height: 95px !important;
+        width: 95px !important;
     }
-    .header-top{
+
+    .header-top {
         display: none;
     }
-    .mobile-header-top{
-        display: block!important;
+
+    .mobile-header-top {
+        display: block !important;
     }
+
     .brand-logo img {
-        height: 40px!important;
+        height: 40px !important;
     }
+
     li.page-item {
 
         display: none;
@@ -41,17 +44,19 @@
     .page-item.disabled {
         display: block;
     }
+
     .page-item .page-link {
         padding: 5px;
         font-size: 13px;
     }
+
     .pagination-part nav ul.pagination {
         justify-content: center;
     }
+
     .footer-pad {
         text-align: center;
+        margin-bottom: 15px;
     }
-.footer-pad ul.social-network {
-    margin-bottom: 30px;
-}
+
 }
