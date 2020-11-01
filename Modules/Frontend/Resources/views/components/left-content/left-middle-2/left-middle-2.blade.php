@@ -34,10 +34,10 @@
                         @if($key == 0)
                             <div class="card mb-3">
                                 <div class="row no-gutters">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-6">
                                         <div class="card-body">
                                             @include('frontend::components.news.news-title')
                                             @include('frontend::components.news.news-author')
@@ -52,13 +52,7 @@
                         @foreach($sixthPositionNews as $key=>$news)
                             @if($key !=0)
                                 <div class="col-sm-12 col-md-4 ">
-                                    <div class="card mb-3 ">
-                                        @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
-                                        <div class="card-body">
-                                            @include('frontend::components.news.news-title')
-                                            @include('frontend::components.news.news-author')
-                                        </div>
-                                    </div>
+                                    @include('frontend::components.news.vertical-card', ['verticalClass' => 'vertical-card'])
                                 </div>
                             @endif
                         @endforeach

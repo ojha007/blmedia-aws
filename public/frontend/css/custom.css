@@ -13,6 +13,73 @@ body {
 }
 
 /*.............................custom design......................................*/
+.form-control:focus, .btn:focus {
+    border-color: #FF5E14;
+    box-shadow: 0 0 0 0.2rem rgba(255,94,20,0.3);
+}
+.brand-logo img {
+    height: 60px;
+}
+.user-info {
+    line-height: 5px;
+}
+.user-info .user-image {
+    display: inline-block; width: 50px; height: auto;
+}
+.user-info .user-detail {
+    display: inline-block;
+    padding-left: 10px;
+}
+.user-info .user-detail p{
+    margin-bottom: 10px;
+}
+.user-info .user-detail p a{
+    color: black;
+    text-decoration: none;
+}
+.user-info .user-detail p a:hover{
+    color: #FF5E14;
+}
+
+/* owl nav */
+.owl-prev span, .owl-next span {
+    color: #FF5E14;
+    font-size:20px;
+}
+
+.owl-prev span:hover,
+.owl-next span:hover {
+    color: black;
+}
+
+.owl-prev, .owl-next {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.owl-prev {
+    left: 7px;
+}
+
+.owl-next {
+    right: 7px;
+}
+
+/* removing blue outline from buttons */
+button:focus, button:active {
+    outline: none;
+}
+.recommendation-card:hover{
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 6px -6px #777;
+    cursor: pointer;
+    padding: 5px;
+}
+.bl-special-background-color {
+    background-color: rgba(255,94,20,0.3);
+}
 .rounded-img {
     max-height: 110px;
     max-width: 110px;
@@ -191,8 +258,14 @@ body {
     background-color: #FF5E14; /* Set a background color */
     color: white; /* Text color */
     cursor: pointer; /* Add a mouse pointer on hover */
-    padding: 15px; /* Some padding */
+    padding: 10px; /* Some padding */
     font-size: 18px; /* Increase font size */
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: position 10s;
+    -ms-transition: position 10s;
+    -o-transition: position 10s;
+    transition: all 0.5s ease;
+    animation: smoothScroll 1s forwards;
 }
 
 #scrollTop:hover {
@@ -202,6 +275,47 @@ body {
 
 /*end custom design*/
 /*.................................header part css..............................*/
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    background-color: white;
+    box-shadow: 0 8px 6px -10px black;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: position 10s;
+    -ms-transition: position 10s;
+    -o-transition: position 10s;
+    transition: all 0.5s ease;
+    animation: smoothScroll 1s forwards;
+}
+@keyframes smoothScroll {
+    0% {
+        transform: translateY(-40px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+.sticky-navbar .navbar .navbar-nav .nav-item.home-site-logo img {
+    height: 30px;
+    width: 40px;
+}
+.sticky-navbar .navbar .navbar-nav .nav-item.home-site-logo .navbar-brand-img-logo {
+    padding: 8px 8px 8px 0;
+}
+.sticky-navbar .navbar .navbar-nav .nav-item.home-site-logo {
+    display: none;
+}
+
+.sticky-navbar.fixed-header .navbar .navbar-nav .nav-item.home-site-logo {
+    display: block;
+}
+.sticky-navbar.fixed-header .navbar .navbar-nav .nav-item.home {
+    display: none!important;
+}
+
 .header-top-section .header-top {
     background-color: #FF5E14;
 }
@@ -209,15 +323,13 @@ body {
 .header-top-section .navbar .navbar-nav .nav-link {
     color: white;
 }
-
+.header-top-section .navbar .navbar-nav .nav-link:hover {
+    color: black;
+}
 .header-top-section .navbar .navbar-brand {
     background-color: white;
     padding: 5px 2rem;
     font-weight: 600;
-}
-
-.header-mid-section {
-
 }
 
 .header-end-section .navbar {
@@ -228,10 +340,13 @@ body {
     color: black;
 }
 
-.header-end-section .social-unicode .nav-item .nav-link {
-    color: black;
+.header-end-section .social-unicode .nav .nav-item .nav-link {
+    color:#FF5E14;
     padding-left: 5px;
     padding-right: 5px;
+}
+.header-end-section .social-unicode .nav .nav-item .nav-link:hover {
+    color: black;
 }
 
 .header-end-section .social-unicode .nav {
@@ -257,12 +372,35 @@ body {
 .card.front_body_position_10 .card-block .card .card-body, .card.front_body_position_11 .card-block .card .card-body, .card.front_body_position_12 .card-block .card .card-body,
 .card.front_body_position_13 .card-block .card .card-body, .card.front_body_position_14 .card-block .card .card-body, .card.front_body_position_15 .card-block .card .card-body,
 .card.detail_body_position_1 .card-block .card .card-body, .card.detail_body_position_2 .card-block .card .card-body, .card.detail_body_position_3 .card-block .card .card-body,
-.card.news-by-category .card-block .card .card-body
+.card.news-by-category .card-block .card .card-body,
+.card.recommendation .card-block .card.recommendation-card .card-body, .card.sub-recommendation .card-block .card.recommendation-card .card-body
 {
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 13px;
     padding-right: 0;
+}
+
+.card.front_body_position_1 .card-block .card.featured-card .card-body, .card.front_body_position_2 .card-block .card.featured-card .card-body, .card.front_body_position_3 .card-block .card.featured-card .card-body,
+.card.front_body_position_4 .card-block .card.featured-card .card-body, .card.front_body_position_5 .card-block .card.featured-card .card-body, .card.front_body_position_6 .card-block .card.featured-card .card-body,
+.card.front_body_position_7 .card-block .card.featured-card .card-body, .card.front_body_position_8 .card-block .card.featured-card .card-body, .card.front_body_position_9 .card-block .card.featured-card .card-body,
+.card.front_body_position_10 .card-block .card.featured-card .card-body, .card.front_body_position_11 .card-block .card.featured-card .card-body, .card.front_body_position_12 .card-block .card.featured-card .card-body,
+.card.front_body_position_13 .card-block .card.featured-card .card-body, .card.front_body_position_14 .card-block .card.featured-card .card-body, .card.front_body_position_15 .card-block .card.featured-card .card-body,
+.card.detail_body_position_1 .card-block .card.featured-card .card-body, .card.detail_body_position_2 .card-block .card.featured-card .card-body, .card.detail_body_position_3 .card-block .card.featured-card .card-body,
+
+.card.front_body_position_1 .card-block .card.vertical-card .card-body, .card.front_body_position_2 .card-block .card.vertical-card .card-body, .card.front_body_position_3 .card-block .card.vertical-card .card-body,
+.card.front_body_position_4 .card-block .card.vertical-card .card-body, .card.front_body_position_5 .card-block .card.vertical-card .card-body, .card.front_body_position_6 .card-block .card.vertical-card .card-body,
+.card.front_body_position_7 .card-block .card.vertical-card .card-body, .card.front_body_position_8 .card-block .card.vertical-card .card-body, .card.front_body_position_9 .card-block .card.vertical-card .card-body,
+.card.front_body_position_10 .card-block .card.vertical-card .card-body, .card.front_body_position_11 .card-block .card.vertical-card .card-body, .card.front_body_position_12 .card-block .card.vertical-card .card-body,
+.card.front_body_position_13 .card-block .card.vertical-card .card-body, .card.front_body_position_14 .card-block .card.vertical-card .card-body, .card.front_body_position_15 .card-block .card.vertical-card .card-body,
+
+.card.news-by-category .card-block .card.with-child-category .card-block .card.featured-card .card-body,
+.card.news-by-category .card-block .card.with-child-category .card-block .card.vertical-card .card-body,
+
+.card.recommendation .card-block .card.recommendation-card .card-body, .card.sub-recommendation .card-block .card.recommendation-card .card-body
+{
+    padding-top: 13px;
+    padding-left: 0;
 }
 
 .card.front_body_position_1 .news-title, .card.front_body_position_2 .news-title, .card.front_body_position_3 .news-title,
@@ -349,6 +487,7 @@ body {
 
 /*end main content css*/
 /*.....................................footer part css...................................*/
+
 footer {
     background: #FF5E14;
     background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
@@ -644,27 +783,6 @@ ul.social-network li {
     border: 1px solid #ddd; /* Gray border */
     padding: 10px; /* Some padding */
 }
-
-/*.recommendation-card {
-    margin: 15px 0;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
-    padding: 6px !important;
-}
-
-.recommendation-card:hover {
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.14);
-}
-
-.recommendation-card figure {
-    height: 200px !important;
-    !*background-color: black;*!
-    !*padding: 10px;*!
-    overflow: hidden;
-}
-
-.recommendation-card img {
-    height: 100%;
-}*/
 
 .custom-tag {
     border-radius: 35px;

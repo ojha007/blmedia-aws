@@ -2,9 +2,9 @@
     @if(count($allNews))
         <div class="card border-primary mb-3 {{ $positionClass ?? '' }}">
             @include('frontend::components.card-header',['header'=>$allNews])
-            <div class="card-block">
+            <div class="card-block {{ $blSpecialBackgroundClass ?? '' }}">
                 @foreach($allNews as $news)
-                    <div class="card mb-3">
+                    <div class="card mb-3 bg-transparent">
                         <div class="row no-gutters">
                             <div class="col-md-6">
                                 @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])

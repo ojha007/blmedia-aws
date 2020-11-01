@@ -24,14 +24,8 @@
                 <div class="row row-card">
                     @foreach($thirteenPositionNews as $key=>$news)
                         @if($key >0)
-                            <div class="col-sm-12 col-md-4">
-                                <div class="card my-3">
-                                    @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
-                                    <div class="card-body">
-                                        @include('frontend::components.news.news-title')
-                                        @include('frontend::components.news.news-author')
-                                    </div>
-                                </div>
+                            <div class="col-sm-12 col-md-4 my-4">
+                                @include('frontend::components.news.vertical-card', ['verticalClass' => 'vertical-card'])
                             </div>
                         @endif
                     @endforeach

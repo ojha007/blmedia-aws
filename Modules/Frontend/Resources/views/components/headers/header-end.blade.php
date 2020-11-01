@@ -1,21 +1,39 @@
 <section class=" header-end-section ">
-    <div class="offset-lg-1 col-lg-10 ">
+    <div class="col-12 col-sm-12 offset-lg-1 col-lg-10 sticky-navbar">
         <div class="row">
-            <div class="col-lg-10">
-                <nav class="navbar navbar-expand-lg navbar-light px-0" >
-                    {{--        <a class="navbar-brand" href="#">Navbar</a>--}}
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
+            <div class="col-12 col-sm-12 col-md-10 col-lg-10 bg-white">
+                <nav class="navbar navbar-expand-lg navbar-light  px-0 ">
+                    <div class="d-block d-sm-none col-12 col-sm-12">
+                      <div class="row">
+                          <div class="col-2 pl-0">
+                              <a href="{{route($routePrefix.'index')}}" class="btn bg-site-color text-white  btn-sm ">
+                                  <i class="fa fa-home"></i>
+                              </a>
+                          </div>
+                          <div class="col-8 px-0">
+                              <form>
+                                  <input class="form-control shadow-none" type="text" placeholder="Search...">
+                              </form>
+                          </div>
+                          <div class="col-2 ">
+                              <button class="navbar-toggler btn-sm btn " type="button" data-toggle="collapse"
+                                  data-target="#navbarSupportedContent"
+                                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                          </button>
+                          </div>
+                      </div>
+                    </div>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-
-                            <li class="nav-item">
-                                <a href="{{route($routePrefix.'index')}}" class="nav-link"><i
-                                            class="fa fa-home"></i> <span class="sr-only">Home</span>
+                        <ul class="navbar-nav text-center">
+                            <li class="nav-item home-site-logo" >
+                                <a class="nav-link navbar-brand-img-logo " href="{{route($routePrefix.'index')}}">
+                                    <img class="responsive-img" src="{{asset('frontend/img/logo.png')}}" alt="BL Media">
+                                </a>
+                            </li>
+                            <li class="nav-item d-none d-sm-block bg-site-color home">
+                                <a href="{{route($routePrefix.'index')}}" class="nav-link text-white "><i
+                                            class="fa fa-home fa-sm"></i> <span class="sr-only">Home</span>
                                 </a>
                             </li>
                             @foreach($headerCategories as $category)
@@ -26,7 +44,7 @@
                                                              )
                                                      ? 'active':''}}">
                                     <a href="{{route($routePrefix.'news-category.show',$category->slug)}}"
-                                       class="nav-link">
+                                       class="nav-link hover-site-color">
                                         {{$category->name}}
                                     </a>
                                 </li>
@@ -35,8 +53,8 @@
                     </div>
                 </nav>
             </div>
-            <div class="col-lg-2 social-unicode ">
-                <ul class="float-left nav">
+            <div class="col-12 col-lg-2 social-unicode col-sm-12 bg-white">
+                <ul class=" nav justify-content-center ">
                     <li class="nav-item">
                         <a href="https://www.facebook.com/breaknlinksnp/" target="_blank" class="nav-link">
                             <i class="fab fa-facebook-square"></i></a>
@@ -55,14 +73,18 @@
                            class="nav-link">
                             <i class="fab fa-youtube-square"></i></a>
                     </li>
-
-                    @if(request()->segment(1) == 'nepali')
+                    <li class="nav-item">
+                        <a href="{{route($routePrefix.'preeti-to-unicode')}}" target="_blank"
+                           class="nav-link"> |
+                            <i class="fa fa-keyboard"></i> युनिकोड</a>
+                    </li>
+                    {{--@if(request()->segment(1) == 'nepali')
                         <li class="nav-item">
                             <a href="{{route($routePrefix.'preeti-to-unicode')}}" target="_blank"
                                class="nav-link"> |
                                 <i class="fa fa-keyboard"></i> युनिकोड</a>
                         </li>
-                    @endif
+                    @endif--}}
                 </ul>
             </div>
         </div>

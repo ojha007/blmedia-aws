@@ -12,17 +12,36 @@
                             </p>
                         </div>
                         <div class="card-block">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="card">
+                            <div class="row mb-2">
+                                <div class="col-sm-12 col-md-4 user-info" >
+                                    <div class="user-image" >
+                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                                             class="card-img  rounded-circle" alt="..." >
+                                    </div>
+                                    <div class="user-detail" >
+                                        <p >
+                                        @if($news->reporter || $news->guest)
+                                            @php($author_type = $news->reporter ? 'reporters' : 'guests')
+                                            @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)
+                                            <a href="{{route($routePrefix.'news.by.author',[$author_type,$author_slug])}}" >
+                                                <span class="usr" style="font-size: 16px;
+                                                                      padding-bottom: 5px">
+                                                    {{ $news->reporter ? $news->reporter->name
+                                                     :( $news->guest ? $news->guest->name:'')  }}
+                                                    </span>
+                                            </a></p>
+                                        @endif
+                                        <p class="ext-muted"> <small><i class="fas fa-map-marker-alt pr-2"></i>{{$news->date_line ? $news->date_line : 'Location'}}</small></p>
+                                    </div>
+                                    {{--<div class="card profile-info">
                                         <div class="row no-gutters">
-                                            <div class="col-md-4 bg-success rounded-circle">
-                                                <img src="https://breaknlinks.s3.amazonaws.com/nepali/uploads/reporters/ba0f43bd4266c73277f38e448161e81bBarhakhari.jpg"
+                                            <div class="col-md-2 profile-img" >
+                                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                                      class="card-img  rounded-circle" alt="...">
                                             </div>
-                                            <div class="col-md-8">
-                                                <div class="card-block pt-0 pb-0 pr-0">
-                                                    <p class="card-text">
+                                            <div class="col-md-10">
+                                                <div class="card-block ">
+                                                    <p class="card-text mb-0">
                                                         @if($news->reporter || $news->guest)
                                                             @php($author_type = $news->reporter ? 'reporters' : 'guests')
                                                             @php($author_slug = $news->reporter ? $news->reporter->slug : $news->guest->slug)
@@ -43,9 +62,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
-                                <div class="col-sm-8 py-2">
+                                <div class="col-sm-12 col-md-4 py-2">
                                     <div class="sharethis-inline-share-buttons float-left"></div>
                                 </div>
                             </div>
@@ -72,7 +91,7 @@
                         </div>
                     </div>
                     <div class="card border-primary  mb-3 tag-collection">
-                        <div class="card-body">
+                        <div class="card-block">
                             <p class="card-text text-bold"><i
                                         class="fas fa-calendar-alt pr-2"></i>{{trans('messages.publish_on')}}&nbsp;
                                 {{\Carbon\Carbon::parse($news->publish_date)->toDateTimeString()}}</p>
@@ -92,19 +111,22 @@
                             </p>
                         </div>
                         <div class="card-block">
-                            <div class="row">
-                                @foreach($sameCategoryNews->take(4) as $key=>$news)
-                                    <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                                        <div class="card mb-3 recommendation-card">
-                                            @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
-                                            <div class="card-body">
-                                                @include('frontend::components.news.news-title')
-                                                @include('frontend::components.news.news-author')
+                            <div class="row ">
+                                <div class="col-12 col-carousel">
+                                    <div class="owl-carousel carousel-main">
+                                        @foreach($sameCategoryNews as $key=>$news)
+                                            <div class="card">
+                                                @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
+                                                <div class="card-body px-0">
+                                                    @include('frontend::components.news.news-title')
+                                                    @include('frontend::components.news.news-author')
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="card  border-primary  mb-3">
@@ -115,7 +137,7 @@
                                 </a>
                             </p>
                         </div>
-                        <div class="card-body py-5 my-3">
+                        <div class="card-block py-5 my-3">
                             <p class="card-text"> This is comment.</p>
                         </div>
                     </div>
@@ -125,7 +147,8 @@
                     @include('frontend::components.news.news-template',
                               [
                                   'allNews'=>$blSpecialNews,
-                                 'positionClass'=>'detail_body_position_1'
+                                 'positionClass'=>'detail_body_position_1',
+                                 'blSpecialBackgroundClass'=>'bl-special-background-color'
                                   ])
                     @include('frontend::components.news.news-template3',['allNews'=>$detailPageSecondPositionNews,  'positionClass'=>'detail_body_position_2'])
                     @include('frontend::components.news.news-template2',['allNews'=>$detailPageThirdPositionNews,  'positionClass'=>'detail_body_position_3'])
@@ -328,12 +351,36 @@
         </div>
     </section>--}}
         @endsection
-        {{--<div class="addthis_inline_share_toolbox"--}}
-        {{--     data-url="{{route($routePrefix.'news.show',$news->id)}}"--}}
-        {{--     data-title="{{$news->title}}"--}}
-        {{--     data-description="{{$news->title}}"--}}
-        {{--     data-media="{{$news->image}}"--}}
-        {{--></div>--}}
+        @push('scripts')
+
+            <script>
+                $('.carousel-main').owlCarousel({
+                    items: 4,
+                    loop: true,
+                    autoplay: true,
+                    autoplayTimeout: 1500,
+                    margin: 10,
+                    nav: true,
+                    dots: false,
+                    navText: ['<span class="fas fa-chevron-circle-left "></span>','<span class="fas fa-chevron-circle-right "></span>'],
+                    responsive:{
+                        0:{
+                            items:1,
+                            nav:true
+                        },
+                        600:{
+                            items:3,
+                            nav:false
+                        },
+                        1000:{
+                            items:4,
+                            nav:true,
+                            loop:false
+                        }
+                    }
+                })
+            </script>
+        @endpush
         @push('meta')
             {{--    <meta name="{{$news->title}}"--}}
             {{--          content="{{$news->short_description}}"--}}

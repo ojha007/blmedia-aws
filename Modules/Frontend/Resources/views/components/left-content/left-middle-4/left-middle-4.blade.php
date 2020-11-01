@@ -7,7 +7,7 @@
                     <div class="col-sm-12 col-md-7">
                         @foreach($tenthPositionNews as $key=>$news)
                             @if($key == 0)
-                                @include('frontend::components.news.featured-card')
+                                @include('frontend::components.news.featured-card', ['featuredClass' => 'featured-card'])
                             @endif
                         @endforeach
                     </div>

@@ -4,22 +4,9 @@
         <div class="card-block">
             @foreach($anchorNews as $key=>$news)
                 @if($key == 0)
-                    @include('frontend::components.news.featured-card')
+                    @include('frontend::components.news.featured-card', ['featuredClass' => 'featured-card'])
                 @else
-                    <div class="card mb-3">
-                        <div class="row no-gutters">
-                            <div class="col-md-4">
-                                @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img'])
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    @include('frontend::components.news.news-title')
-                                    @include('frontend::components.news.news-author')
-                                    @include('frontend::components.news.news-short-description')
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('frontend::components.news.horizontal-card')
                 @endif
             @endforeach
             @include('frontend::components.buttons.view-all-category-button', ['position' => $anchorNews])

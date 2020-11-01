@@ -7,7 +7,7 @@
                     <div class="col-md-6">
                         @foreach($twelvePositionNews as $key=>$news)
                             @if($key == 0)
-                                @include('frontend::components.news.featured-card')
+                                @include('frontend::components.news.featured-card', ['featuredClass' => 'featured-card'])
                             @endif
                         @endforeach
                     </div>
@@ -16,13 +16,7 @@
                             @foreach($twelvePositionNews as $key=>$news)
                                 @if($key >0)
                                     <div class=" col-md-6">
-                                        <div class="card mb-3">
-                                            @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
-                                            <div class="card-body">
-                                                @include('frontend::components.news.news-title')
-                                                @include('frontend::components.news.news-author')
-                                            </div>
-                                        </div>
+                                        @include('frontend::components.news.vertical-card', ['verticalClass' => 'vertical-card'])
                                     </div>
                                 @endif
                             @endforeach

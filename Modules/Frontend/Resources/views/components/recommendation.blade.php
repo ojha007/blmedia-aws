@@ -16,8 +16,8 @@
     <div class="card-block">
         <div class="row">
             @foreach($sameCategoryNews as $key=>$news)
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                    <div class="card mb-3 recommendation-card">
+                <div class="col-sm-12 recommendation-div col-md-6 col-lg-4 col-xl-4">
+                    <div class="card mb-3 recommendation-card ">
                         @include('frontend::components.news.news-image',['figureClass'=>'','imgClass'=>'card-img-top'])
                         <div class="card-body">
                             @include('frontend::components.news.news-title')

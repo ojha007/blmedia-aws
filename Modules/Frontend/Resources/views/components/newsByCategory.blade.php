@@ -33,7 +33,8 @@
                 @include('frontend::components.news.news-template',
                           [
                               'allNews'=>$blSpecialNews,
-                             'positionClass'=>'detail_body_position_1'
+                             'positionClass'=>'detail_body_position_1',
+                              'blSpecialBackgroundClass'=>'bl-special-background-color'
                               ])
                 @include('frontend::components.news.news-template3',['allNews'=>$detailPageSecondPositionNews,  'positionClass'=>'detail_body_position_2'])
                 @include('frontend::components.news.news-template2',['allNews'=>$detailPageThirdPositionNews,  'positionClass'=>'detail_body_position_3'])

@@ -4,7 +4,7 @@
         <div class="card-block">
             @foreach($allNews as $key=>$news)
                 @if($key == 0)
-                    @include('frontend::components.news.featured-card')
+                    @include('frontend::components.news.featured-card', ['featuredClass' => 'featured-card'])
                 @else
                     <div class="card mb-3">
                         <div class="row no-gutters">

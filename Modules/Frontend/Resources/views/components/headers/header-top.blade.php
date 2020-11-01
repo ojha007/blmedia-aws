@@ -2,7 +2,7 @@
     @include('frontend::components.ads.ads-2',['ads'=>$allAds,'placement'=>'above','sub_for'=>'top_menu'])
 </div>
 <section class="header-top-section">
-    <div class="col-sm-12 header-top">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-xl-12 header-top">
         <div class="offset-lg-1 col-lg-10 px-0">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a class="navbar-brand" href="#">{{trans('messages.editions')}}</a>

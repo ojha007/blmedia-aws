@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3 {{ $featuredClass ?? '' }}">
     @include('frontend::components.news.news-image',['figureClass'=>'card-img-wrap img-zoom-in','imgClass'=>'card-img-top'])
     <div class="card-body">
         @include('frontend::components.news.news-title')

@@ -178,13 +178,6 @@ ul.lst li h2 a:hover {
     color: #b3b3b3;
 }
 
-.headerfixed {
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    background: #fff;
-    transition: 0.06s;
-}
 
 .news-story div iframe {
     width: 100%;
@@ -4859,10 +4852,6 @@ BREAKPOINTS
     font-size: 2.4rem;
 }
 
-.headerfixed .home-site-logo {
-    display: block !important;
-    width: 8%;
-}
 
 
 
@@ -4870,9 +4859,7 @@ BREAKPOINTS
     display: none !important;
 }
 
-.headerfixed .home-site-logo-home {
-    display: none !important;
-}
+
 
 /*home page Amrit Edited*/
 .am-bl-hmads {
