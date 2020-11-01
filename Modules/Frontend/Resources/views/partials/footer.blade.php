@@ -34,17 +34,19 @@
     <div class="footer-middle">
         <div class="container">
             <div class="row pb-2">
-                <div class="col-md-2 my-auto">
+                <div class="col-12 col-md-2 my-auto">
                     <div class="footer-pad">
                         <a href="{{route($routePrefix.'index')}}">
                             <picture class="brand-logo ">
-                                <img class=" " src="{{asset('frontend/img/logo.png')}}" height="50" width="100"
+                                <img class=" " src="{{asset('frontend/img/logo.png')}}" height="30" width="100"
                                      alt="BL Media">
                             </picture>
                         </a>
+                        <h4>BL media Inc</h4>
+                        <p class="small">Media for all across the globe</p>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 ">
+                <div class="col-12 col-md-2 col-sm-6 ">
                     <!--Column1-->
                     <div class="footer-pad ">
                         <h4>Editions</h4>
@@ -55,7 +57,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-5 col-sm-6 ">
+                <div class="col-12 col-md-5 col-sm-6 ">
                     <!--Column1-->
                     <div class="footer-pad">
                         <h4>About us</h4>
@@ -67,7 +69,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6  ">
+                <div class="col-12 col-md-3 col-sm-6  ">
                     <!--Column1-->
                     <div class="footer-pad">
                         <h4>Connect with us</h4>
