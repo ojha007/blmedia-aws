@@ -23,6 +23,9 @@
 <section class="left-middle-5-section">
     @include('frontend::components.left-content.left-middle-5.left-middle-5', [ 'positionClass'=>'front_body_position_12'])
 </section>
+<section class="left-middle-6-section">
+    @include('frontend::components.left-content.left-middle-6.left-middle-6', [ 'positionClass'=>'front_body_position_12'])
+</section>
 <section class="left-middle-3-section">
     @include('frontend::components.left-content.left-middle-3.left-middle-3',['baseAllNews'=>$fifteenPositionNews, 'positionClass'=>'front_body_position_8'])
 </section>

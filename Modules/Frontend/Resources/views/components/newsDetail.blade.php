@@ -359,6 +359,7 @@
                     loop: true,
                     autoplay: true,
                     autoplayTimeout: 1500,
+                    autoplayHoverPause:true,
                     margin: 10,
                     nav: true,
                     dots: false,
@@ -366,16 +367,18 @@
                     responsive:{
                         0:{
                             items:1,
-                            nav:true
+                            nav:true,
+                            loop:true
                         },
                         600:{
                             items:3,
-                            nav:false
+                            nav:true,
+                            loop:true
                         },
                         1000:{
                             items:4,
                             nav:true,
-                            loop:false
+                            loop:true
                         }
                     }
                 })

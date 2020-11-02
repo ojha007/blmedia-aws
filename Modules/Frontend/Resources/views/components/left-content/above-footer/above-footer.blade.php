@@ -5,18 +5,10 @@
             <div class="card-block">
                 @foreach($thirteenPositionNews as $key=>$news)
                     @if($key == 0)
-                        <div class="card text-white overlay-main ">
+                        <div class="card text-white footer-card-overlay ">
                             @include('frontend::components.news.news-image',['figureClass'=>'hello', 'imgClass'=>'card-img'])
-                            <div class="card-img-overlay d-flex flex-column px-0">
-                                <p class="mt-auto mb-0">
-                                    <a href="{{route($routePrefix.'news.show',$news->news_slug)}}" class="text-white">
-                                        @isset($limit)
-                                            {{\Illuminate\Support\Str::limit($news->title, $limit)}}
-                                        @else
-                                            {!! $news->title !!}
-                                        @endisset
-                                    </a>
-                                </p>
+                            <div class="card-img-overlay  d-flex align-items-end" >
+                                @include('frontend::components.news.news-title')
                             </div>
                         </div>
                     @endif

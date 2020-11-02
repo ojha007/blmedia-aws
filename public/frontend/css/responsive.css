@@ -31,6 +31,11 @@
         height: 40px !important;
     }
 
+    .footer-card-overlay .card-img-overlay .news-title a {
+        color: white;
+        font-size: 17px!important;
+    }
+
     li.page-item {
 
         display: none;
@@ -58,5 +63,6 @@
         text-align: center;
         margin-bottom: 15px;
     }
+
 
 }
