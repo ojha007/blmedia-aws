@@ -6,8 +6,9 @@
                     <div class="d-block d-sm-none col-12 col-sm-12">
                       <div class="row">
                           <div class="col-2 pl-0">
-                              <a href="{{route($routePrefix.'index')}}" class="btn bg-site-color text-white  btn-sm ">
-                                  <i class="fa fa-home"></i>
+                              <a href="{{route($routePrefix.'index')}}" >
+                                  <img class="responsive-img" src="{{asset('frontend/img/logo.png')}}" alt="BL Media" height="28" width="43">
+{{--                                  <i class="fa fa-home"></i>--}}
                               </a>
                           </div>
                           <div class="col-8 px-0">

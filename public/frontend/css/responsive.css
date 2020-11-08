@@ -33,7 +33,7 @@
 
     .footer-card-overlay .card-img-overlay .news-title a {
         color: white;
-        font-size: 17px!important;
+        font-size: 17px !important;
     }
 
     li.page-item {
@@ -64,5 +64,8 @@
         margin-bottom: 15px;
     }
 
+    .header-mid-section {
+        display: none;
+    }
 
 }
