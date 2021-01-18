@@ -25,5 +25,5 @@
     </a>
 </figure>--}}
 <div class="{{ $figureClass ?? ''}}">
-    <img class=" {{$imgClass ?? ''}}" src="https://wallpaperaccess.com/full/2040762.jpg" alt="Card image cap">
+    <img class=" {{$imgClass ?? ''}}" src="{{$news->image}}" alt="Card image cap">
 </div>

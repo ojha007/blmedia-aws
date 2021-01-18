@@ -8,7 +8,7 @@
                         <div class="card text-white footer-card-overlay ">
                             @include('frontend::components.news.news-image',['figureClass'=>'hello', 'imgClass'=>'card-img'])
                             <div class="card-img-overlay  d-flex align-items-end" >
-                                @include('frontend::components.news.news-title')
+                                @include('frontend::components.news.news-title', ['contentClass' => 'text-center'])
                             </div>
                         </div>
                     @endif

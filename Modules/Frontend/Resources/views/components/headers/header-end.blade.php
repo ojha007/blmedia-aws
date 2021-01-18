@@ -1,3 +1,4 @@
+
 <section class=" header-end-section ">
     <div class="col-12 col-sm-12 offset-lg-1 col-lg-10 sticky-navbar">
         <div class="row">
@@ -16,16 +17,21 @@
                                   <input class="form-control shadow-none" type="text" placeholder="Search...">
                               </form>
                           </div>
-                          <div class="col-2 ">
+                         {{-- <div class="col-2 ">
                               <button class="navbar-toggler btn-sm btn " type="button" data-toggle="collapse"
                                   data-target="#navbarSupportedContent"
                                   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                               <span class="navbar-toggler-icon"></span>
                           </button>
-                          </div>
+                          </div>--}}
+                          {{--<div class="col-2 ">
+                              <button class="navbar-toggler btn-sm btn mySidebar-btn" type="button" onclick="sidebarFunction()">
+                                  <span class="navbar-toggler-icon"></span>
+                              </button>
+                          </div>--}}
                       </div>
                     </div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                         <ul class="navbar-nav text-center">
                             <li class="nav-item home-site-logo" >
                                 <a class="nav-link navbar-brand-img-logo " href="{{route($routePrefix.'index')}}">
@@ -52,6 +58,33 @@
                             @endforeach
                         </ul>
                     </div>
+                    {{--<div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav text-center">
+                            <li class="nav-item home-site-logo" >
+                                <a class="nav-link navbar-brand-img-logo " href="{{route($routePrefix.'index')}}">
+                                    <img class="responsive-img" src="{{asset('frontend/img/logo.png')}}" alt="BL Media">
+                                </a>
+                            </li>
+                            <li class="nav-item d-none d-sm-block bg-site-color home">
+                                <a href="{{route($routePrefix.'index')}}" class="nav-link text-white "><i
+                                            class="fa fa-home fa-sm"></i> <span class="sr-only">Home</span>
+                                </a>
+                            </li>
+                            @foreach($headerCategories as $category)
+                                <li class="nav-item {{
+                                                         request()->is(
+                                                             $urlPrefix.'category/'.$category->slug,
+                                                             $urlPrefix.'category/'.$category->slug.'/*'
+                                                             )
+                                                     ? 'active':''}}">
+                                    <a href="{{route($routePrefix.'news-category.show',$category->slug)}}"
+                                       class="nav-link hover-site-color">
+                                        {{$category->name}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>--}}
                 </nav>
             </div>
             <div class="col-12 col-lg-2 social-unicode col-sm-12 bg-white">
@@ -89,6 +122,7 @@
                 </ul>
             </div>
         </div>
+
     </div>
     {{-- <div class="container-fluid">
          <div class="row" style="border-top: 1px solid #ddd;border-bottom: 1px solid #ddd;">

@@ -390,13 +390,13 @@
             {{--          category--}}
             {{--    />--}}
             <meta property="og:type" content="article"/>
-            <meta property="og:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
+{{--            <meta property="og:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>--}}
             <meta property="og:title" content="{{$news->title}}"/>
             <meta property="og:image" content="{{$news->image}}"/>
             {{--    <meta property="og:description" content="{{$news->short_description}}"/>--}}
             {{--    <meta name="twitter:card" content="summary_large_image"/>--}}
             <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->news_slug)}}"/>
+{{--            <meta name="twitter:url" content="{{route($routePrefix.'news.show',$news->id)}}"/>--}}
             <meta name="twitter:title" content="{{$news->title}}"/>
             <meta name="twitter:image:src" content="{{$news->image}}"/>
     {{--    <meta name="twitter:description" content="{{$news->short_description}}"/>--}}

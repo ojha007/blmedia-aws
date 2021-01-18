@@ -19,4 +19,5 @@
             searchPseudoElements: true
         };
     </script>
+
 @endpush

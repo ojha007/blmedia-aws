@@ -60,12 +60,12 @@
     }
 
     .footer-pad {
-        text-align: center;
+        text-align: left;
         margin-bottom: 15px;
     }
 
     .header-mid-section {
-        display: none;
+        display: none ;
     }
 
 }

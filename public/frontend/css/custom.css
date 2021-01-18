@@ -18,9 +18,9 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(255, 94, 20, 0.3);
 }
 
-.brand-logo img {
+/*.brand-logo img {
     height: 60px;
-}
+}*/
 
 .user-info {
     line-height: 5px;
@@ -288,6 +288,20 @@ button:focus, button:active {
 
 /*end custom design*/
 /*.................................header part css..............................*/
+/*.mySidebar {
+    min-width: 250px;
+    width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 30px;
+    left: 0;
+    z-index: 9999;
+    !*display: none;*!
+    color: black;
+    background-color: white;
+    transition: transform 0.2s;
+}*/
 
 .fixed-header {
     position: fixed;
@@ -372,6 +386,10 @@ button:focus, button:active {
 
 .header-end-section .social-unicode .nav {
     line-height: 40px;
+}
+
+.header-mid-section a .brand-logo img {
+    height: 40px;
 }
 
 /*end header part css*/
@@ -511,16 +529,18 @@ button:focus, button:active {
     color: white;
     font-size: 13px;
 }
+
 .index-carousel .card .card-img-overlay .news-title, .footer-card-overlay .card-img-overlay .news-title {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     width: 100%;
 }
+
 .footer-card-overlay .card-img-overlay .news-title a {
     color: white;
-    font-size: 30px;
+    font-size: 30px !important;
+    text-align: center !important;
 }
-
 
 
 /*end main content css*/
@@ -551,8 +571,8 @@ footer a:hover {
     border-top: 1px solid #FFFFFF;
 }
 
-.brand-logo img {
-    height: 40px !important;
+.main-footer .footer-middle div .footer-pad .brand-logo img {
+    height: 50px;
     padding-bottom: 5px;
 }
 
